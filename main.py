@@ -103,12 +103,14 @@ def cmd_run_module1(args: argparse.Namespace) -> None:
             sys.stdout.write("\n")
 
     pipeline = Module1Pipeline(config_manager=cm)
+    resume = not getattr(args, "no_resume", False)
     res = pipeline.run(
         mode=args.mode,
         force_mock=force_mock,
         custom_start=custom_start,
         custom_end=custom_end,
         custom_interval=getattr(args, "interval", None),
+        resume=resume,
         progress_callback=cli_progress,
     )
 
@@ -213,6 +215,7 @@ def main() -> None:
     p_m1.add_argument("--end", type=str, default=None, help="Custom end timestamp (YYYY-MM-DD HH:MM)")
     p_m1.add_argument("--mock", action="store_true", help="Force mock telemetry generation")
     p_m1.add_argument("--live", action="store_true", help="Force live PI Web API connection")
+    p_m1.add_argument("--no-resume", action="store_true", help="Start fresh without resuming from existing checkpoint")
 
     # run-module2
     p_m2 = subparsers.add_parser("run-module2", help="Execute Module 2 (Correlation Analysis)")

@@ -40,11 +40,13 @@ class Module1Pipeline:
         custom_start: Optional[dt.datetime] = None,
         custom_end: Optional[dt.datetime] = None,
         custom_interval: Optional[str] = None,
+        resume: bool = True,
+        checkpoint_interval: int = 10,
         progress_callback: Optional[Callable[[float, str, Dict[str, Any]], None]] = None,
     ) -> Dict[str, Any]:
         """Execute the full Module 1 pipeline with progress tracking."""
         start_time_proc = time.time()
-        logger.info(f"=== Starting Module 1 Pipeline (mode={mode}, interval={custom_interval or self.pi_client.sample_interval}, mock={force_mock if force_mock is not None else self.pi_client.mock_mode}) ===")
+        logger.info(f"=== Starting Module 1 Pipeline (mode={mode}, interval={custom_interval or self.pi_client.sample_interval}, resume={resume}, mock={force_mock if force_mock is not None else self.pi_client.mock_mode}) ===")
 
         if force_mock is not None:
             self.pi_client.mock_mode = force_mock
@@ -66,6 +68,8 @@ class Module1Pipeline:
             custom_interval=custom_interval,
             save_storage=True,
             storage_path=storage_path,
+            resume=resume,
+            checkpoint_interval=checkpoint_interval,
             progress_callback=ingestion_cb,
         )
 

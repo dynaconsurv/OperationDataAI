@@ -251,6 +251,8 @@ class PIWebApiClient:
         storage_path: Optional[Path] = None,
         save_pickle: Optional[bool] = None,
         pickle_path: Optional[Path] = None,
+        resume: bool = True,
+        checkpoint_interval: int = 10,
         progress_callback: Optional[Callable[[float, str, Dict[str, Any]], None]] = None,
     ) -> pd.DataFrame:
         """Execute telemetry ingestion according to mode, time range, and sampling interval.
@@ -258,6 +260,10 @@ class PIWebApiClient:
         When sampling by minute (e.g. '1m', '5m', '10m'), queries spanning more than 1 hour
         are automatically split into 1-hour slices between start and stop to avoid PI server timeouts
         and payload limits.
+
+        Supports checkpointing and resume: if resume=True, inspects existing parquet/pickle storage,
+        skips already completed hourly slices, and continues from where it stopped. Saves checkpoints
+        periodically and upon interruption.
         """
         end_time = custom_end or dt.datetime.now().replace(minute=0, second=0, microsecond=0)
 
@@ -287,10 +293,43 @@ class PIWebApiClient:
         else:
             slices = [(start_time, end_time)]
 
+        # Determine target file path for checkpoints & storage
+        target_path = storage_path or pickle_path
+        if target_path is None:
+            storage_cfg = self.config.get("storage", {})
+            pq_file = storage_cfg.get("parquet_file", "data/historical_data.parquet")
+            target_path = Path(pq_file)
+            if not target_path.is_absolute():
+                target_path = Path(__file__).resolve().parent.parent.parent / target_path
+
+        # Check for existing checkpoint to resume
+        existing_df: Optional[pd.DataFrame] = None
+        if resume and target_path and target_path.exists():
+            try:
+                if str(target_path).lower().endswith(".parquet"):
+                    existing_df = pd.read_parquet(target_path, engine="pyarrow")
+                else:
+                    with open(target_path, "rb") as f:
+                        existing_df = pickle.load(f)
+                if existing_df is not None and not existing_df.empty:
+                    if not isinstance(existing_df.index, pd.DatetimeIndex):
+                        existing_df.index = pd.to_datetime(existing_df.index)
+                    existing_df = existing_df.sort_index()
+                    logger.info(
+                        f"Resume enabled: Loaded existing checkpoint from {target_path} "
+                        f"({len(existing_df)} rows, {len(existing_df.columns)} sensors, "
+                        f"from {existing_df.index.min()} to {existing_df.index.max()})"
+                    )
+            except Exception as e:
+                logger.warning(f"Could not read existing checkpoint from {target_path}: {e}")
+                existing_df = None
+
         logger.info(
-            f"Pulling data (mode={mode}, interval={effective_interval}, mock={self.mock_mode}, slices={len(slices)}) "
-            f"from {start_time} to {end_time}..."
+            f"Pulling data (mode={mode}, interval={effective_interval}, mock={self.mock_mode}, "
+            f"slices={len(slices)}, resume={resume}) from {start_time} to {end_time}..."
         )
+
+        should_save = save_storage if save_pickle is None else (save_storage or save_pickle)
 
         if self.mock_mode:
             logger.info("MOCK MODE ACTIVE: Generating simulated GT-2420A telemetry (no external network call).")
@@ -318,9 +357,25 @@ class PIWebApiClient:
                 end_time=end_time,
                 freq=effective_interval,
             )
+
+            if resume and existing_df is not None and not existing_df.empty:
+                df = pd.concat([existing_df, df])
+                df = df[~df.index.duplicated(keep="last")].sort_index()
+
+            if should_save and not df.empty and target_path:
+                target_path.parent.mkdir(parents=True, exist_ok=True)
+                if str(target_path).lower().endswith(".parquet"):
+                    df.to_parquet(target_path, engine="pyarrow", compression="snappy", index=True)
+                    logger.info(f"Simulated telemetry saved to Apache Parquet at: {target_path} (Shape: {df.shape})")
+                else:
+                    with open(target_path, "wb") as f:
+                        pickle.dump(df, f)
+                    logger.info(f"Simulated telemetry saved to pickle at: {target_path} (Shape: {df.shape})")
+
+            return df
+
         else:
             logger.info(f"LIVE PI WEB API MODE: Connecting to {self.base_url}")
-            # Map sensors to WebIds
             tag_webid_map: Dict[str, str] = {}
             for s in self.sensors:
                 parent = s.get("parent", "")
@@ -334,81 +389,143 @@ class PIWebApiClient:
                 logger.error("No WebIDs could be resolved from PI AF. Aborting live pull.")
                 return pd.DataFrame()
 
+            # Inspect checkpoint to determine which slices to skip
+            skipped_slices = []
+            remaining_slices = []
+            latest_ts_cmp = None
+
+            if resume and existing_df is not None and not existing_df.empty:
+                latest_ts = existing_df.index.max()
+                if hasattr(latest_ts, "tzinfo") and latest_ts.tzinfo is not None:
+                    latest_ts_cmp = latest_ts.tz_convert("UTC").tz_localize(None)
+                else:
+                    latest_ts_cmp = latest_ts
+
+            if latest_ts_cmp is not None:
+                for s_start, s_end in slices:
+                    s_end_cmp = s_end.tz_convert("UTC").tz_localize(None) if (hasattr(s_end, "tzinfo") and s_end.tzinfo) else s_end
+                    if s_end_cmp <= latest_ts_cmp:
+                        skipped_slices.append((s_start, s_end))
+                    else:
+                        remaining_slices.append((s_start, s_end))
+                if skipped_slices:
+                    logger.info(f"Checkpoint resume: Skipping {len(skipped_slices)} previously completed slices up to {latest_ts_cmp}.")
+            else:
+                remaining_slices = list(slices)
+
+            if not remaining_slices and existing_df is not None and not existing_df.empty:
+                logger.info("All requested time slices are already present in existing parquet file. No network calls needed.")
+                if progress_callback:
+                    progress_callback(
+                        1.0,
+                        f"All {len(slices)} slices already present in checkpoint. Loaded {len(existing_df)} rows.",
+                        {"points_collected": int(existing_df.size), "total_slices": len(slices), "slice": len(slices)},
+                    )
+                return existing_df
+
             total_slices = len(slices)
+            completed_slices = len(skipped_slices)
+
             all_series: Dict[str, List[pd.Series]] = {k: [] for k in tag_webid_map.keys()}
             total_points_accum = 0
+
+            # Pre-seed series from existing checkpoint
+            if resume and existing_df is not None and not existing_df.empty:
+                total_points_accum = int(existing_df.size)
+                for col in existing_df.columns:
+                    s = existing_df[col].dropna()
+                    if not s.empty:
+                        if col in all_series:
+                            all_series[col].append(s)
+                        else:
+                            all_series[col] = [s]
+
             t_pull_start = time.time()
 
-            for s_idx, (s_start, s_end) in enumerate(slices):
-                s_start_str = s_start.strftime("%Y-%m-%dT%H:%M:%SZ")
-                s_end_str = s_end.strftime("%Y-%m-%dT%H:%M:%SZ")
-                slice_label = f"{s_start.strftime('%H:%M')}-{s_end.strftime('%H:%M')}"
+            def save_checkpoint(is_final: bool = False) -> pd.DataFrame:
+                combined_dict: Dict[str, pd.Series] = {}
+                for tag_path, ser_list in all_series.items():
+                    if ser_list:
+                        cat_s = pd.concat(ser_list)
+                        cat_s = cat_s[~cat_s.index.duplicated(keep="last")].sort_index()
+                        combined_dict[tag_path] = cat_s
 
-                def slice_cb(fraction: float, message: str, details: Optional[Dict[str, Any]] = None):
-                    if progress_callback:
-                        details = details or {}
-                        overall_frac = (s_idx + fraction) / total_slices
-                        elapsed = time.time() - t_pull_start
-                        eta = (elapsed / overall_frac) - elapsed if overall_frac > 0 else 0.0
-                        d_out = dict(details)
-                        d_out["slice"] = s_idx + 1
-                        d_out["total_slices"] = total_slices
-                        d_out["elapsed"] = round(elapsed, 1)
-                        d_out["eta"] = round(eta, 1)
-                        d_out["points_collected"] = total_points_accum + details.get("points_collected", 0)
+                if not combined_dict:
+                    return pd.DataFrame()
 
-                        if total_slices > 1:
-                            hdr = f"Hour {s_idx + 1}/{total_slices} ({slice_label})"
-                            progress_callback(overall_frac, f"{hdr} | {message}", d_out)
-                        else:
-                            progress_callback(fraction, message, d_out)
+                chk_df = pd.DataFrame(combined_dict)
+                chk_df.index.name = "timestamp"
 
-                slice_batch = self.fetch_batch_data_live(
-                    tag_webid_map=tag_webid_map,
-                    start_time_str=s_start_str,
-                    end_time_str=s_end_str,
-                    interval=effective_interval,
-                    progress_callback=slice_cb,
-                )
+                if should_save and target_path:
+                    target_path.parent.mkdir(parents=True, exist_ok=True)
+                    if str(target_path).lower().endswith(".parquet"):
+                        chk_df.to_parquet(target_path, engine="pyarrow", compression="snappy", index=True)
+                    else:
+                        with open(target_path, "wb") as f:
+                            pickle.dump(chk_df, f)
+                    action = "Final telemetry saved" if is_final else "Checkpoint saved"
+                    logger.info(f"{action} ({chk_df.shape[0]} rows, {chk_df.shape[1]} sensors) to {target_path}")
 
-                slice_pts = sum(len(ser) for ser in slice_batch.values())
-                total_points_accum += slice_pts
+                return chk_df
 
-                for tag_path, ser in slice_batch.items():
-                    if tag_path in all_series and not ser.empty:
-                        all_series[tag_path].append(ser)
+            df = pd.DataFrame()
+            try:
+                for s_idx, (s_start, s_end) in enumerate(remaining_slices):
+                    current_slice_num = completed_slices + s_idx + 1
+                    s_start_str = s_start.strftime("%Y-%m-%dT%H:%M:%SZ")
+                    s_end_str = s_end.strftime("%Y-%m-%dT%H:%M:%SZ")
+                    slice_label = f"{s_start.strftime('%H:%M')}-{s_end.strftime('%H:%M')}"
 
-            # Combine and deduplicate across slices
-            combined_dict: Dict[str, pd.Series] = {}
-            for tag_path, ser_list in all_series.items():
-                if ser_list:
-                    cat_s = pd.concat(ser_list)
-                    cat_s = cat_s[~cat_s.index.duplicated(keep="first")].sort_index()
-                    combined_dict[tag_path] = cat_s
+                    def slice_cb(fraction: float, message: str, details: Optional[Dict[str, Any]] = None):
+                        if progress_callback:
+                            details = details or {}
+                            overall_frac = (completed_slices + s_idx + fraction) / total_slices
+                            elapsed = time.time() - t_pull_start
+                            done_in_session = (s_idx + fraction)
+                            if done_in_session > 0:
+                                rem_slices_count = total_slices - (completed_slices + s_idx + fraction)
+                                eta = (elapsed / done_in_session) * rem_slices_count
+                            else:
+                                eta = 0.0
 
-            df = pd.DataFrame(combined_dict)
-            df.index.name = "timestamp"
+                            d_out = dict(details)
+                            d_out["slice"] = current_slice_num
+                            d_out["total_slices"] = total_slices
+                            d_out["elapsed"] = round(elapsed, 1)
+                            d_out["eta"] = round(eta, 1)
+                            d_out["points_collected"] = total_points_accum + details.get("points_collected", 0)
 
-        should_save = save_storage if save_pickle is None else (save_storage or save_pickle)
-        if should_save and not df.empty:
-            target_path = storage_path or pickle_path
-            if target_path is None:
-                storage_cfg = self.config.get("storage", {})
-                pq_file = storage_cfg.get("parquet_file", "data/historical_data.parquet")
-                target_path = Path(pq_file)
-                if not target_path.is_absolute():
-                    target_path = Path(__file__).resolve().parent.parent.parent / target_path
+                            if total_slices > 1:
+                                hdr = f"Hour {current_slice_num}/{total_slices} ({slice_label})"
+                                if completed_slices > 0:
+                                    hdr += f" [Resumed from Hr {completed_slices}]"
+                                progress_callback(overall_frac, f"{hdr} | {message}", d_out)
+                            else:
+                                progress_callback(fraction, message, d_out)
 
-            target_path.parent.mkdir(parents=True, exist_ok=True)
-            if str(target_path).lower().endswith(".parquet"):
-                df.to_parquet(target_path, engine="pyarrow", compression="snappy", index=True)
-                logger.info(f"Historical telemetry saved to Apache Parquet at: {target_path} (Shape: {df.shape})")
-            else:
-                with open(target_path, "wb") as f:
-                    pickle.dump(df, f)
-                logger.info(f"Historical telemetry saved to pickle at: {target_path} (Shape: {df.shape})")
+                    slice_batch = self.fetch_batch_data_live(
+                        tag_webid_map=tag_webid_map,
+                        start_time_str=s_start_str,
+                        end_time_str=s_end_str,
+                        interval=effective_interval,
+                        progress_callback=slice_cb,
+                    )
 
-        return df
+                    slice_pts = sum(len(ser) for ser in slice_batch.values())
+                    total_points_accum += slice_pts
+
+                    for tag_path, ser in slice_batch.items():
+                        if tag_path in all_series and not ser.empty:
+                            all_series[tag_path].append(ser)
+
+                    # Periodic Checkpoint
+                    if (s_idx + 1) % checkpoint_interval == 0:
+                        save_checkpoint(is_final=False)
+
+            finally:
+                df = save_checkpoint(is_final=True)
+
+            return df
 
     @staticmethod
     def load_cached_data(file_path: Path) -> Optional[pd.DataFrame]:

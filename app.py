@@ -274,6 +274,11 @@ elif page == "⚡ Module 1: Ingestion & Limits":
                 st.info(f"ℹ️ 1-Day ingestion at `{sel_interval}` resolution will be automatically split into 24 hourly slices between start and stop.")
 
         mock_override = st.checkbox("Force Simulation Mode (Synthetic GT-2420A Data)", value=config.get("pi_web_api", {}).get("mock_mode", True))
+        resume_checkpoint = st.checkbox(
+            "🔄 Resume from last checkpoint if available",
+            value=True,
+            help="If checked, ingestion will inspect data/historical_data.parquet and resume from the latest downloaded timestamp, skipping previously completed hourly slices.",
+        )
 
         if not mock_override:
             st.warning("⚠️ **Live PI Web API is selected.** Ensure your machine is connected to PTTEP's internal network / VPN.")
@@ -316,6 +321,7 @@ elif page == "⚡ Module 1: Ingestion & Limits":
                 custom_start=custom_start,
                 custom_end=custom_end,
                 custom_interval=sel_interval,
+                resume=resume_checkpoint,
                 progress_callback=on_progress_ui,
             )
 
