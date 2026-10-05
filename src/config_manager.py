@@ -34,7 +34,7 @@ DEFAULT_CONFIG: Dict[str, Any] = {
         "timeout_seconds": 30,
         "mock_mode": True,  # Safe development default
         "query_mode": "interpolated",  # 'interpolated' or 'recorded'
-        "sample_interval": "1h",
+        "sample_interval": "1m",
         "batch_size": 25,
         "test_duration_days": 1,
         "full_duration_months": 12,

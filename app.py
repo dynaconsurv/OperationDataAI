@@ -546,8 +546,10 @@ elif page == "⚙️ Settings":
         with p_col2:
             pi_auth = st.selectbox("Authentication Type", ["basic", "ntlm"], index=0 if config.get("pi_web_api", {}).get("auth_type") == "basic" else 1)
             pi_verify_ssl = st.checkbox("Verify SSL Certificate", value=config.get("pi_web_api", {}).get("verify_ssl", False))
-            pi_mock = st.checkbox("Simulation Mode (MOCK Mode)", value=config.get("pi_web_api", {}).get("mock_mode", True), help="Uncheck only when ready to pull from live PI server!")
-            pi_interval = st.selectbox("Interpolation Interval", ["10m", "15m", "30m", "1h", "2h", "1d"], index=3)
+            setting_interval_opts = ["1m", "5m", "10m", "15m", "30m", "1h", "2h", "1d"]
+            curr_setting_int = config.get("pi_web_api", {}).get("sample_interval", "1h")
+            setting_int_idx = setting_interval_opts.index(curr_setting_int) if curr_setting_int in setting_interval_opts else 5
+            pi_interval = st.selectbox("Interpolation Interval", setting_interval_opts, index=setting_int_idx)
             pi_timeout = st.number_input("Request Timeout (seconds)", min_value=5, max_value=300, value=config.get("pi_web_api", {}).get("timeout_seconds", 30))
 
         st.markdown("---")

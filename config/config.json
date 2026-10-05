@@ -11,7 +11,7 @@
         "timeout_seconds": 30,
         "mock_mode": true,
         "query_mode": "interpolated",
-        "sample_interval": "1h",
+        "sample_interval": "1m",
         "batch_size": 25,
         "test_duration_days": 1,
         "full_duration_months": 12
