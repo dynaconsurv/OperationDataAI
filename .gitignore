@@ -38,3 +38,9 @@ logs/*.log
 
 # Temporary files
 *.tmp
+
+# Data & Telemetry Storage
+*.parquet
+data/*.parquet
+*.pkl
+data/*.pkl
