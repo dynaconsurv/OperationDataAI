@@ -1,10 +1,10 @@
 {
-    "last_pull_timestamp": "2026-10-05 14:54:08",
-    "duration_seconds": 12.9,
+    "last_pull_timestamp": "2026-10-05 15:13:40",
+    "duration_seconds": 9.24,
     "pull_mode": "1-Day Test",
     "is_mock": false,
     "backend_db": "sqlite",
-    "time_range": "2026-10-04 14:00 to 2026-10-05 06:00",
+    "time_range": "2026-10-04 15:00 to 2026-10-05 07:00",
     "tags_requested": 162,
     "tags_successful": 125,
     "data_points_collected": 2125,
