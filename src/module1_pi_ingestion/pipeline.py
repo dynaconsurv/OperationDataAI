@@ -50,8 +50,9 @@ class Module1Pipeline:
             self.pi_client.mock_mode = force_mock
 
         # Step 1: Ingest Telemetry (0% - 85% of total pipeline progress)
-        pickle_rel = self.config.get("storage", {}).get("pickle_file", "data/historical_data.pkl")
-        pickle_path = self.cm.resolve_path(pickle_rel)
+        storage_cfg = self.config.get("storage", {})
+        parquet_rel = storage_cfg.get("parquet_file", "data/historical_data.parquet")
+        storage_path = self.cm.resolve_path(parquet_rel)
 
         def ingestion_cb(fraction: float, message: str, details: Optional[Dict[str, Any]] = None):
             if progress_callback:
@@ -63,8 +64,8 @@ class Module1Pipeline:
             custom_start=custom_start,
             custom_end=custom_end,
             custom_interval=custom_interval,
-            save_pickle=True,
-            pickle_path=pickle_path,
+            save_storage=True,
+            storage_path=storage_path,
             progress_callback=ingestion_cb,
         )
 

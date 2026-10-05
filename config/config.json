@@ -50,6 +50,7 @@
         "top_n_pairs": 20
     },
     "storage": {
+        "parquet_file": "data/historical_data.parquet",
         "pickle_file": "data/historical_data.pkl",
         "correlation_file": "data/correlation_matrix.csv",
         "limits_csv_file": "data/operating_limits.csv"

@@ -90,14 +90,17 @@ if page == "📊 Dashboard":
 
     st.markdown("---")
 
-    # Load Telemetry Pickle
-    pickle_path = cm.resolve_path(config.get("storage", {}).get("pickle_file", "data/historical_data.pkl"))
+    # Load Telemetry (Parquet with fallback to Pickle)
+    data_path = cm.get_telemetry_path()
     df_telemetry = None
-    if pickle_path.exists():
-        import pickle
+    if data_path.exists():
         try:
-            with open(pickle_path, "rb") as f:
-                df_telemetry = pickle.load(f)
+            if str(data_path).lower().endswith(".parquet"):
+                df_telemetry = pd.read_parquet(data_path, engine="pyarrow")
+            else:
+                import pickle
+                with open(data_path, "rb") as f:
+                    df_telemetry = pickle.load(f)
         except Exception:
             df_telemetry = None
 
@@ -346,13 +349,16 @@ elif page == "🔬 Module 2: Correlation Engine":
     st.title("🔬 Module 2: Multi-Sensor Many-to-Many Correlation Engine")
     st.markdown("Identify thermodynamic, aerodynamic, and mechanical interdependencies across all GT-2420A sensors.")
 
-    pickle_path = cm.resolve_path(config.get("storage", {}).get("pickle_file", "data/historical_data.pkl"))
-    if not pickle_path.exists():
+    data_path = cm.get_telemetry_path()
+    if not data_path.exists():
         st.warning("⚠️ Historical telemetry data not found. Please run **Module 1** first to ingest data.")
     else:
-        import pickle
-        with open(pickle_path, "rb") as f:
-            df_telemetry = pickle.load(f)
+        if str(data_path).lower().endswith(".parquet"):
+            df_telemetry = pd.read_parquet(data_path, engine="pyarrow")
+        else:
+            import pickle
+            with open(data_path, "rb") as f:
+                df_telemetry = pickle.load(f)
 
         c_col1, c_col2, c_col3 = st.columns([1, 1, 1])
         with c_col1:
@@ -467,13 +473,16 @@ elif page == "🔮 Module 3: Prediction Engine":
     Below is the interactive baseline Anomaly Detector and Time-Series Forecaster stub.
     """)
 
-    pickle_path = cm.resolve_path(config.get("storage", {}).get("pickle_file", "data/historical_data.pkl"))
-    if not pickle_path.exists():
+    data_path = cm.get_telemetry_path()
+    if not data_path.exists():
         st.warning("Please run Module 1 first to generate telemetry.")
     else:
-        import pickle
-        with open(pickle_path, "rb") as f:
-            df_telemetry = pickle.load(f)
+        if str(data_path).lower().endswith(".parquet"):
+            df_telemetry = pd.read_parquet(data_path, engine="pyarrow")
+        else:
+            import pickle
+            with open(data_path, "rb") as f:
+                df_telemetry = pickle.load(f)
 
         tab_anom, tab_fc = st.tabs(["🚨 Multivariate Anomaly Detection", "📈 Parameter Forecast Stub"])
 

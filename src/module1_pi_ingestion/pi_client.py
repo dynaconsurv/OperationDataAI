@@ -247,7 +247,9 @@ class PIWebApiClient:
         custom_start: Optional[dt.datetime] = None,
         custom_end: Optional[dt.datetime] = None,
         custom_interval: Optional[str] = None,
-        save_pickle: bool = True,
+        save_storage: bool = True,
+        storage_path: Optional[Path] = None,
+        save_pickle: Optional[bool] = None,
         pickle_path: Optional[Path] = None,
         progress_callback: Optional[Callable[[float, str, Dict[str, Any]], None]] = None,
     ) -> pd.DataFrame:
@@ -387,30 +389,38 @@ class PIWebApiClient:
             df = pd.DataFrame(combined_dict)
             df.index.name = "timestamp"
 
-        if save_pickle and not df.empty:
-            if pickle_path is None:
+        should_save = save_storage if save_pickle is None else (save_storage or save_pickle)
+        if should_save and not df.empty:
+            target_path = storage_path or pickle_path
+            if target_path is None:
                 storage_cfg = self.config.get("storage", {})
-                p_file = storage_cfg.get("pickle_file", "data/historical_data.pkl")
-                pickle_path = Path(p_file)
-                if not pickle_path.is_absolute():
-                    pickle_path = Path(__file__).resolve().parent.parent.parent / pickle_path
+                pq_file = storage_cfg.get("parquet_file", "data/historical_data.parquet")
+                target_path = Path(pq_file)
+                if not target_path.is_absolute():
+                    target_path = Path(__file__).resolve().parent.parent.parent / target_path
 
-            pickle_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(pickle_path, "wb") as f:
-                pickle.dump(df, f)
-            logger.info(f"Historical telemetry saved to pickle at: {pickle_path} (Shape: {df.shape})")
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            if str(target_path).lower().endswith(".parquet"):
+                df.to_parquet(target_path, engine="pyarrow", compression="snappy", index=True)
+                logger.info(f"Historical telemetry saved to Apache Parquet at: {target_path} (Shape: {df.shape})")
+            else:
+                with open(target_path, "wb") as f:
+                    pickle.dump(df, f)
+                logger.info(f"Historical telemetry saved to pickle at: {target_path} (Shape: {df.shape})")
 
         return df
 
     @staticmethod
-    def load_cached_data(pickle_path: Path) -> Optional[pd.DataFrame]:
-        """Load previously serialized telemetry DataFrame from pickle."""
-        if not pickle_path.exists():
+    def load_cached_data(file_path: Path) -> Optional[pd.DataFrame]:
+        """Load previously serialized telemetry DataFrame from Parquet (or fallback to Pickle)."""
+        if not file_path.exists():
             return None
         try:
-            with open(pickle_path, "rb") as f:
-                df = pickle.load(f)
-            return df
+            if str(file_path).lower().endswith(".parquet"):
+                return pd.read_parquet(file_path, engine="pyarrow")
+            else:
+                with open(file_path, "rb") as f:
+                    return pickle.load(f)
         except Exception as e:
-            logger.error(f"Failed to load cached pickle from {pickle_path}: {e}")
+            logger.error(f"Failed to load cached telemetry from {file_path}: {e}")
             return None

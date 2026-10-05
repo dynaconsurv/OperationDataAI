@@ -73,6 +73,7 @@ DEFAULT_CONFIG: Dict[str, Any] = {
         "top_n_pairs": 20,
     },
     "storage": {
+        "parquet_file": "data/historical_data.parquet",
         "pickle_file": "data/historical_data.pkl",
         "correlation_file": "data/correlation_matrix.csv",
         "limits_csv_file": "data/operating_limits.csv",
@@ -188,3 +189,19 @@ class ConfigManager:
         with open(temp_file, "w", encoding="utf-8") as f:
             json.dump(meta, f, indent=4)
         temp_file.replace(self.meta_path)
+
+    def get_telemetry_path(self) -> Path:
+        """Resolve historical telemetry path (prefers .parquet, falls back to .pkl)."""
+        cfg = self.load_config()
+        storage = cfg.get("storage", {})
+        parquet_rel = storage.get("parquet_file", "data/historical_data.parquet")
+        parquet_path = self.resolve_path(parquet_rel)
+        if parquet_path.exists():
+            return parquet_path
+
+        pickle_rel = storage.get("pickle_file", "data/historical_data.pkl")
+        pickle_path = self.resolve_path(pickle_rel)
+        if pickle_path.exists():
+            return pickle_path
+
+        return parquet_path

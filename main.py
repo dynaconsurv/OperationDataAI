@@ -125,16 +125,17 @@ def cmd_run_module2(args: argparse.Namespace) -> None:
     cfg = cm.load_config()
     sensors = cm.load_sensors()
 
-    pickle_rel = cfg.get("storage", {}).get("pickle_file", "data/historical_data.pkl")
-    pickle_path = cm.resolve_path(pickle_rel)
-
-    if not pickle_path.exists():
-        console.print(f"[bold red]Error:[/bold red] Telemetry pickle not found at {pickle_path}. Please run Module 1 first.")
+    data_path = cm.get_telemetry_path()
+    if not data_path.exists():
+        console.print(f"[bold red]Error:[/bold red] Telemetry data not found at {data_path}. Please run Module 1 first.")
         sys.exit(1)
 
-    import pickle
-    with open(pickle_path, "rb") as f:
-        df: pd.DataFrame = pickle.load(f)
+    if str(data_path).lower().endswith(".parquet"):
+        df: pd.DataFrame = pd.read_parquet(data_path, engine="pyarrow")
+    else:
+        import pickle
+        with open(data_path, "rb") as f:
+            df: pd.DataFrame = pickle.load(f)
 
     console.print(f"[bold green]Computing {args.method.upper()} correlation matrix on {df.shape[1]} sensors ({df.shape[0]} timestamps)...[/bold green]")
     engine = CorrelationEngine(method=args.method)

@@ -10,14 +10,14 @@ def test_module1_pipeline_mock_run(tmp_path: Path):
     sen_file = tmp_path / "sensors.json"
     meta_file = tmp_path / "last_run_meta.json"
     db_file = tmp_path / "test.db"
-    pickle_file = tmp_path / "test_data.pkl"
+    parquet_file = tmp_path / "test_data.parquet"
 
     cm = ConfigManager(config_path=cfg_file, sensors_path=sen_file, meta_path=meta_file)
     cfg = cm.load_config()
     cfg["pi_web_api"]["mock_mode"] = True
     cfg["database"]["engine"] = "sqlite"
     cfg["database"]["sqlite_path"] = str(db_file)
-    cfg["storage"]["pickle_file"] = str(pickle_file)
+    cfg["storage"]["parquet_file"] = str(parquet_file)
     cm.save_config(cfg)
 
     # Use a small set of sensors for fast integration test
@@ -35,7 +35,7 @@ def test_module1_pipeline_mock_run(tmp_path: Path):
     assert res["limits_calculated"] == 10  # 2 tags * 5 limits (Normal, HH, H, L, LL)
     assert res["sql_inserted"] == 10
     assert res["sql_skipped"] == 0
-    assert pickle_file.exists()
+    assert parquet_file.exists()
 
     # Re-run pipeline with same data -> deduplication should skip all 10 inserts!
     res2 = pipeline.run(mode="test", force_mock=True)
@@ -51,14 +51,14 @@ def test_module1_pipeline_minute_hourly_slicing(tmp_path: Path):
     sen_file = tmp_path / "sensors_m.json"
     meta_file = tmp_path / "meta_m.json"
     db_file = tmp_path / "test_m.db"
-    pickle_file = tmp_path / "test_m.pkl"
+    parquet_file = tmp_path / "test_m.parquet"
 
     cm = ConfigManager(config_path=cfg_file, sensors_path=sen_file, meta_path=meta_file)
     cfg = cm.load_config()
     cfg["pi_web_api"]["mock_mode"] = True
     cfg["database"]["engine"] = "sqlite"
     cfg["database"]["sqlite_path"] = str(db_file)
-    cfg["storage"]["pickle_file"] = str(pickle_file)
+    cfg["storage"]["parquet_file"] = str(parquet_file)
     cm.save_config(cfg)
 
     test_sensors = [
@@ -85,6 +85,7 @@ def test_module1_pipeline_minute_hourly_slicing(tmp_path: Path):
     # 3 hours at 1m interval = 181 points
     assert res["data_points_collected"] == 181
     assert res["limits_calculated"] == 5
+    assert parquet_file.exists()
 
 
 if __name__ == "__main__":
