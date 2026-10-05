@@ -9,7 +9,7 @@ from __future__ import annotations
 import datetime as dt
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 import pandas as pd
 
 from src.config_manager import ConfigManager
@@ -39,34 +39,23 @@ class Module1Pipeline:
         force_mock: Optional[bool] = None,
         custom_start: Optional[dt.datetime] = None,
         custom_end: Optional[dt.datetime] = None,
+        progress_callback: Optional[Callable[[float, str, Dict[str, Any]], None]] = None,
     ) -> Dict[str, Any]:
-        """Execute the full Module 1 pipeline.
-
-        Parameters
-        ----------
-        mode : str
-            'test' for 1-day ingestion, 'full' for 12-month ingestion.
-        force_mock : bool, optional
-            Override mock_mode setting if provided.
-        custom_start : datetime, optional
-            Custom start timestamp.
-        custom_end : datetime, optional
-            Custom end timestamp.
-
-        Returns
-        -------
-        Dict[str, Any]
-            Pipeline execution summary dictionary.
-        """
+        """Execute the full Module 1 pipeline with progress tracking."""
         start_time_proc = time.time()
         logger.info(f"=== Starting Module 1 Pipeline (mode={mode}, mock={force_mock if force_mock is not None else self.pi_client.mock_mode}) ===")
 
         if force_mock is not None:
             self.pi_client.mock_mode = force_mock
 
-        # Step 1: Ingest Telemetry
+        # Step 1: Ingest Telemetry (0% - 85% of total pipeline progress)
         pickle_rel = self.config.get("storage", {}).get("pickle_file", "data/historical_data.pkl")
         pickle_path = self.cm.resolve_path(pickle_rel)
+
+        def ingestion_cb(fraction: float, message: str, details: Optional[Dict[str, Any]] = None):
+            if progress_callback:
+                overall_fraction = fraction * 0.85
+                progress_callback(overall_fraction, f"[Ingest] {message}", details or {})
 
         df = self.pi_client.pull_data(
             mode=mode,
@@ -74,11 +63,14 @@ class Module1Pipeline:
             custom_end=custom_end,
             save_pickle=True,
             pickle_path=pickle_path,
+            progress_callback=ingestion_cb,
         )
 
         if df.empty:
             error_msg = "No telemetry collected. Pipeline stopped."
             logger.error(error_msg)
+            if progress_callback:
+                progress_callback(1.0, f"[Failed] {error_msg}", {"error": True})
             meta = {
                 "last_pull_timestamp": dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 "duration_seconds": round(time.time() - start_time_proc, 2),
@@ -96,7 +88,10 @@ class Module1Pipeline:
             self.cm.save_last_run_meta(meta)
             return meta
 
-        # Step 2: Compute Operating Limits
+        # Step 2: Compute Operating Limits (85% - 95%)
+        if progress_callback:
+            progress_callback(0.88, f"[Limits] Computing operating limits for {len(df.columns)} sensors...", {"step": 2, "total_steps": 3})
+
         records, summary_df = self.calculator.compute_all_limits(df)
 
         # Optional: Save summary to CSV
@@ -105,8 +100,14 @@ class Module1Pipeline:
         limits_csv_path.parent.mkdir(parents=True, exist_ok=True)
         summary_df.to_csv(limits_csv_path, index=False)
 
-        # Step 3: Insert into SQL with Deduplication
+        # Step 3: Insert into SQL with Deduplication (95% - 100%)
+        if progress_callback:
+            progress_callback(0.95, f"[SQL Sync] Synchronizing {len(records)} limits into database...", {"step": 3, "total_steps": 3})
+
         inserted_count, skipped_count = self.sql_storage.save_limits(records)
+
+        if progress_callback:
+            progress_callback(1.0, f"[Done] Sync complete: {inserted_count} limits inserted, {skipped_count} skipped.", {"step": 3, "total_steps": 3})
 
         # Step 4: Record Execution Metadata
         duration = round(time.time() - start_time_proc, 2)

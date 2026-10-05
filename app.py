@@ -222,16 +222,45 @@ elif page == "⚡ Module 1: Ingestion & Limits":
         run_btn = st.button("🚀 Trigger Ingestion & Limits Calculation", type="primary", use_container_width=True)
 
         if run_btn:
-            with st.spinner("Processing telemetry pipeline..."):
-                exec_mode = "test" if "1-Day" in mode_choice else "full"
-                pipeline = Module1Pipeline(config_manager=cm)
-                res = pipeline.run(mode=exec_mode, force_mock=mock_override)
+            exec_mode = "test" if "1-Day" in mode_choice else "full"
+            st.markdown("### 🔄 Ingestion & Processing Progress")
+            progress_bar = st.progress(0.0, text="Initializing pipeline...")
+            metrics_box = st.empty()
+            status_box = st.status("📡 Connecting to PI Web API...", expanded=True)
 
-                if res.get("status") == "Success":
-                    st.success(f"✅ Ingestion successful in {res['duration_seconds']} seconds!")
-                    st.balloons()
-                else:
-                    st.error(f"❌ Ingestion failed: {res.get('last_error')}")
+            def on_progress_ui(fraction: float, message: str, details: Optional[Dict[str, Any]] = None):
+                clamped_frac = min(1.0, max(0.0, float(fraction)))
+                pct = int(clamped_frac * 100)
+                progress_bar.progress(clamped_frac, text=f"Overall Progress: {pct}% | {message}")
+
+                details = details or {}
+                elapsed = details.get("elapsed", 0.0)
+                eta = details.get("eta")
+                tags_done = details.get("tags_completed", 0)
+                total_tags = details.get("total_tags", len(sensors))
+                points = details.get("points_collected", 0)
+
+                eta_str = f"{eta}s remaining" if eta is not None and eta > 0 else ("Finishing up..." if pct >= 85 else "Calculating ETA...")
+
+                with metrics_box.container():
+                    m1, m2, m3, m4 = st.columns(4)
+                    m1.metric("Progress", f"{pct}%")
+                    m2.metric("Sensors Ingested", f"{tags_done} / {total_tags}")
+                    m3.metric("Data Points", f"{points:,}")
+                    m4.metric("Estimated ETA", eta_str if pct < 100 else f"Done in {elapsed}s")
+
+                status_box.write(f"• `{message}` (Elapsed: `{elapsed}s`)")
+
+            pipeline = Module1Pipeline(config_manager=cm)
+            res = pipeline.run(mode=exec_mode, force_mock=mock_override, progress_callback=on_progress_ui)
+
+            if res.get("status") == "Success":
+                status_box.update(label="✅ Ingestion & Limit Synchronization Completed!", state="complete", expanded=False)
+                st.success(f"🎉 Successfully ingested {res['tags_successful']} tags and calculated {res['limits_calculated']} operating limits in {res['duration_seconds']}s!")
+                st.balloons()
+            else:
+                status_box.update(label=f"❌ Ingestion Failed: {res.get('last_error')}", state="error", expanded=True)
+                st.error(f"❌ Ingestion failed: {res.get('last_error')}")
 
     with col_info:
         st.subheader("Last Pipeline Execution Telemetry")

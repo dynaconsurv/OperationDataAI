@@ -65,8 +65,27 @@ def cmd_run_module1(args: argparse.Namespace) -> None:
         force_mock = False
 
     console.print(f"[bold green]Starting Module 1 Pipeline (mode={args.mode}, mock={force_mock})...[/bold green]")
+
+    def cli_progress(fraction: float, message: str, details: Optional[Dict[str, Any]] = None):
+        pct = int(min(1.0, max(0.0, fraction)) * 100)
+        details = details or {}
+        elapsed = details.get("elapsed", 0.0)
+        eta = details.get("eta")
+        eta_str = f" | ETA: {eta}s" if eta is not None and eta > 0 else ""
+        points = details.get("points_collected", 0)
+        points_str = f" | {points:,} pts" if points > 0 else ""
+
+        bar_len = 20
+        filled = int(bar_len * fraction)
+        bar = "=" * filled + (">" if filled < bar_len else "") + " " * max(0, bar_len - filled - (1 if filled < bar_len else 0))
+        clean_msg = message[:35]
+        sys.stdout.write(f"\r[{bar}] {pct:3d}% | {clean_msg:<35} ({elapsed:.1f}s{eta_str}{points_str})")
+        sys.stdout.flush()
+        if fraction >= 1.0:
+            sys.stdout.write("\n")
+
     pipeline = Module1Pipeline(config_manager=cm)
-    res = pipeline.run(mode=args.mode, force_mock=force_mock)
+    res = pipeline.run(mode=args.mode, force_mock=force_mock, progress_callback=cli_progress)
 
     console.print(f"\n[bold cyan]Pipeline Result:[/bold cyan] {res['status']}")
     console.print(f"Time Taken: [bold yellow]{res['duration_seconds']}s[/bold yellow]")

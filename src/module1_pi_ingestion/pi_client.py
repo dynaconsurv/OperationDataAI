@@ -7,9 +7,10 @@ from __future__ import annotations
 
 import datetime as dt
 import pickle
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+import time
 import urllib.parse
+from pathlib import Path
+from typing import Any, Callable, Dict, List, Optional, Tuple
 import urllib3
 import pandas as pd
 import requests
@@ -141,14 +142,36 @@ class PIWebApiClient:
         start_time_str: str,
         end_time_str: str,
         interval: str = "1h",
+        progress_callback: Optional[Callable[[float, str, Dict[str, Any]], None]] = None,
     ) -> Dict[str, pd.Series]:
-        """Fetch data using PI Web API Batch request for multiple WebIDs."""
+        """Fetch data using PI Web API Batch request for multiple WebIDs with progress feedback."""
         batch_url = f"{self.base_url}/batch"
         results: Dict[str, pd.Series] = {}
 
         tag_items = list(tag_webid_map.items())
+        total_tags = len(tag_items)
+        total_batches = (total_tags + self.batch_size - 1) // self.batch_size if self.batch_size > 0 else 1
+        batch_idx = 0
+        t_start = time.time()
+
+        if progress_callback:
+            progress_callback(
+                0.0,
+                f"Starting batch download for {total_tags} tags ({total_batches} batches)...",
+                {
+                    "batch": 0,
+                    "total_batches": total_batches,
+                    "tags_completed": 0,
+                    "total_tags": total_tags,
+                    "elapsed": 0.0,
+                    "eta": None,
+                    "points_collected": 0,
+                },
+            )
+
         for i in range(0, len(tag_items), self.batch_size):
             chunk = tag_items[i : i + self.batch_size]
+            batch_idx += 1
             subrequests: Dict[str, Any] = {}
 
             for tag_path, web_id in chunk:
@@ -190,6 +213,32 @@ class PIWebApiClient:
             except Exception as e:
                 logger.error(f"Batch request exception: {e}")
 
+            # Compute progress and ETA
+            tags_done = min(total_tags, i + len(chunk))
+            fraction = tags_done / total_tags if total_tags > 0 else 1.0
+            elapsed = time.time() - t_start
+            eta = (elapsed / fraction) - elapsed if fraction > 0 else 0.0
+
+            first_tag_path = chunk[0][0]
+            subsystem = first_tag_path.split("\\")[4] if len(first_tag_path.split("\\")) >= 5 else ""
+            msg = f"Batch {batch_idx}/{total_batches} ({tags_done}/{total_tags} tags) - {subsystem}"
+            total_points = sum(len(s) for s in results.values())
+
+            if progress_callback:
+                progress_callback(
+                    fraction,
+                    msg,
+                    {
+                        "batch": batch_idx,
+                        "total_batches": total_batches,
+                        "tags_completed": tags_done,
+                        "total_tags": total_tags,
+                        "elapsed": round(elapsed, 1),
+                        "eta": round(eta, 1),
+                        "points_collected": total_points,
+                    },
+                )
+
         return results
 
     def pull_data(
@@ -199,27 +248,9 @@ class PIWebApiClient:
         custom_end: Optional[dt.datetime] = None,
         save_pickle: bool = True,
         pickle_path: Optional[Path] = None,
+        progress_callback: Optional[Callable[[float, str, Dict[str, Any]], None]] = None,
     ) -> pd.DataFrame:
-        """Execute telemetry ingestion according to mode and configuration.
-
-        Parameters
-        ----------
-        mode : str
-            'test' for 1-day ingestion, 'full' for 12-month ingestion.
-        custom_start : datetime, optional
-            Explicit start time.
-        custom_end : datetime, optional
-            Explicit end time.
-        save_pickle : bool
-            Whether to serialize resulting DataFrame to pickle.
-        pickle_path : Path, optional
-            Target pickle file path.
-
-        Returns
-        -------
-        pd.DataFrame
-            Indexed by timestamp, columns matching sensor paths.
-        """
+        """Execute telemetry ingestion according to mode and configuration."""
         end_time = custom_end or dt.datetime.now().replace(minute=0, second=0, microsecond=0)
 
         if custom_start is not None:
@@ -237,6 +268,24 @@ class PIWebApiClient:
 
         if self.mock_mode:
             logger.info("MOCK MODE ACTIVE: Generating simulated GT-2420A telemetry (no external network call).")
+            if progress_callback:
+                for step in range(1, 6):
+                    time.sleep(0.06)
+                    frac = step / 5.0
+                    progress_callback(
+                        frac,
+                        f"Simulating telemetry generation ({int(frac * 100)}%)...",
+                        {
+                            "batch": step,
+                            "total_batches": 5,
+                            "tags_completed": int(frac * len(self.sensors)),
+                            "total_tags": len(self.sensors),
+                            "elapsed": round(step * 0.06, 2),
+                            "eta": round((5 - step) * 0.06, 2),
+                            "points_collected": 0,
+                        },
+                    )
+
             df = generate_mock_telemetry(
                 sensors=self.sensors,
                 start_time=start_time,
@@ -267,6 +316,7 @@ class PIWebApiClient:
                 start_time_str=start_str,
                 end_time_str=end_str,
                 interval=self.sample_interval,
+                progress_callback=progress_callback,
             )
 
             df = pd.DataFrame(batch_data)
