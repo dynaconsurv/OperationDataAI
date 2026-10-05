@@ -18,7 +18,7 @@
     },
     "database": {
         "engine": "mssql",
-        "host": "localhost",
+        "host": "10.8.33.73",
         "port": 1433,
         "database": "OperationLimits",
         "user": "pi-ai",
@@ -38,10 +38,10 @@
             "ll": 3.0
         },
         "percentiles": {
-            "ll": 1.0,
-            "l": 5.0,
+            "hh": 99.0,
             "h": 95.0,
-            "hh": 99.0
+            "l": 5.0,
+            "ll": 1.0
         }
     },
     "correlation": {

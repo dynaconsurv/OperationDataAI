@@ -43,7 +43,8 @@ class CorrelationEngine:
         if len(valid_cols) < len(numeric_df.columns):
             logger.info(f"Filtered out {len(numeric_df.columns) - len(valid_cols)} zero-variance or constant columns.")
 
-        corr_matrix = numeric_df[valid_cols].corr(method=self.method, min_periods=self.min_periods)
+        effective_min = min(self.min_periods, max(5, len(numeric_df) // 3))
+        corr_matrix = numeric_df[valid_cols].corr(method=self.method, min_periods=effective_min)
         self.correlation_matrix = corr_matrix
         return corr_matrix
 

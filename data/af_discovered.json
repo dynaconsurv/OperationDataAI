@@ -1,0 +1,1136 @@
+[
+  {
+    "subsystem": "Air Filter System",
+    "element_name": "Ambient Inlet Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\Ambient Inlet Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQU3uXDiS-8RGf-_Q72Pfl3wVcg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxBSVIgRklMVEVSIFNZU1RFTVxBTUJJRU5UIElOTEVUIFBSRVNTVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Air Filter System",
+    "element_name": "High Differential Pressure High Efficiency",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\High Differential Pressure High Efficiency",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQTXuXDiS-8RGf-_Q72Pfl3wS8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxBSVIgRklMVEVSIFNZU1RFTVxISUdIIERJRkZFUkVOVElBTCBQUkVTU1VSRSBISUdIIEVGRklDSUVOQ1l8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Air Filter System",
+    "element_name": "High Differential Pressure High Efficiency Filter ATM",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\High Differential Pressure High Efficiency Filter ATM",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQUHuXDiS-8RGf-_Q72Pfl3wVsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxBSVIgRklMVEVSIFNZU1RFTVxISUdIIERJRkZFUkVOVElBTCBQUkVTU1VSRSBISUdIIEVGRklDSUVOQ1kgRklMVEVSIEFUTXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Air Filter System",
+    "element_name": "High Differential Pressure Prefilter",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\High Differential Pressure Prefilter",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQKD2-VR2-8RGf-_Q72Pfl3wLo4fuIZIeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxBSVIgRklMVEVSIFNZU1RFTVxISUdIIERJRkZFUkVOVElBTCBQUkVTU1VSRSBQUkVGSUxURVJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Journal Bearing Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Journal Bearing Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQKXuXDiS-8RGf-_Q72Pfl3wL8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgSk9VUk5BTCBCRUFSSU5HIFRFTVBFUkFUVVJFIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Journal Bearing Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Journal Bearing Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQLHuXDiS-8RGf-_Q72Pfl3wKsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgSk9VUk5BTCBCRUFSSU5HIFRFTVBFUkFUVVJFIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Journal Bearing Temperature 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Journal Bearing Temperature 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQL3uXDiS-8RGf-_Q72Pfl3wKcg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgSk9VUk5BTCBCRUFSSU5HIFRFTVBFUkFUVVJFIDN8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Journal Bearing Temperature 4",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Journal Bearing Temperature 4",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQMnuXDiS-8RGf-_Q72Pfl3wNMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgSk9VUk5BTCBCRUFSSU5HIFRFTVBFUkFUVVJFIDR8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Shaft Axial Displacement A",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Shaft Axial Displacement A",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQR3uXDiS-8RGf-_Q72Pfl3wQcg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgU0hBRlQgQVhJQUwgRElTUExBQ0VNRU5UIEF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Shaft Axial Displacement B",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Shaft Axial Displacement B",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQSnuXDiS-8RGf-_Q72Pfl3wTMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgU0hBRlQgQVhJQUwgRElTUExBQ0VNRU5UIEJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Shaft DE X Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Shaft DE X Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQO3uXDiS-8RGf-_Q72Pfl3wPcg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgU0hBRlQgREUgWCBSQURJQUwgVklCUkFUSU9OfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Shaft DE Y Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Shaft DE Y Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQPnuXDiS-8RGf-_Q72Pfl3wOMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgU0hBRlQgREUgWSBSQURJQUwgVklCUkFUSU9OfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Shaft NDE X Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Shaft NDE X Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQQXuXDiS-8RGf-_Q72Pfl3wR8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgU0hBRlQgTkRFIFggUkFESUFMIFZJQlJBVElPTnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Shaft NDE Y Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Shaft NDE Y Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQRHuXDiS-8RGf-_Q72Pfl3wQsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgU0hBRlQgTkRFIFkgUkFESUFMIFZJQlJBVElPTnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Thrust Bearing Active Side Temperature1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Thrust Bearing Active Side Temperature1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQOHuXDiS-8RGf-_Q72Pfl3wPsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgVEhSVVNUIEJFQVJJTkcgQUNUSVZFIFNJREUgVEVNUEVSQVRVUkUxfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor",
+    "element_name": "Compressor Thrust Bearing Non Active Side Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Compressor Thrust Bearing Non Active Side Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQNXuXDiS-8RGf-_Q72Pfl3wM8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SXENPTVBSRVNTT1IgVEhSVVNUIEJFQVJJTkcgTk9OIEFDVElWRSBTSURFIFRFTVBFUkFUVVJFIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "1st Stage Anti Surge Valve",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Anti Surge Valve",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQWXuXDiS-8RGf-_Q72Pfl3wX8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMVNUIFNUQUdFIEFOVEkgU1VSR0UgVkFMVkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "1st Stage Anti Surge Valve Position",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Anti Surge Valve Position",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQa3uXDiS-8RGf-_Q72Pfl3wbcg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMVNUIFNUQUdFIEFOVEkgU1VSR0UgVkFMVkUgUE9TSVRJT058UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "1st Stage Compressor Inlet Flow",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Compressor Inlet Flow",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQXHuXDiS-8RGf-_Q72Pfl3wWsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMVNUIFNUQUdFIENPTVBSRVNTT1IgSU5MRVQgRkxPV3xQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "1st Stage Compressor Inlet Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Compressor Inlet Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQX3uXDiS-8RGf-_Q72Pfl3wWcg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMVNUIFNUQUdFIENPTVBSRVNTT1IgSU5MRVQgUFJFU1NVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "1st Stage Compressor Inlet Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Compressor Inlet Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQZXuXDiS-8RGf-_Q72Pfl3wY8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMVNUIFNUQUdFIENPTVBSRVNTT1IgSU5MRVQgVEVNUEVSQVRVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "1st Stage Compressor Outlet Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Compressor Outlet Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQYnuXDiS-8RGf-_Q72Pfl3wZMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMVNUIFNUQUdFIENPTVBSRVNTT1IgT1VUTEVUIFBSRVNTVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "1st Stage Compressor Outlet Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Compressor Outlet Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQaHuXDiS-8RGf-_Q72Pfl3wbsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMVNUIFNUQUdFIENPTVBSRVNTT1IgT1VUTEVUIFRFTVBFUkFUVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "1st Stage Compressor Ratio",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Compressor Ratio",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQg3uXDiS-8RGf-_Q72Pfl3whcg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMVNUIFNUQUdFIENPTVBSRVNTT1IgUkFUSU98UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "2nd Stage Anti Surge Valve",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Anti Surge Valve",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQbnuXDiS-8RGf-_Q72Pfl3waMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMk5EIFNUQUdFIEFOVEkgU1VSR0UgVkFMVkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "2nd Stage Anti Surge Valve Position",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Anti Surge Valve Position",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQgHuXDiS-8RGf-_Q72Pfl3whsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMk5EIFNUQUdFIEFOVEkgU1VSR0UgVkFMVkUgUE9TSVRJT058UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "2nd Stage Compressor Inlet Flow",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Compressor Inlet Flow",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQcXuXDiS-8RGf-_Q72Pfl3wd8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMk5EIFNUQUdFIENPTVBSRVNTT1IgSU5MRVQgRkxPV3xQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "2nd Stage Compressor Inlet Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Compressor Inlet Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQdHuXDiS-8RGf-_Q72Pfl3wcsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMk5EIFNUQUdFIENPTVBSRVNTT1IgSU5MRVQgUFJFU1NVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "2nd Stage Compressor Inlet Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Compressor Inlet Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQenuXDiS-8RGf-_Q72Pfl3wfMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMk5EIFNUQUdFIENPTVBSRVNTT1IgSU5MRVQgVEVNUEVSQVRVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "2nd Stage Compressor Outlet Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Compressor Outlet Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQd3uXDiS-8RGf-_Q72Pfl3wccg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMk5EIFNUQUdFIENPTVBSRVNTT1IgT1VUTEVUIFBSRVNTVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "2nd Stage Compressor Outlet Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Compressor Outlet Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQfXuXDiS-8RGf-_Q72Pfl3we8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMk5EIFNUQUdFIENPTVBSRVNTT1IgT1VUTEVUIFRFTVBFUkFUVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "2nd Stage Compressor Ratio",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Compressor Ratio",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQhnuXDiS-8RGf-_Q72Pfl3wgMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcMk5EIFNUQUdFIENPTVBSRVNTT1IgUkFUSU98UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Compressor Process",
+    "element_name": "Compressor Suction Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\Compressor Suction Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQVnuXDiS-8RGf-_Q72Pfl3wUMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxDT01QUkVTU09SIFBST0NFU1NcQ09NUFJFU1NPUiBTVUNUSU9OIFBSRVNTVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Buffer Seal Gas Inlet Valve Positioner I/P Positioner",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Buffer Seal Gas Inlet Valve Positioner I/P Positioner",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQwnuXDiS-8RGf-_Q72Pfl3wxMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXEJVRkZFUiBTRUFMIEdBUyBJTkxFVCBWQUxWRSBQT1NJVElPTkVSIEkvUCBQT1NJVElPTkVSfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "CC Sealing Chamber Vent Discharge Side Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\CC Sealing Chamber Vent Discharge Side Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQp3uXDiS-8RGf-_Q72Pfl3wocg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXENDIFNFQUxJTkcgQ0hBTUJFUiBWRU5UIERJU0NIQVJHRSBTSURFIFBSRVNTVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "CC Sealing Chamber Vent Suction Side Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\CC Sealing Chamber Vent Suction Side Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQqnuXDiS-8RGf-_Q72Pfl3wrMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXENDIFNFQUxJTkcgQ0hBTUJFUiBWRU5UIFNVQ1RJT04gU0lERSBQUkVTU1VSRXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Compressor Discharge End Primary Vent Flow",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Compressor Discharge End Primary Vent Flow",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQiXuXDiS-8RGf-_Q72Pfl3wj8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXENPTVBSRVNTT1IgRElTQ0hBUkdFIEVORCBQUklNQVJZIFZFTlQgRkxPV3xQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Compressor Discharge End Primary Vent Pressure 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Compressor Discharge End Primary Vent Pressure 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQlXuXDiS-8RGf-_Q72Pfl3wk8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXENPTVBSRVNTT1IgRElTQ0hBUkdFIEVORCBQUklNQVJZIFZFTlQgUFJFU1NVUkUgMXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Compressor Discharge End Primary Vent Pressure 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Compressor Discharge End Primary Vent Pressure 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQmHuXDiS-8RGf-_Q72Pfl3wnsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXENPTVBSRVNTT1IgRElTQ0hBUkdFIEVORCBQUklNQVJZIFZFTlQgUFJFU1NVUkUgMnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Compressor Discharge End Primary Vent Pressure 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Compressor Discharge End Primary Vent Pressure 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQm3uXDiS-8RGf-_Q72Pfl3wncg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXENPTVBSRVNTT1IgRElTQ0hBUkdFIEVORCBQUklNQVJZIFZFTlQgUFJFU1NVUkUgM3xQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Compressor Suction End Primary Vent Flow",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Compressor Suction End Primary Vent Flow",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQjHuXDiS-8RGf-_Q72Pfl3wisg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXENPTVBSRVNTT1IgU1VDVElPTiBFTkQgUFJJTUFSWSBWRU5UIEZMT1d8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Compressor Suction End Primary Vent Pressure 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Compressor Suction End Primary Vent Pressure 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQnnuXDiS-8RGf-_Q72Pfl3wmMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXENPTVBSRVNTT1IgU1VDVElPTiBFTkQgUFJJTUFSWSBWRU5UIFBSRVNTVVJFIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Compressor Suction End Primary Vent Pressure 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Compressor Suction End Primary Vent Pressure 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQoXuXDiS-8RGf-_Q72Pfl3wp8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXENPTVBSRVNTT1IgU1VDVElPTiBFTkQgUFJJTUFSWSBWRU5UIFBSRVNTVVJFIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Compressor Suction End Primary Vent Pressure 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Compressor Suction End Primary Vent Pressure 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQpHuXDiS-8RGf-_Q72Pfl3wosg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXENPTVBSRVNTT1IgU1VDVElPTiBFTkQgUFJJTUFSWSBWRU5UIFBSRVNTVVJFIDN8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "N2 Filter Diffirential Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\N2 Filter Diffirential Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQknuXDiS-8RGf-_Q72Pfl3wlMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXE4yIEZJTFRFUiBESUZGSVJFTlRJQUwgUFJFU1NVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Seal Gas Amplifier Differential Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Amplifier Differential Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQv3uXDiS-8RGf-_Q72Pfl3wucg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFNFQUwgR0FTIEFNUExJRklFUiBESUZGRVJFTlRJQUwgUFJFU1NVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Seal Gas Balancing Line Pressure 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Balancing Line Pressure 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQj3uXDiS-8RGf-_Q72Pfl3wicg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFNFQUwgR0FTIEJBTEFOQ0lORyBMSU5FIFBSRVNTVVJFIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Seal Gas Downstream Electric Heater Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Downstream Electric Heater Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQxXuXDiS-8RGf-_Q72Pfl3ww8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFNFQUwgR0FTIERPV05TVFJFQU0gRUxFQ1RSSUMgSEVBVEVSIFRFTVBFUkFUVVJFIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Seal Gas Downstream Electric Heater Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Downstream Electric Heater Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQyHuXDiS-8RGf-_Q72Pfl3wzsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFNFQUwgR0FTIERPV05TVFJFQU0gRUxFQ1RSSUMgSEVBVEVSIFRFTVBFUkFUVVJFIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Seal Gas Downstream Electric Heater Temperature 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Downstream Electric Heater Temperature 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQy3uXDiS-8RGf-_Q72Pfl3wzcg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFNFQUwgR0FTIERPV05TVFJFQU0gRUxFQ1RSSUMgSEVBVEVSIFRFTVBFUkFUVVJFIDN8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Seal Gas Filters Differential Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Filters Differential Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQvHuXDiS-8RGf-_Q72Pfl3wusg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFNFQUwgR0FTIEZJTFRFUlMgRElGRkVSRU5USUFMIFBSRVNTVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Seal Gas Inlet Balancing Line Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Inlet Balancing Line Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQrXuXDiS-8RGf-_Q72Pfl3wq8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFNFQUwgR0FTIElOTEVUIEJBTEFOQ0lORyBMSU5FIFBSRVNTVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Tertiary Seal Gas Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQsHuXDiS-8RGf-_Q72Pfl3wtsg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFRFUlRJQVJZIFNFQUwgR0FTIFBSRVNTVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Tertiary Seal Gas Pressure Pressure  1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure Pressure  1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQs3uXDiS-8RGf-_Q72Pfl3wtcg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFRFUlRJQVJZIFNFQUwgR0FTIFBSRVNTVVJFIFBSRVNTVVJFICAxfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Tertiary Seal Gas Pressure Pressure 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure Pressure 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQtnuXDiS-8RGf-_Q72Pfl3wsMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFRFUlRJQVJZIFNFQUwgR0FTIFBSRVNTVVJFIFBSRVNTVVJFIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Dry Gas Seal System",
+    "element_name": "Tertiary Seal Gas Pressure Pressure 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure Pressure 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQuXuXDiS-8RGf-_Q72Pfl3wv8g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxEUlkgR0FTIFNFQUwgU1lTVEVNXFRFUlRJQVJZIFNFQUwgR0FTIFBSRVNTVVJFIFBSRVNTVVJFIDN8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Enclosure System",
+    "element_name": "Acc. Compart. Vent. Outlet Gas Detector",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Acc. Compart. Vent. Outlet Gas Detector",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ0XuXDiS-8RGf-_Q72Pfl3w18g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxFTkNMT1NVUkUgU1lTVEVNXEFDQy4gQ09NUEFSVC4gVkVOVC4gT1VUTEVUIEdBUyBERVRFQ1RPUnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Enclosure System",
+    "element_name": "Coupling Compartment Internal Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Coupling Compartment Internal Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ6XuXDiS-8RGf-_Q72Pfl3w78g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxFTkNMT1NVUkUgU1lTVEVNXENPVVBMSU5HIENPTVBBUlRNRU5UIElOVEVSTkFMIFRFTVBFUkFUVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Enclosure System",
+    "element_name": "G.T. Compart. Vent. Outlet Gas Detector",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\G.T. Compart. Vent. Outlet Gas Detector",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ1HuXDiS-8RGf-_Q72Pfl3w0sg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxFTkNMT1NVUkUgU1lTVEVNXEcuVC4gQ09NUEFSVC4gVkVOVC4gT1VUTEVUIEdBUyBERVRFQ1RPUnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Enclosure System",
+    "element_name": "Gas Detector Inlet Air Filter Ir Gas Detector",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Gas Detector Inlet Air Filter Ir Gas Detector",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQznuXDiS-8RGf-_Q72Pfl3wyMg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxFTkNMT1NVUkUgU1lTVEVNXEdBUyBERVRFQ1RPUiBJTkxFVCBBSVIgRklMVEVSIElSIEdBUyBERVRFQ1RPUnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Enclosure System",
+    "element_name": "Turbine Compartment Internal Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Compartment Internal Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ4HuXDiS-8RGf-_Q72Pfl3w5sg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxFTkNMT1NVUkUgU1lTVEVNXFRVUkJJTkUgQ09NUEFSVE1FTlQgSU5URVJOQUwgVEVNUEVSQVRVUkUgMXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Enclosure System",
+    "element_name": "Turbine Compartment Internal Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Compartment Internal Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ43uXDiS-8RGf-_Q72Pfl3w5cg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxFTkNMT1NVUkUgU1lTVEVNXFRVUkJJTkUgQ09NUEFSVE1FTlQgSU5URVJOQUwgVEVNUEVSQVRVUkUgMnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Enclosure System",
+    "element_name": "Turbine Compartment Internal Temperature 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Compartment Internal Temperature 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ5nuXDiS-8RGf-_Q72Pfl3w4Mg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxFTkNMT1NVUkUgU1lTVEVNXFRVUkJJTkUgQ09NUEFSVE1FTlQgSU5URVJOQUwgVEVNUEVSQVRVUkUgM3xQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Enclosure System",
+    "element_name": "Turbine Compartment Ventilation Pressure 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Compartment Ventilation Pressure 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ13uXDiS-8RGf-_Q72Pfl3w0cg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxFTkNMT1NVUkUgU1lTVEVNXFRVUkJJTkUgQ09NUEFSVE1FTlQgVkVOVElMQVRJT04gUFJFU1NVUkUgMXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Enclosure System",
+    "element_name": "Turbine Compartment Ventilation Pressure 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Compartment Ventilation Pressure 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ2nuXDiS-8RGf-_Q72Pfl3w3Mg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxFTkNMT1NVUkUgU1lTVEVNXFRVUkJJTkUgQ09NUEFSVE1FTlQgVkVOVElMQVRJT04gUFJFU1NVUkUgMnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Enclosure System",
+    "element_name": "Turbine Compartment Ventilation Pressure 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Compartment Ventilation Pressure 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ3XuXDiS-8RGf-_Q72Pfl3w28g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxFTkNMT1NVUkUgU1lTVEVNXFRVUkJJTkUgQ09NUEFSVE1FTlQgVkVOVElMQVRJT04gUFJFU1NVUkUgM3xQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Fuel Gas System",
+    "element_name": "Fuel Gas Control Valve Position",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Control Valve Position",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQAXyXDiS-8RGf-_Q72Pfl3wB882479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxGVUVMIEdBUyBTWVNURU1cRlVFTCBHQVMgQ09OVFJPTCBWQUxWRSBQT1NJVElPTnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Fuel Gas System",
+    "element_name": "Fuel Gas Inlet Pressure Measurement Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Inlet Pressure Measurement Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ7HuXDiS-8RGf-_Q72Pfl3w6sg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxGVUVMIEdBUyBTWVNURU1cRlVFTCBHQVMgSU5MRVQgUFJFU1NVUkUgTUVBU1VSRU1FTlQgUFJFU1NVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Fuel Gas System",
+    "element_name": "Fuel Gas Inlet Temperature Rtd",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Inlet Temperature Rtd",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ-3uXDiS-8RGf-_Q72Pfl3w_cg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxGVUVMIEdBUyBTWVNURU1cRlVFTCBHQVMgSU5MRVQgVEVNUEVSQVRVUkUgUlREfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Fuel Gas System",
+    "element_name": "Fuel Gas Pressure Upstream Valve Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Pressure Upstream Valve Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ-HuXDiS-8RGf-_Q72Pfl3w_sg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxGVUVMIEdBUyBTWVNURU1cRlVFTCBHQVMgUFJFU1NVUkUgVVBTVFJFQU0gVkFMVkUgUFJFU1NVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Fuel Gas System",
+    "element_name": "Fuel Gas Stop/Speed Ratio Valve Position",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Stop/Speed Ratio Valve Position",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ_nuXDiS-8RGf-_Q72Pfl3w-Mg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxGVUVMIEdBUyBTWVNURU1cRlVFTCBHQVMgU1RPUC9TUEVFRCBSQVRJTyBWQUxWRSBQT1NJVElPTnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Fuel Gas System",
+    "element_name": "Interstage Fuel Gas Pressure Pressure 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Interstage Fuel Gas Pressure Pressure 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ73uXDiS-8RGf-_Q72Pfl3w6cg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxGVUVMIEdBUyBTWVNURU1cSU5URVJTVEFHRSBGVUVMIEdBUyBQUkVTU1VSRSBQUkVTU1VSRSAxfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Fuel Gas System",
+    "element_name": "Interstage Fuel Gas Pressure Pressure 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Interstage Fuel Gas Pressure Pressure 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ8nuXDiS-8RGf-_Q72Pfl3w9Mg2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxGVUVMIEdBUyBTWVNURU1cSU5URVJTVEFHRSBGVUVMIEdBUyBQUkVTU1VSRSBQUkVTU1VSRSAyfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Fuel Gas System",
+    "element_name": "Interstage Fuel Gas Pressure Pressure 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Interstage Fuel Gas Pressure Pressure 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ9XuXDiS-8RGf-_Q72Pfl3w88g2479IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxGVUVMIEdBUyBTWVNURU1cSU5URVJTVEFHRSBGVUVMIEdBUyBQUkVTU1VSRSBQUkVTU1VSRSAzfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Average Axial Discharge Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Average Axial Discharge Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ27jTOSS-8RGf-_Q72Pfl3w3Qty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcQVZFUkFHRSBBWElBTCBESVNDSEFSR0UgUFJFU1NVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Average Exhaust Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Average Exhaust Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ1bjTOSS-8RGf-_Q72Pfl3w0wty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcQVZFUkFHRSBFWEhBVVNUIFRFTVBFUkFUVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Axial Compressor Discharge Pressure 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Compressor Discharge Pressure 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQVLjTOSS-8RGf-_Q72Pfl3wUgty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcQVhJQUwgQ09NUFJFU1NPUiBESVNDSEFSR0UgUFJFU1NVUkUgMXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Axial Compressor Discharge Pressure 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Compressor Discharge Pressure 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQV7jTOSS-8RGf-_Q72Pfl3wUQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcQVhJQUwgQ09NUFJFU1NPUiBESVNDSEFSR0UgUFJFU1NVUkUgMnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Axial Compressor Discharge Pressure 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Compressor Discharge Pressure 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQWrjTOSS-8RGf-_Q72Pfl3wXAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcQVhJQUwgQ09NUFJFU1NPUiBESVNDSEFSR0UgUFJFU1NVUkUgM3xQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Axial Compressor Discharge Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Compressor Discharge Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQb7jTOSS-8RGf-_Q72Pfl3waQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcQVhJQUwgQ09NUFJFU1NPUiBESVNDSEFSR0UgVEVNUEVSQVRVUkUgMXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Axial Compressor Discharge Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Compressor Discharge Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQcrjTOSS-8RGf-_Q72Pfl3wdAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcQVhJQUwgQ09NUFJFU1NPUiBESVNDSEFSR0UgVEVNUEVSQVRVUkUgMnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Axial Compressor Inlet Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Compressor Inlet Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQabjTOSS-8RGf-_Q72Pfl3wbwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcQVhJQUwgQ09NUFJFU1NPUiBJTkxFVCBURU1QRVJBVFVSRSAxfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Axial Compressor Inlet Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Compressor Inlet Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQbLjTOSS-8RGf-_Q72Pfl3wagty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcQVhJQUwgQ09NUFJFU1NPUiBJTkxFVCBURU1QRVJBVFVSRSAyfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Duct Back Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Duct Back Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQUbjTOSS-8RGf-_Q72Pfl3wVwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBEVUNUIEJBQ0sgUFJFU1NVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQirjTOSS-8RGf-_Q72Pfl3wjAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSAxfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 10",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 10",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQpbjTOSS-8RGf-_Q72Pfl3wowty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSAxMHxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 11",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 11",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQqLjTOSS-8RGf-_Q72Pfl3wrgty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSAxMXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 12",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 12",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQq7jTOSS-8RGf-_Q72Pfl3wrQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSAxMnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 13",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 13",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQrrjTOSS-8RGf-_Q72Pfl3wqAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSAxM3xQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQjbjTOSS-8RGf-_Q72Pfl3wiwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSAyfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQkLjTOSS-8RGf-_Q72Pfl3wlgty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSAzfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 4",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 4",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQk7jTOSS-8RGf-_Q72Pfl3wlQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSA0fFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 5",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 5",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQlrjTOSS-8RGf-_Q72Pfl3wkAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSA1fFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 6",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 6",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQmbjTOSS-8RGf-_Q72Pfl3wnwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSA2fFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 7",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 7",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQnLjTOSS-8RGf-_Q72Pfl3wmgty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSA3fFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 8",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 8",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQn7jTOSS-8RGf-_Q72Pfl3wmQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSA4fFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Exhaust Temperature 9",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 9",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQorjTOSS-8RGf-_Q72Pfl3wpAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRVhIQVVTVCBURU1QRVJBVFVSRSA5fFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Flame Detector Combustion Chamber 10",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector Combustion Chamber 10",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ0rjTOSS-8RGf-_Q72Pfl3w1Aty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRkxBTUUgREVURUNUT1IgQ09NQlVTVElPTiBDSEFNQkVSIDEwfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Flame Detector Combustion Chamber 11",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector Combustion Chamber 11",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQz7jTOSS-8RGf-_Q72Pfl3wyQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRkxBTUUgREVURUNUT1IgQ09NQlVTVElPTiBDSEFNQkVSIDExfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Flame Detector Combustion Chamber 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector Combustion Chamber 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQybjTOSS-8RGf-_Q72Pfl3wzwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRkxBTUUgREVURUNUT1IgQ09NQlVTVElPTiBDSEFNQkVSIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Flame Detector Combustion Chamber 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector Combustion Chamber 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQzLjTOSS-8RGf-_Q72Pfl3wygty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcRkxBTUUgREVURUNUT1IgQ09NQlVTVElPTiBDSEFNQkVSIDN8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "HP Rotor Axial Displacement Displacement Probe Proximitor 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Rotor Axial Displacement Displacement Probe Proximitor 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQvbjTOSS-8RGf-_Q72Pfl3wuwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcSFAgUk9UT1IgQVhJQUwgRElTUExBQ0VNRU5UIERJU1BMQUNFTUVOVCBQUk9CRSBQUk9YSU1JVE9SIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "HP Rotor Axial Displacement Displacement Probe Proximitor 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Rotor Axial Displacement Displacement Probe Proximitor 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQwLjTOSS-8RGf-_Q72Pfl3wxgty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcSFAgUk9UT1IgQVhJQUwgRElTUExBQ0VNRU5UIERJU1BMQUNFTUVOVCBQUk9CRSBQUk9YSU1JVE9SIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "HP Shaft Magnetic Speed Pick Up",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Shaft Magnetic Speed Pick Up",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQXbjTOSS-8RGf-_Q72Pfl3wWwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcSFAgU0hBRlQgTUFHTkVUSUMgU1BFRUQgUElDSyBVUHxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "HP Shaft Speed Control",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Shaft Speed Control",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQY7jTOSS-8RGf-_Q72Pfl3wZQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcSFAgU0hBRlQgU1BFRUQgQ09OVFJPTHxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "HP Shaft Vibration Seismic Probe",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Shaft Vibration Seismic Probe",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQsbjTOSS-8RGf-_Q72Pfl3wtwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcSFAgU0hBRlQgVklCUkFUSU9OIFNFSVNNSUMgUFJPQkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Journal Bearing 1 Drain Oil Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Journal Bearing 1 Drain Oil Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQP7jTOSS-8RGf-_Q72Pfl3wOQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcSk9VUk5BTCBCRUFSSU5HIDEgRFJBSU4gT0lMIFRFTVBFUkFUVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Journal Bearing 2 Drain Oil Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Journal Bearing 2 Drain Oil Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQQrjTOSS-8RGf-_Q72Pfl3wRAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcSk9VUk5BTCBCRUFSSU5HIDIgRFJBSU4gT0lMIFRFTVBFUkFUVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Journal Bearing 3 Drain Oil Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Journal Bearing 3 Drain Oil Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQRbjTOSS-8RGf-_Q72Pfl3wQwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcSk9VUk5BTCBCRUFSSU5HIDMgRFJBSU4gT0lMIFRFTVBFUkFUVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Journal Bearing 4 Metal Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Journal Bearing 4 Metal Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQh7jTOSS-8RGf-_Q72Pfl3wgQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcSk9VUk5BTCBCRUFSSU5HIDQgTUVUQUwgVEVNUEVSQVRVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Journal Thrust Bearing 4 Drain Oil Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Journal Thrust Bearing 4 Drain Oil Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQSLjTOSS-8RGf-_Q72Pfl3wTgty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcSk9VUk5BTCBUSFJVU1QgQkVBUklORyA0IERSQUlOIE9JTCBURU1QRVJBVFVSRXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "LP Rotor Axial Displacement Displacement Probe Proximitor 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Rotor Axial Displacement Displacement Probe Proximitor 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQw7jTOSS-8RGf-_Q72Pfl3wxQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcTFAgUk9UT1IgQVhJQUwgRElTUExBQ0VNRU5UIERJU1BMQUNFTUVOVCBQUk9CRSBQUk9YSU1JVE9SIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "LP Rotor Axial Displacement Displacement Probe Proximitor 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Rotor Axial Displacement Displacement Probe Proximitor 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQxrjTOSS-8RGf-_Q72Pfl3wwAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcTFAgUk9UT1IgQVhJQUwgRElTUExBQ0VNRU5UIERJU1BMQUNFTUVOVCBQUk9CRSBQUk9YSU1JVE9SIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "LP Shaft Magnetic Speed Pick Up",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Shaft Magnetic Speed Pick Up",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQYLjTOSS-8RGf-_Q72Pfl3wZgty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcTFAgU0hBRlQgTUFHTkVUSUMgU1BFRUQgUElDSyBVUHxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "LP Shaft Speed Control",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Shaft Speed Control",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQZrjTOSS-8RGf-_Q72Pfl3wYAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcTFAgU0hBRlQgU1BFRUQgQ09OVFJPTHxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "LP Shaft Vibration Seismic Probe",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Shaft Vibration Seismic Probe",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQtLjTOSS-8RGf-_Q72Pfl3wsgty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcTFAgU0hBRlQgVklCUkFUSU9OIFNFSVNNSUMgUFJPQkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Spread Exhaust Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Spread Exhaust Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ2LjTOSS-8RGf-_Q72Pfl3w3gty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcU1BSRUFEIEVYSEFVU1QgVEVNUEVSQVRVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Thrust Bearing 1 Drain Oil Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Thrust Bearing 1 Drain Oil Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQPLjTOSS-8RGf-_Q72Pfl3wOgty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcVEhSVVNUIEJFQVJJTkcgMSBEUkFJTiBPSUwgVEVNUEVSQVRVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Thrust Bearing 4 Active Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Thrust Bearing 4 Active Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQhLjTOSS-8RGf-_Q72Pfl3wggty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcVEhSVVNUIEJFQVJJTkcgNCBBQ1RJVkUgVEVNUEVSQVRVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Thrust Bearing 4 Inactive Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Thrust Bearing 4 Inactive Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQgbjTOSS-8RGf-_Q72Pfl3whwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcVEhSVVNUIEJFQVJJTkcgNCBJTkFDVElWRSBURU1QRVJBVFVSRXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Turbine 2nd Stage Nozzles Position",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Turbine 2nd Stage Nozzles Position",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQS7jTOSS-8RGf-_Q72Pfl3wTQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcVFVSQklORSAyTkQgU1RBR0UgTk9aWkxFUyBQT1NJVElPTnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Turbine Bearing 1 Radial Vibrations Vibration Probe Proximitor",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Turbine Bearing 1 Radial Vibrations Vibration Probe Proximitor",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQt7jTOSS-8RGf-_Q72Pfl3wsQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcVFVSQklORSBCRUFSSU5HIDEgUkFESUFMIFZJQlJBVElPTlMgVklCUkFUSU9OIFBST0JFIFBST1hJTUlUT1J8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Turbine Bearing Radial Vibrations Vibration Probe Proximitor",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Turbine Bearing Radial Vibrations Vibration Probe Proximitor",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQurjTOSS-8RGf-_Q72Pfl3wvAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcVFVSQklORSBCRUFSSU5HIFJBRElBTCBWSUJSQVRJT05TIFZJQlJBVElPTiBQUk9CRSBQUk9YSU1JVE9SfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Turbine IGV Position",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Turbine IGV Position",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQTrjTOSS-8RGf-_Q72Pfl3wSAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcVFVSQklORSBJR1YgUE9TSVRJT058UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Wheel Space Temperature 1st Stage Aft Inner #1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Wheel Space Temperature 1st Stage Aft Inner #1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQe7jTOSS-8RGf-_Q72Pfl3wfQty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcV0hFRUwgU1BBQ0UgVEVNUEVSQVRVUkUgMVNUIFNUQUdFIEFGVCBJTk5FUiAjMXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Wheel Space Temperature 1St Stage Fwd Inner #1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Wheel Space Temperature 1St Stage Fwd Inner #1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQdbjTOSS-8RGf-_Q72Pfl3wcwty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcV0hFRUwgU1BBQ0UgVEVNUEVSQVRVUkUgMVNUIFNUQUdFIEZXRCBJTk5FUiAjMXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Wheel Space Temperature 2nd Stage Aft Inner #1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Wheel Space Temperature 2nd Stage Aft Inner #1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQfrjTOSS-8RGf-_Q72Pfl3weAty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcV0hFRUwgU1BBQ0UgVEVNUEVSQVRVUkUgMk5EIFNUQUdFIEFGVCBJTk5FUiAjMXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gas Turbine Engine",
+    "element_name": "Wheel Space Temperature 2nd Stage Fwd Inner #1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Wheel Space Temperature 2nd Stage Fwd Inner #1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQeLjTOSS-8RGf-_Q72Pfl3wfgty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHQVMgVFVSQklORSBFTkdJTkVcV0hFRUwgU1BBQ0UgVEVNUEVSQVRVUkUgMk5EIFNUQUdFIEZXRCBJTk5FUiAjMXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box  Wheel Casing Accelerator Sensor",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box  Wheel Casing Accelerator Sensor",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ_LjTOSS-8RGf-_Q72Pfl3w-gty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YICBXSEVFTCBDQVNJTkcgQUNDRUxFUkFUT1IgU0VOU09SfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box  Wheel DE Journal Bearing Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box  Wheel DE Journal Bearing Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ4bjTOSS-8RGf-_Q72Pfl3w5wty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YICBXSEVFTCBERSBKT1VSTkFMIEJFQVJJTkcgVEVNUEVSQVRVUkUgMnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box  Wheel NDE Journal Bearing Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box  Wheel NDE Journal Bearing Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ5LjTOSS-8RGf-_Q72Pfl3w4gty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YICBXSEVFTCBOREUgSk9VUk5BTCBCRUFSSU5HIFRFTVBFUkFUVVJFIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box  Wheel NDE Journal Bearing Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box  Wheel NDE Journal Bearing Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ57jTOSS-8RGf-_Q72Pfl3w4Qty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YICBXSEVFTCBOREUgSk9VUk5BTCBCRUFSSU5HIFRFTVBFUkFUVVJFIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box  Wheel Thrust Bearing Active Side Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box  Wheel Thrust Bearing Active Side Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ87jTOSS-8RGf-_Q72Pfl3w9Qty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YICBXSEVFTCBUSFJVU1QgQkVBUklORyBBQ1RJVkUgU0lERSBURU1QRVJBVFVSRSAxfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box  Wheel Thrust Bearing Active Side Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box  Wheel Thrust Bearing Active Side Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ9rjTOSS-8RGf-_Q72Pfl3w8Aty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YICBXSEVFTCBUSFJVU1QgQkVBUklORyBBQ1RJVkUgU0lERSBURU1QRVJBVFVSRSAyfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box  Wheel Thrust Bearing Non Active Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box  Wheel Thrust Bearing Non Active Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ8LjTOSS-8RGf-_Q72Pfl3w9gty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YICBXSEVFTCBUSFJVU1QgQkVBUklORyBOT04gQUNUSVZFIFRFTVBFUkFUVVJFIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Pinion De Bearing X Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Pinion De Bearing X Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQEbnTOSS-8RGf-_Q72Pfl3wFwpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFBJTklPTiBERSBCRUFSSU5HIFggUkFESUFMIFZJQlJBVElPTnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Pinion De Bearing Y Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Pinion De Bearing Y Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQFLnTOSS-8RGf-_Q72Pfl3wEgpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFBJTklPTiBERSBCRUFSSU5HIFkgUkFESUFMIFZJQlJBVElPTnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Pinion DE Journal Bearing 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Pinion DE Journal Bearing 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ7bjTOSS-8RGf-_Q72Pfl3w6wty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFBJTklPTiBERSBKT1VSTkFMIEJFQVJJTkcgMnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Pinion NDE Bearing X Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Pinion NDE Bearing X Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQC7nTOSS-8RGf-_Q72Pfl3wDQpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFBJTklPTiBOREUgQkVBUklORyBYIFJBRElBTCBWSUJSQVRJT058UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Pinion NDE Bearing Y Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Pinion NDE Bearing Y Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQDrnTOSS-8RGf-_Q72Pfl3wCApy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFBJTklPTiBOREUgQkVBUklORyBZIFJBRElBTCBWSUJSQVRJT058UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Pinion NDE Journal Bearing Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Pinion NDE Journal Bearing Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ6rjTOSS-8RGf-_Q72Pfl3w7Aty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFBJTklPTiBOREUgSk9VUk5BTCBCRUFSSU5HIFRFTVBFUkFUVVJFIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Wheel Axial Bearing Displacement 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Wheel Axial Bearing Displacement 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQF7nTOSS-8RGf-_Q72Pfl3wEQpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFdIRUVMIEFYSUFMIEJFQVJJTkcgRElTUExBQ0VNRU5UIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Wheel Axial Bearing Displacement 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Wheel Axial Bearing Displacement 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQGrnTOSS-8RGf-_Q72Pfl3wHApy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFdIRUVMIEFYSUFMIEJFQVJJTkcgRElTUExBQ0VNRU5UIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Wheel DE Bearing X Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Wheel DE Bearing X Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ_7jTOSS-8RGf-_Q72Pfl3w-Qty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFdIRUVMIERFIEJFQVJJTkcgWCBSQURJQUwgVklCUkFUSU9OfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Wheel DE Bearing Y Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Wheel DE Bearing Y Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQArnTOSS-8RGf-_Q72Pfl3wBApy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFdIRUVMIERFIEJFQVJJTkcgWSBSQURJQUwgVklCUkFUSU9OfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gearbox Wheel DE Journal Bearing Temperature 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel DE Journal Bearing Temperature 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ3rjTOSS-8RGf-_Q72Pfl3w2Aty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVJCT1ggV0hFRUwgREUgSk9VUk5BTCBCRUFSSU5HIFRFTVBFUkFUVVJFIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Wheel NDE Bearing X Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Wheel NDE Bearing X Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQBbnTOSS-8RGf-_Q72Pfl3wAwpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFdIRUVMIE5ERSBCRUFSSU5HIFggUkFESUFMIFZJQlJBVElPTnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gear-Box Wheel NDE Bearing Y Radial Vibration",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gear-Box Wheel NDE Bearing Y Radial Vibration",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQCLnTOSS-8RGf-_Q72Pfl3wDgpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVItQk9YIFdIRUVMIE5ERSBCRUFSSU5HIFkgUkFESUFMIFZJQlJBVElPTnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Gearbox",
+    "element_name": "Gearbox Wheel Thrust Bearing Non Active Temperature 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Thrust Bearing Non Active Temperature 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQ-bjTOSS-8RGf-_Q72Pfl3w_wty1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxHRUFSQk9YXEdFQVJCT1ggV0hFRUwgVEhSVVNUIEJFQVJJTkcgTk9OIEFDVElWRSBURU1QRVJBVFVSRSAyfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Hydraulic System",
+    "element_name": "Control Oil Header Pressure 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Control Oil Header Pressure 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQI7nTOSS-8RGf-_Q72Pfl3wJQpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxIWURSQVVMSUMgU1lTVEVNXENPTlRST0wgT0lMIEhFQURFUiBQUkVTU1VSRSAxfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Hydraulic System",
+    "element_name": "Control Oil Header Pressure 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Control Oil Header Pressure 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQJrnTOSS-8RGf-_Q72Pfl3wIApy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxIWURSQVVMSUMgU1lTVEVNXENPTlRST0wgT0lMIEhFQURFUiBQUkVTU1VSRSAyfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Hydraulic System",
+    "element_name": "Control Oil Header Pressure 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Control Oil Header Pressure 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQKbnTOSS-8RGf-_Q72Pfl3wLwpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxIWURSQVVMSUMgU1lTVEVNXENPTlRST0wgT0lMIEhFQURFUiBQUkVTU1VSRSAzfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Hydraulic System",
+    "element_name": "Hydraulic Oil Filters High Differential Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Hydraulic Oil Filters High Differential Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQHbnTOSS-8RGf-_Q72Pfl3wGwpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxIWURSQVVMSUMgU1lTVEVNXEhZRFJBVUxJQyBPSUwgRklMVEVSUyBISUdIIERJRkZFUkVOVElBTCBQUkVTU1VSRXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Hydraulic System",
+    "element_name": "Hydraulic Oil Header Low Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Hydraulic Oil Header Low Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQILnTOSS-8RGf-_Q72Pfl3wJgpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxIWURSQVVMSUMgU1lTVEVNXEhZRFJBVUxJQyBPSUwgSEVBREVSIExPVyBQUkVTU1VSRXxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Lube Oil System",
+    "element_name": "Lube Oil Average Header Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Average Header Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQQbnTOSS-8RGf-_Q72Pfl3wRwpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxMVUJFIE9JTCBTWVNURU1cTFVCRSBPSUwgQVZFUkFHRSBIRUFERVIgUFJFU1NVUkV8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Lube Oil System",
+    "element_name": "Lube Oil Differential Pressure Filter",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Differential Pressure Filter",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQL7nTOSS-8RGf-_Q72Pfl3wKQpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxMVUJFIE9JTCBTWVNURU1cTFVCRSBPSUwgRElGRkVSRU5USUFMIFBSRVNTVVJFIEZJTFRFUnxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Lube Oil System",
+    "element_name": "Lube Oil Header Pressure 1",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Pressure 1",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQOLnTOSS-8RGf-_Q72Pfl3wPgpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxMVUJFIE9JTCBTWVNURU1cTFVCRSBPSUwgSEVBREVSIFBSRVNTVVJFIDF8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Lube Oil System",
+    "element_name": "Lube Oil Header Pressure 2",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Pressure 2",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQO7nTOSS-8RGf-_Q72Pfl3wPQpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxMVUJFIE9JTCBTWVNURU1cTFVCRSBPSUwgSEVBREVSIFBSRVNTVVJFIDJ8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Lube Oil System",
+    "element_name": "Lube Oil Header Pressure 3",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Pressure 3",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQPrnTOSS-8RGf-_Q72Pfl3wOApy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxMVUJFIE9JTCBTWVNURU1cTFVCRSBPSUwgSEVBREVSIFBSRVNTVVJFIDN8UEFSQU1FVEVS",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Lube Oil System",
+    "element_name": "Lube Oil Header Temperature",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Temperature",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQNbnTOSS-8RGf-_Q72Pfl3wMwpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxMVUJFIE9JTCBTWVNURU1cTFVCRSBPSUwgSEVBREVSIFRFTVBFUkFUVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Lube Oil System",
+    "element_name": "Lube Oil Pumps Low Delivery Pressure",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Pumps Low Delivery Pressure",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQMrnTOSS-8RGf-_Q72Pfl3wNApy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxMVUJFIE9JTCBTWVNURU1cTFVCRSBPSUwgUFVNUFMgTE9XIERFTElWRVJZIFBSRVNTVVJFfFBBUkFNRVRFUg",
+    "attribute_name": "Parameter"
+  },
+  {
+    "subsystem": "Lube Oil System",
+    "element_name": "Lube Oil Tank Level",
+    "af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Tank Level",
+    "web_id": "F1AbE5cqYAPyzXUGOIYCd8upOcQLLnTOSS-8RGf-_Q72Pfl3wKgpy1L9IeF0OI3c4SvwFYQS1VMLVBJQUZcR0VHIFJQTVxNQUxBWVNJQVxCT1JGXEdUR1xHVC0yNDIwQVxMVUJFIE9JTCBTWVNURU1cTFVCRSBPSUwgVEFOSyBMRVZFTHxQQVJBTUVURVI",
+    "attribute_name": "Parameter"
+  }
+]

@@ -153,13 +153,13 @@ class PIWebApiClient:
 
             for tag_path, web_id in chunk:
                 if self.query_mode == "interpolated":
-                    rel_url = f"streams/{web_id}/interpolated?startTime={urllib.parse.quote(start_time_str)}&endTime={urllib.parse.quote(end_time_str)}&interval={interval}"
+                    full_uri = f"{self.base_url}/streams/{web_id}/interpolated?startTime={start_time_str}&endTime={end_time_str}&interval={interval}"
                 else:
-                    rel_url = f"streams/{web_id}/recorded?startTime={urllib.parse.quote(start_time_str)}&endTime={urllib.parse.quote(end_time_str)}"
+                    full_uri = f"{self.base_url}/streams/{web_id}/recorded?startTime={start_time_str}&endTime={end_time_str}"
 
                 subrequests[tag_path] = {
                     "Method": "GET",
-                    "Resource": rel_url,
+                    "Resource": full_uri,
                 }
 
             try:
