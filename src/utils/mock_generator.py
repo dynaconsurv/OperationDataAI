@@ -12,6 +12,16 @@ import numpy as np
 import pandas as pd
 
 
+def normalize_pandas_freq(freq_str: str) -> str:
+    """Convert PI Web API frequency strings (e.g. '1m', '10m', '1d') to pandas aliases ('1min', '10min', '1D')."""
+    f = str(freq_str).strip().lower()
+    if f.endswith("m") and not f.endswith("mo") and not f.endswith("min"):
+        return f + "in"
+    if f.endswith("d"):
+        return f.upper()
+    return freq_str
+
+
 def generate_mock_telemetry(
     sensors: List[Dict[str, Any]],
     start_time: Optional[dt.datetime] = None,
@@ -46,7 +56,8 @@ def generate_mock_telemetry(
     if start_time is None:
         start_time = end_time - dt.timedelta(days=365)
 
-    timestamps = pd.date_range(start=start_time, end=end_time, freq=freq)
+    pandas_freq = normalize_pandas_freq(freq)
+    timestamps = pd.date_range(start=start_time, end=end_time, freq=pandas_freq)
     n_points = len(timestamps)
 
     if n_points == 0:

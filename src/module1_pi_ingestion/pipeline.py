@@ -39,11 +39,12 @@ class Module1Pipeline:
         force_mock: Optional[bool] = None,
         custom_start: Optional[dt.datetime] = None,
         custom_end: Optional[dt.datetime] = None,
+        custom_interval: Optional[str] = None,
         progress_callback: Optional[Callable[[float, str, Dict[str, Any]], None]] = None,
     ) -> Dict[str, Any]:
         """Execute the full Module 1 pipeline with progress tracking."""
         start_time_proc = time.time()
-        logger.info(f"=== Starting Module 1 Pipeline (mode={mode}, mock={force_mock if force_mock is not None else self.pi_client.mock_mode}) ===")
+        logger.info(f"=== Starting Module 1 Pipeline (mode={mode}, interval={custom_interval or self.pi_client.sample_interval}, mock={force_mock if force_mock is not None else self.pi_client.mock_mode}) ===")
 
         if force_mock is not None:
             self.pi_client.mock_mode = force_mock
@@ -61,6 +62,7 @@ class Module1Pipeline:
             mode=mode,
             custom_start=custom_start,
             custom_end=custom_end,
+            custom_interval=custom_interval,
             save_pickle=True,
             pickle_path=pickle_path,
             progress_callback=ingestion_cb,
@@ -119,6 +121,7 @@ class Module1Pipeline:
             "last_pull_timestamp": dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "duration_seconds": duration,
             "pull_mode": "1-Day Test" if mode == "test" else "12-Month Historical",
+            "sample_interval": custom_interval or self.pi_client.sample_interval,
             "is_mock": self.pi_client.mock_mode,
             "backend_db": self.sql_storage.active_backend,
             "time_range": time_range_desc,

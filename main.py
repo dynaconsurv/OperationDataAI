@@ -6,6 +6,7 @@ and database inspection.
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import sys
 from pathlib import Path
 import pandas as pd
@@ -64,7 +65,24 @@ def cmd_run_module1(args: argparse.Namespace) -> None:
     elif args.live:
         force_mock = False
 
-    console.print(f"[bold green]Starting Module 1 Pipeline (mode={args.mode}, mock={force_mock})...[/bold green]")
+    custom_start = None
+    if getattr(args, "start", None):
+        try:
+            custom_start = dt.datetime.fromisoformat(args.start)
+        except ValueError:
+            console.print(f"[bold red]Invalid start timestamp format: {args.start}. Use 'YYYY-MM-DD HH:MM'.[/bold red]")
+            return
+
+    custom_end = None
+    if getattr(args, "end", None):
+        try:
+            custom_end = dt.datetime.fromisoformat(args.end)
+        except ValueError:
+            console.print(f"[bold red]Invalid end timestamp format: {args.end}. Use 'YYYY-MM-DD HH:MM'.[/bold red]")
+            return
+
+    interval_info = f", interval={args.interval}" if getattr(args, "interval", None) else ""
+    console.print(f"[bold green]Starting Module 1 Pipeline (mode={args.mode}{interval_info}, mock={force_mock})...[/bold green]")
 
     def cli_progress(fraction: float, message: str, details: Optional[Dict[str, Any]] = None):
         pct = int(min(1.0, max(0.0, fraction)) * 100)
@@ -85,7 +103,14 @@ def cmd_run_module1(args: argparse.Namespace) -> None:
             sys.stdout.write("\n")
 
     pipeline = Module1Pipeline(config_manager=cm)
-    res = pipeline.run(mode=args.mode, force_mock=force_mock, progress_callback=cli_progress)
+    res = pipeline.run(
+        mode=args.mode,
+        force_mock=force_mock,
+        custom_start=custom_start,
+        custom_end=custom_end,
+        custom_interval=getattr(args, "interval", None),
+        progress_callback=cli_progress,
+    )
 
     console.print(f"\n[bold cyan]Pipeline Result:[/bold cyan] {res['status']}")
     console.print(f"Time Taken: [bold yellow]{res['duration_seconds']}s[/bold yellow]")
@@ -182,6 +207,9 @@ def main() -> None:
     # run-module1
     p_m1 = subparsers.add_parser("run-module1", help="Execute Module 1 (PI Ingestion, Limits, SQL Sync)")
     p_m1.add_argument("--mode", choices=["test", "full"], default="test", help="Test (1-day) or Full (12-month)")
+    p_m1.add_argument("--interval", type=str, default=None, help="Sampling interval (e.g. 1m, 5m, 10m, 15m, 30m, 1h)")
+    p_m1.add_argument("--start", type=str, default=None, help="Custom start timestamp (YYYY-MM-DD HH:MM)")
+    p_m1.add_argument("--end", type=str, default=None, help="Custom end timestamp (YYYY-MM-DD HH:MM)")
     p_m1.add_argument("--mock", action="store_true", help="Force mock telemetry generation")
     p_m1.add_argument("--live", action="store_true", help="Force live PI Web API connection")
 

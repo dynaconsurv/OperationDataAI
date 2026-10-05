@@ -246,11 +246,17 @@ class PIWebApiClient:
         mode: str = "test",  # 'test' (1-day) or 'full' (12-months)
         custom_start: Optional[dt.datetime] = None,
         custom_end: Optional[dt.datetime] = None,
+        custom_interval: Optional[str] = None,
         save_pickle: bool = True,
         pickle_path: Optional[Path] = None,
         progress_callback: Optional[Callable[[float, str, Dict[str, Any]], None]] = None,
     ) -> pd.DataFrame:
-        """Execute telemetry ingestion according to mode and configuration."""
+        """Execute telemetry ingestion according to mode, time range, and sampling interval.
+
+        When sampling by minute (e.g. '1m', '5m', '10m'), queries spanning more than 1 hour
+        are automatically split into 1-hour slices between start and stop to avoid PI server timeouts
+        and payload limits.
+        """
         end_time = custom_end or dt.datetime.now().replace(minute=0, second=0, microsecond=0)
 
         if custom_start is not None:
@@ -262,8 +268,26 @@ class PIWebApiClient:
             months = self.config.get("pi_web_api", {}).get("full_duration_months", 12)
             start_time = end_time - dt.timedelta(days=int(months * 30.5))
 
+        effective_interval = custom_interval or self.sample_interval
+
+        # Detect minute-level resolution (e.g. '1m', '5m', '10m', '30m', '1min')
+        s_int = effective_interval.strip().lower()
+        is_minute = (s_int.endswith("m") and not s_int.endswith("mo")) or "min" in s_int
+
+        # Split into 1-hour slices between start and stop if minute-based and duration > 1 hour
+        if is_minute and (end_time - start_time) > dt.timedelta(hours=1):
+            slices = []
+            curr = start_time
+            while curr < end_time:
+                next_hr = min(curr + dt.timedelta(hours=1), end_time)
+                slices.append((curr, next_hr))
+                curr = next_hr
+        else:
+            slices = [(start_time, end_time)]
+
         logger.info(
-            f"Pulling data (mode={mode}, mock={self.mock_mode}) from {start_time} to {end_time}..."
+            f"Pulling data (mode={mode}, interval={effective_interval}, mock={self.mock_mode}, slices={len(slices)}) "
+            f"from {start_time} to {end_time}..."
         )
 
         if self.mock_mode:
@@ -290,7 +314,7 @@ class PIWebApiClient:
                 sensors=self.sensors,
                 start_time=start_time,
                 end_time=end_time,
-                freq=self.sample_interval,
+                freq=effective_interval,
             )
         else:
             logger.info(f"LIVE PI WEB API MODE: Connecting to {self.base_url}")
@@ -308,18 +332,59 @@ class PIWebApiClient:
                 logger.error("No WebIDs could be resolved from PI AF. Aborting live pull.")
                 return pd.DataFrame()
 
-            start_str = start_time.strftime("%Y-%m-%dT%H:%M:%SZ")
-            end_str = end_time.strftime("%Y-%m-%dT%H:%M:%SZ")
+            total_slices = len(slices)
+            all_series: Dict[str, List[pd.Series]] = {k: [] for k in tag_webid_map.keys()}
+            total_points_accum = 0
+            t_pull_start = time.time()
 
-            batch_data = self.fetch_batch_data_live(
-                tag_webid_map=tag_webid_map,
-                start_time_str=start_str,
-                end_time_str=end_str,
-                interval=self.sample_interval,
-                progress_callback=progress_callback,
-            )
+            for s_idx, (s_start, s_end) in enumerate(slices):
+                s_start_str = s_start.strftime("%Y-%m-%dT%H:%M:%SZ")
+                s_end_str = s_end.strftime("%Y-%m-%dT%H:%M:%SZ")
+                slice_label = f"{s_start.strftime('%H:%M')}-{s_end.strftime('%H:%M')}"
 
-            df = pd.DataFrame(batch_data)
+                def slice_cb(fraction: float, message: str, details: Optional[Dict[str, Any]] = None):
+                    if progress_callback:
+                        details = details or {}
+                        overall_frac = (s_idx + fraction) / total_slices
+                        elapsed = time.time() - t_pull_start
+                        eta = (elapsed / overall_frac) - elapsed if overall_frac > 0 else 0.0
+                        d_out = dict(details)
+                        d_out["slice"] = s_idx + 1
+                        d_out["total_slices"] = total_slices
+                        d_out["elapsed"] = round(elapsed, 1)
+                        d_out["eta"] = round(eta, 1)
+                        d_out["points_collected"] = total_points_accum + details.get("points_collected", 0)
+
+                        if total_slices > 1:
+                            hdr = f"Hour {s_idx + 1}/{total_slices} ({slice_label})"
+                            progress_callback(overall_frac, f"{hdr} | {message}", d_out)
+                        else:
+                            progress_callback(fraction, message, d_out)
+
+                slice_batch = self.fetch_batch_data_live(
+                    tag_webid_map=tag_webid_map,
+                    start_time_str=s_start_str,
+                    end_time_str=s_end_str,
+                    interval=effective_interval,
+                    progress_callback=slice_cb,
+                )
+
+                slice_pts = sum(len(ser) for ser in slice_batch.values())
+                total_points_accum += slice_pts
+
+                for tag_path, ser in slice_batch.items():
+                    if tag_path in all_series and not ser.empty:
+                        all_series[tag_path].append(ser)
+
+            # Combine and deduplicate across slices
+            combined_dict: Dict[str, pd.Series] = {}
+            for tag_path, ser_list in all_series.items():
+                if ser_list:
+                    cat_s = pd.concat(ser_list)
+                    cat_s = cat_s[~cat_s.index.duplicated(keep="first")].sort_index()
+                    combined_dict[tag_path] = cat_s
+
+            df = pd.DataFrame(combined_dict)
             df.index.name = "timestamp"
 
         if save_pickle and not df.empty:

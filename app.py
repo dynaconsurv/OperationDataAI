@@ -208,11 +208,67 @@ elif page == "⚡ Module 1: Ingestion & Limits":
         st.subheader("Run Telemetry Ingestion")
         st.markdown(f"**Target System:** `MALAYSIA\\BORF\\GTG\\GT-2420A` ({len(sensors)} sensor attributes)")
 
+        # Sampling Interval Selector
+        interval_opts = ["1m", "5m", "10m", "15m", "30m", "1h"]
+        cfg_int = config.get("pi_web_api", {}).get("sample_interval", "1h")
+        init_idx = interval_opts.index(cfg_int) if cfg_int in interval_opts else 5
+        sel_interval = st.selectbox(
+            "⏱️ Telemetry Sampling Interval:",
+            interval_opts,
+            index=init_idx,
+            help="For minute-level sampling (1m, 5m, etc.), multi-hour ranges are automatically split hour-by-hour between start and stop."
+        )
+
+        is_minute_sel = sel_interval.endswith("m") and not sel_interval.endswith("mo")
+
         mode_choice = st.radio(
-            "Select Execution Scope:",
-            ["🧪 1-Day Test Run (Recommended for initial verification)", "📅 12-Month Full Ingestion (Complete historical training)"],
+            "Select Execution Scope & Time Range:",
+            [
+                "🧪 1-Day Test Run (Last 24 Hours)",
+                "⏱️ Specific Hourly Window (Choose Date & Hour range)",
+                "📅 12-Month Full Ingestion (Complete historical training)",
+                "🗓️ Custom Date & Time Range",
+            ],
             index=0,
         )
+
+        custom_start = None
+        custom_end = None
+        exec_mode = "test"
+
+        if mode_choice == "⏱️ Specific Hourly Window (Choose Date & Hour range)":
+            h_date = st.date_input("Target Date:", value=dt.date.today() - dt.timedelta(days=1))
+            h_start, h_end = st.slider("Select Hour Range (Between Hours):", 0, 24, (8, 9), step=1)
+            if h_start >= h_end:
+                st.error("Stop hour must be greater than start hour.")
+                h_end = min(24, h_start + 1)
+            custom_start = dt.datetime.combine(h_date, dt.time(h_start if h_start < 24 else 23, 59 if h_start == 24 else 0))
+            custom_end = dt.datetime.combine(h_date, dt.time(h_end if h_end < 24 else 23, 59 if h_end == 24 else 0)) if h_end < 24 else dt.datetime.combine(h_date + dt.timedelta(days=1), dt.time(0, 0))
+            hours_count = max(1, h_end - h_start)
+            st.info(f"📅 Range: `{custom_start.strftime('%Y-%m-%d %H:%M')}` to `{custom_end.strftime('%Y-%m-%d %H:%M')}` ({hours_count} hr{'s' if hours_count > 1 else ''}). Minute data will be fetched in {hours_count} hourly slice{'s' if hours_count > 1 else ''}.")
+
+        elif mode_choice == "🗓️ Custom Date & Time Range":
+            c_col1, c_col2 = st.columns(2)
+            with c_col1:
+                start_d = st.date_input("Start Date:", value=dt.date.today() - dt.timedelta(days=1))
+                start_t = st.time_input("Start Time:", value=dt.time(0, 0))
+                custom_start = dt.datetime.combine(start_d, start_t)
+            with c_col2:
+                end_d = st.date_input("Stop Date:", value=dt.date.today())
+                end_t = st.time_input("Stop Time:", value=dt.time(0, 0))
+                custom_end = dt.datetime.combine(end_d, end_t)
+            if custom_start >= custom_end:
+                st.error("Start time must be before Stop time.")
+
+        elif mode_choice == "📅 12-Month Full Ingestion (Complete historical training)":
+            exec_mode = "full"
+            if is_minute_sel:
+                st.warning("⚠️ 12-Month ingestion at minute resolution involves ~525,600 intervals per tag. Hourly queries will be automatically sliced, but this will take considerable time.")
+
+        elif mode_choice == "🧪 1-Day Test Run (Last 24 Hours)":
+            exec_mode = "test"
+            if is_minute_sel:
+                st.info(f"ℹ️ 1-Day ingestion at `{sel_interval}` resolution will be automatically split into 24 hourly slices between start and stop.")
 
         mock_override = st.checkbox("Force Simulation Mode (Synthetic GT-2420A Data)", value=config.get("pi_web_api", {}).get("mock_mode", True))
 
@@ -222,7 +278,6 @@ elif page == "⚡ Module 1: Ingestion & Limits":
         run_btn = st.button("🚀 Trigger Ingestion & Limits Calculation", type="primary", use_container_width=True)
 
         if run_btn:
-            exec_mode = "test" if "1-Day" in mode_choice else "full"
             st.markdown("### 🔄 Ingestion & Processing Progress")
             progress_bar = st.progress(0.0, text="Initializing pipeline...")
             metrics_box = st.empty()
@@ -252,7 +307,14 @@ elif page == "⚡ Module 1: Ingestion & Limits":
                 status_box.write(f"• `{message}` (Elapsed: `{elapsed}s`)")
 
             pipeline = Module1Pipeline(config_manager=cm)
-            res = pipeline.run(mode=exec_mode, force_mock=mock_override, progress_callback=on_progress_ui)
+            res = pipeline.run(
+                mode=exec_mode,
+                force_mock=mock_override,
+                custom_start=custom_start,
+                custom_end=custom_end,
+                custom_interval=sel_interval,
+                progress_callback=on_progress_ui,
+            )
 
             if res.get("status") == "Success":
                 status_box.update(label="✅ Ingestion & Limit Synchronization Completed!", state="complete", expanded=False)

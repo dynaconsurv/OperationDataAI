@@ -1,3 +1,2 @@
 af_path,count,mean,std,min,LL,L,Normal,H,HH,max,method
-MALAYSIA\BORF\GTG\GT-2420A\Air Filter System\Ambient Inlet Pressure,25,1.0011,0.0519,0.9182,0.9197,0.9259,1.0092,1.0691,1.0704,1.0707,percentile
-MALAYSIA\BORF\GTG\GT-2420A\Lube Oil System\Lube Oil Tank Level,25,72.1043,0.3815,71.0528,71.1603,71.5407,72.0808,72.6535,72.7844,72.8204,percentile
+MALAYSIA\BORF\GTG\GT-2420A\Air Filter System\Ambient Inlet Pressure,181,1.0091,0.0167,0.9752,0.9765,0.9819,1.0107,1.033,1.0385,1.0442,percentile

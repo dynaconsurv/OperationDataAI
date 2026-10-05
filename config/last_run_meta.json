@@ -1,16 +1,17 @@
 {
-    "last_pull_timestamp": "2026-10-05 15:13:40",
-    "duration_seconds": 9.24,
+    "last_pull_timestamp": "2026-10-05 15:40:07",
+    "duration_seconds": 20.16,
     "pull_mode": "1-Day Test",
+    "sample_interval": "1m",
     "is_mock": false,
     "backend_db": "sqlite",
-    "time_range": "2026-10-04 15:00 to 2026-10-05 07:00",
+    "time_range": "2026-10-05 05:00 to 2026-10-05 07:00",
     "tags_requested": 162,
     "tags_successful": 125,
-    "data_points_collected": 2125,
+    "data_points_collected": 15125,
     "limits_calculated": 625,
-    "sql_inserted": 625,
-    "sql_skipped": 0,
+    "sql_inserted": 402,
+    "sql_skipped": 223,
     "status": "Success",
     "last_error": null
 }
