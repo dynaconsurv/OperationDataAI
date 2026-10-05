@@ -1,0 +1,16 @@
+{
+    "last_pull_timestamp": "2026-10-05 10:58:25",
+    "duration_seconds": 0.59,
+    "pull_mode": "1-Day Test",
+    "is_mock": true,
+    "backend_db": "sqlite",
+    "time_range": "2026-10-04 10:00 to 2026-10-05 10:00",
+    "tags_requested": 162,
+    "tags_successful": 162,
+    "data_points_collected": 4050,
+    "limits_calculated": 810,
+    "sql_inserted": 0,
+    "sql_skipped": 810,
+    "status": "Success",
+    "last_error": null
+}

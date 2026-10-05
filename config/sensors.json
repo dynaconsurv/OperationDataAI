@@ -1,0 +1,2756 @@
+[
+    {
+        "id": 1,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\Ambient Inlet Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\Ambient Inlet Pressure",
+        "subsystem": "Air Filter System",
+        "tag_name": "Ambient Inlet Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 2,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\Hi Differential Pressure Fine Filter",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\Hi Differential Pressure Fine Filter",
+        "subsystem": "Air Filter System",
+        "tag_name": "Hi Differential Pressure Fine Filter",
+        "category": "Differential Pressure",
+        "unit": "mbar",
+        "sim_range": [
+            10.0,
+            150.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 3,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\Hi Differential Pressure HEPA 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\Hi Differential Pressure HEPA 1",
+        "subsystem": "Air Filter System",
+        "tag_name": "Hi Differential Pressure HEPA 1",
+        "category": "Differential Pressure",
+        "unit": "mbar",
+        "sim_range": [
+            10.0,
+            150.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 4,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\Hi Differential Pressure Prefilter",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Air Filter System\\Hi Differential Pressure Prefilter",
+        "subsystem": "Air Filter System",
+        "tag_name": "Hi Differential Pressure Prefilter",
+        "category": "Differential Pressure",
+        "unit": "mbar",
+        "sim_range": [
+            10.0,
+            150.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 5,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Journal Bearing Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Journal Bearing Temperature 1",
+        "subsystem": "Compressor",
+        "tag_name": "Journal Bearing Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 6,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Journal Bearing Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Journal Bearing Temperature 2",
+        "subsystem": "Compressor",
+        "tag_name": "Journal Bearing Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 7,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Journal Bearing Temperature 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Journal Bearing Temperature 3",
+        "subsystem": "Compressor",
+        "tag_name": "Journal Bearing Temperature 3",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 8,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Journal Bearing Temperature 4",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Journal Bearing Temperature 4",
+        "subsystem": "Compressor",
+        "tag_name": "Journal Bearing Temperature 4",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 9,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft Axial Display A",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft Axial Display A",
+        "subsystem": "Compressor",
+        "tag_name": "Shaft Axial Display A",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 10,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft Axial Display B",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft Axial Display B",
+        "subsystem": "Compressor",
+        "tag_name": "Shaft Axial Display B",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 11,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft X Radial Vibrationration 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft X Radial Vibrationration 1",
+        "subsystem": "Compressor",
+        "tag_name": "Shaft X Radial Vibrationration 1",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 12,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft X Radial Vibrationration 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft X Radial Vibrationration 2",
+        "subsystem": "Compressor",
+        "tag_name": "Shaft X Radial Vibrationration 2",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 13,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft Y Radial Vibrationration 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft Y Radial Vibrationration 1",
+        "subsystem": "Compressor",
+        "tag_name": "Shaft Y Radial Vibrationration 1",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 14,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft Y Radial Vibrationration 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Shaft Y Radial Vibrationration 2",
+        "subsystem": "Compressor",
+        "tag_name": "Shaft Y Radial Vibrationration 2",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 15,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Thrust Bearing Active Side Temperature1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Thrust Bearing Active Side Temperature1",
+        "subsystem": "Compressor",
+        "tag_name": "Thrust Bearing Active Side Temperature1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 16,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Thrust Bearing Non-Active Side Temperature1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor\\Thrust Bearing Non-Active Side Temperature1",
+        "subsystem": "Compressor",
+        "tag_name": "Thrust Bearing Non-Active Side Temperature1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 17,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Inlet Flow",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Inlet Flow",
+        "subsystem": "Compressor Process",
+        "tag_name": "1st Inlet Flow",
+        "category": "Flow",
+        "unit": "kg/h",
+        "sim_range": [
+            5000.0,
+            45000.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 18,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage ASV",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage ASV",
+        "subsystem": "Compressor Process",
+        "tag_name": "1st Stage ASV",
+        "category": "Position",
+        "unit": "%",
+        "sim_range": [
+            0.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 19,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Inlet Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Inlet Pressure",
+        "subsystem": "Compressor Process",
+        "tag_name": "1st Stage Inlet Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 20,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Inlet Temperature",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Inlet Temperature",
+        "subsystem": "Compressor Process",
+        "tag_name": "1st Stage Inlet Temperature",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 21,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Outlet Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Outlet Pressure",
+        "subsystem": "Compressor Process",
+        "tag_name": "1st Stage Outlet Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 22,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Outlet Temperature",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Outlet Temperature",
+        "subsystem": "Compressor Process",
+        "tag_name": "1st Stage Outlet Temperature",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 23,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Ratio",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\1st Stage Ratio",
+        "subsystem": "Compressor Process",
+        "tag_name": "1st Stage Ratio",
+        "category": "Ratio",
+        "unit": "ratio",
+        "sim_range": [
+            1.2,
+            4.5
+        ],
+        "web_id": null
+    },
+    {
+        "id": 24,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage ASV",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage ASV",
+        "subsystem": "Compressor Process",
+        "tag_name": "2nd Stage ASV",
+        "category": "Position",
+        "unit": "%",
+        "sim_range": [
+            0.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 25,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Inlet Flow",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Inlet Flow",
+        "subsystem": "Compressor Process",
+        "tag_name": "2nd Stage Inlet Flow",
+        "category": "Flow",
+        "unit": "kg/h",
+        "sim_range": [
+            5000.0,
+            45000.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 26,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Inlet Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Inlet Pressure",
+        "subsystem": "Compressor Process",
+        "tag_name": "2nd Stage Inlet Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 27,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Inlet Temperature",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Inlet Temperature",
+        "subsystem": "Compressor Process",
+        "tag_name": "2nd Stage Inlet Temperature",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 28,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Outlet Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Outlet Pressure",
+        "subsystem": "Compressor Process",
+        "tag_name": "2nd Stage Outlet Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 29,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Outlet Temperature",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Outlet Temperature",
+        "subsystem": "Compressor Process",
+        "tag_name": "2nd Stage Outlet Temperature",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 30,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Ratio",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\2nd Stage Ratio",
+        "subsystem": "Compressor Process",
+        "tag_name": "2nd Stage Ratio",
+        "category": "Ratio",
+        "unit": "ratio",
+        "sim_range": [
+            1.2,
+            4.5
+        ],
+        "web_id": null
+    },
+    {
+        "id": 31,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\ASV Position Transmitter",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\ASV Position Transmitter",
+        "subsystem": "Compressor Process",
+        "tag_name": "ASV Position Transmitter",
+        "category": "Position",
+        "unit": "%",
+        "sim_range": [
+            0.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 32,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\ASV Position Transmitter 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\ASV Position Transmitter 2",
+        "subsystem": "Compressor Process",
+        "tag_name": "ASV Position Transmitter 2",
+        "category": "Position",
+        "unit": "%",
+        "sim_range": [
+            0.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 33,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\Comp. Suction Pressure.",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Compressor Process\\Comp. Suction Pressure.",
+        "subsystem": "Compressor Process",
+        "tag_name": "Comp. Suction Pressure.",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 34,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Buff Seal Gas Inlet Pos.",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Buff Seal Gas Inlet Pos.",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Buff Seal Gas Inlet Pos.",
+        "category": "Position",
+        "unit": "%",
+        "sim_range": [
+            0.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 35,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\DE CC Vent Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\DE CC Vent Pressure",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "DE CC Vent Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 36,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\DE Primary Vent Flow",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\DE Primary Vent Flow",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "DE Primary Vent Flow",
+        "category": "Flow",
+        "unit": "kg/h",
+        "sim_range": [
+            5000.0,
+            45000.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 37,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Differential Pressure Seal Gas Amplifier",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Differential Pressure Seal Gas Amplifier",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Differential Pressure Seal Gas Amplifier",
+        "category": "Differential Pressure",
+        "unit": "mbar",
+        "sim_range": [
+            10.0,
+            150.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 38,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Differential Pressure Seal Gas Filter",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Differential Pressure Seal Gas Filter",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Differential Pressure Seal Gas Filter",
+        "category": "Differential Pressure",
+        "unit": "mbar",
+        "sim_range": [
+            10.0,
+            150.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 39,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\N2 Filter Differential Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\N2 Filter Differential Pressure",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "N2 Filter Differential Pressure",
+        "category": "Differential Pressure",
+        "unit": "mbar",
+        "sim_range": [
+            10.0,
+            150.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 40,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 1",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Primary Vent Pressure 1",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 41,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 2",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Primary Vent Pressure 2",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 42,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 3",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Primary Vent Pressure 3",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 43,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 4",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 4",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Primary Vent Pressure 4",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 44,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 5",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 5",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Primary Vent Pressure 5",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 45,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 6",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Primary Vent Pressure 6",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Primary Vent Pressure 6",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 46,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\SE CC Vent Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\SE CC Vent Pressure",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "SE CC Vent Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 47,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\SE Primary Vent Flow",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\SE Primary Vent Flow",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "SE Primary Vent Flow",
+        "category": "Flow",
+        "unit": "kg/h",
+        "sim_range": [
+            5000.0,
+            45000.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 48,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Balancing Pressure 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Balancing Pressure 1",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Seal Gas Balancing Pressure 1",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 49,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Balancing Pressure 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Balancing Pressure 2",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Seal Gas Balancing Pressure 2",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 50,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Heater Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Heater Temperature 1",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Seal Gas Heater Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 51,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Heater Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Heater Temperature 2",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Seal Gas Heater Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 52,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Heater Temperature 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Seal Gas Heater Temperature 3",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Seal Gas Heater Temperature 3",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 53,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Tertiary Seal Gas Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 54,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure  2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure  2",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Tertiary Seal Gas Pressure  2",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 55,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure 1",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Tertiary Seal Gas Pressure 1",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 56,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Dry Gas Seal System\\Tertiary Seal Gas Pressure 3",
+        "subsystem": "Dry Gas Seal System",
+        "tag_name": "Tertiary Seal Gas Pressure 3",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 57,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Couple Internal Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Couple Internal Temperature 2",
+        "subsystem": "Enclosure System",
+        "tag_name": "Couple Internal Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 58,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Gas Detector Acc Vent Out 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Gas Detector Acc Vent Out 1",
+        "subsystem": "Enclosure System",
+        "tag_name": "Gas Detector Acc Vent Out 1",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 59,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Gas Detector GT Vent Outlet",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Gas Detector GT Vent Outlet",
+        "subsystem": "Enclosure System",
+        "tag_name": "Gas Detector GT Vent Outlet",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 60,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Gas Detector Inlet Filter 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Gas Detector Inlet Filter 1",
+        "subsystem": "Enclosure System",
+        "tag_name": "Gas Detector Inlet Filter 1",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 61,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Internal Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Internal Temperature 1",
+        "subsystem": "Enclosure System",
+        "tag_name": "Turbine Internal Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 62,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Internal Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Internal Temperature 2",
+        "subsystem": "Enclosure System",
+        "tag_name": "Turbine Internal Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 63,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Internal Temperature 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Internal Temperature 3",
+        "subsystem": "Enclosure System",
+        "tag_name": "Turbine Internal Temperature 3",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 64,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Vent Pressure 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Vent Pressure 1",
+        "subsystem": "Enclosure System",
+        "tag_name": "Turbine Vent Pressure 1",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 65,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Vent Pressure 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Vent Pressure 2",
+        "subsystem": "Enclosure System",
+        "tag_name": "Turbine Vent Pressure 2",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 66,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Vent Pressure 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Enclosure System\\Turbine Vent Pressure 3",
+        "subsystem": "Enclosure System",
+        "tag_name": "Turbine Vent Pressure 3",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 67,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas  SSRV 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas  SSRV 1",
+        "subsystem": "Fuel Gas System",
+        "tag_name": "Fuel Gas  SSRV 1",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 68,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas  Upstream Valve Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas  Upstream Valve Pressure",
+        "subsystem": "Fuel Gas System",
+        "tag_name": "Fuel Gas  Upstream Valve Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 69,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Control Valve 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Control Valve 1",
+        "subsystem": "Fuel Gas System",
+        "tag_name": "Fuel Gas Control Valve 1",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 70,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Inlet Pressure 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Inlet Pressure 1",
+        "subsystem": "Fuel Gas System",
+        "tag_name": "Fuel Gas Inlet Pressure 1",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 71,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Inlet Temperature",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Inlet Temperature",
+        "subsystem": "Fuel Gas System",
+        "tag_name": "Fuel Gas Inlet Temperature",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 72,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Interstage Pressure 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Interstage Pressure 1",
+        "subsystem": "Fuel Gas System",
+        "tag_name": "Fuel Gas Interstage Pressure 1",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 73,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Interstage Pressure 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Interstage Pressure 2",
+        "subsystem": "Fuel Gas System",
+        "tag_name": "Fuel Gas Interstage Pressure 2",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 74,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Interstage Pressure 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Fuel Gas System\\Fuel Gas Interstage Pressure 3",
+        "subsystem": "Fuel Gas System",
+        "tag_name": "Fuel Gas Interstage Pressure 3",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 75,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Average Axial Discharge Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Average Axial Discharge Pressure",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Average Axial Discharge Pressure",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 76,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Average Exhaust Temperature",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Average Exhaust Temperature",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Average Exhaust Temperature",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 77,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Discharge Pressure 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Discharge Pressure 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Axial Discharge Pressure 1",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 78,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Discharge Pressure 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Discharge Pressure 2",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Axial Discharge Pressure 2",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 79,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Discharge Pressure 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Discharge Pressure 3",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Axial Discharge Pressure 3",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 80,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Discharge Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Discharge Temperature 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Axial Discharge Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 81,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Discharge Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Discharge Temperature 2",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Axial Discharge Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 82,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Inlet Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Inlet Temperature 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Axial Inlet Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 83,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Inlet Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Axial Inlet Temperature 2",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Axial Inlet Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 84,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Drain Temperature Journal Bearing 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Drain Temperature Journal Bearing 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Drain Temperature Journal Bearing 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 85,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Drain Temperature Journal Bearing 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Drain Temperature Journal Bearing 2",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Drain Temperature Journal Bearing 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 86,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Drain Temperature Journal Bearing 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Drain Temperature Journal Bearing 3",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Drain Temperature Journal Bearing 3",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 87,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Drain Temperature Journal Thrust Bearing 4",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Drain Temperature Journal Thrust Bearing 4",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Drain Temperature Journal Thrust Bearing 4",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 88,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Drain Temperature Thrust Bearing 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Drain Temperature Thrust Bearing 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Drain Temperature Thrust Bearing 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 89,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Back Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Back Pressure",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Back Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 90,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 91,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 10",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 10",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 10",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 92,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 11",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 11",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 11",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 93,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 12",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 12",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 12",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 94,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 13",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 13",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 13",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 95,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 2",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 96,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 3",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 3",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 97,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 4",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 4",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 4",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 98,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 5",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 5",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 5",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 99,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 6",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 6",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 6",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 100,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 7",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 7",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 7",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 101,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 8",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 8",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 8",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 102,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 9",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Exhaust Temperature 9",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Exhaust Temperature 9",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 103,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector 10",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector 10",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Flame Detector 10",
+        "category": "Flame Detector",
+        "unit": "Intensity",
+        "sim_range": [
+            0.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 104,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector 11",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector 11",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Flame Detector 11",
+        "category": "Flame Detector",
+        "unit": "Intensity",
+        "sim_range": [
+            0.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 105,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector 2",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Flame Detector 2",
+        "category": "Flame Detector",
+        "unit": "Intensity",
+        "sim_range": [
+            0.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 106,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Flame Detector 3",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Flame Detector 3",
+        "category": "Flame Detector",
+        "unit": "Intensity",
+        "sim_range": [
+            0.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 107,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Axial 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Axial 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "HP Axial 1",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 108,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Axial 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Axial 2",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "HP Axial 2",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 109,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Shaft Control 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Shaft Control 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "HP Shaft Control 1",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 110,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Shaft Speed 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Shaft Speed 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "HP Shaft Speed 1",
+        "category": "Speed",
+        "unit": "RPM",
+        "sim_range": [
+            3000.0,
+            9500.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 111,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Vibration 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\HP Vibration 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "HP Vibration 1",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 112,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\IGV 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\IGV 2",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "IGV 2",
+        "category": "Position",
+        "unit": "%",
+        "sim_range": [
+            0.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 113,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Journal Brg 4 Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Journal Brg 4 Temperature 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Journal Brg 4 Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 114,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Axial 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Axial 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "LP Axial 1",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 115,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Axial 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Axial 2",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "LP Axial 2",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 116,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Shaft Control 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Shaft Control 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "LP Shaft Control 1",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 117,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Shaft Pick Up 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Shaft Pick Up 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "LP Shaft Pick Up 1",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 118,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Vibration 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\LP Vibration 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "LP Vibration 1",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 119,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Spread Exhaust Temperature",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Spread Exhaust Temperature",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Spread Exhaust Temperature",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 120,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Stage 1 WS AFT Inner Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Stage 1 WS AFT Inner Temperature 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Stage 1 WS AFT Inner Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 121,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Stage 1 WS FWD Inner Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Stage 1 WS FWD Inner Temperature 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Stage 1 WS FWD Inner Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 122,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Stage 2 Nozzle 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Stage 2 Nozzle 2",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Stage 2 Nozzle 2",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 123,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Stage 2 WS AFT Inner Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Stage 2 WS AFT Inner Temperature 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Stage 2 WS AFT Inner Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 124,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Stage 2 WS FWD Inner Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Stage 2 WS FWD Inner Temperature 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Stage 2 WS FWD Inner Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 125,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Thrust Bearing 4 Active Temperature",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Thrust Bearing 4 Active Temperature",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Thrust Bearing 4 Active Temperature",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 126,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Thrust Bearing 4 Inactive Temperature",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Thrust Bearing 4 Inactive Temperature",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Thrust Bearing 4 Inactive Temperature",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 127,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Turbine Bearing 1 Radial Vibration 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Turbine Bearing 1 Radial Vibration 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Turbine Bearing 1 Radial Vibration 1",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 128,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Turbine Bearing 4 Radial Vibration 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gas Turbine Engine\\Turbine Bearing 4 Radial Vibration 1",
+        "subsystem": "Gas Turbine Engine",
+        "tag_name": "Turbine Bearing 4 Radial Vibration 1",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 129,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Pinion Brg X Vibration",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Pinion Brg X Vibration",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox DE Pinion Brg X Vibration",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 130,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Pinion Brg Y Vibration",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Pinion Brg Y Vibration",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox DE Pinion Brg Y Vibration",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 131,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Pinion Journal Brg 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Pinion Journal Brg 2",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox DE Pinion Journal Brg 2",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 132,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Wheel Brg X Vibration",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Wheel Brg X Vibration",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox DE Wheel Brg X Vibration",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 133,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Wheel Brg Y Vibration",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Wheel Brg Y Vibration",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox DE Wheel Brg Y Vibration",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 134,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Wheel Journal Brg Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Wheel Journal Brg Temperature 1",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox DE Wheel Journal Brg Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 135,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Wheel Journal Brg Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox DE Wheel Journal Brg Temperature 2",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox DE Wheel Journal Brg Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 136,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Pinion Brg X Vibration",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Pinion Brg X Vibration",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox NDE Pinion Brg X Vibration",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 137,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Pinion Brg Y Vibration",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Pinion Brg Y Vibration",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox NDE Pinion Brg Y Vibration",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 138,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Pinion Journal Brg Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Pinion Journal Brg Temperature 2",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox NDE Pinion Journal Brg Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 139,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Wheel Brg X Vibration",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Wheel Brg X Vibration",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox NDE Wheel Brg X Vibration",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 140,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Wheel Brg Y Vibration",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Wheel Brg Y Vibration",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox NDE Wheel Brg Y Vibration",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 141,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Wheel Journal Brg Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Wheel Journal Brg Temperature 1",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox NDE Wheel Journal Brg Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 142,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Wheel Journal Brg Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox NDE Wheel Journal Brg Temperature 2",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox NDE Wheel Journal Brg Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 143,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Axial 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Axial 1",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox Wheel Axial 1",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 144,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Axial 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Axial 2",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox Wheel Axial 2",
+        "category": "Vibration",
+        "unit": "mm/s",
+        "sim_range": [
+            0.5,
+            12.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 145,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Casing",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Casing",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox Wheel Casing",
+        "category": "Process Parameter",
+        "unit": "units",
+        "sim_range": [
+            10.0,
+            100.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 146,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Thrust Bearing Active Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Thrust Bearing Active Temperature 1",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox Wheel Thrust Bearing Active Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 147,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Thrust Bearing Active Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Thrust Bearing Active Temperature 2",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox Wheel Thrust Bearing Active Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 148,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Thrust Bearing Inactive Temperature 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Thrust Bearing Inactive Temperature 1",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox Wheel Thrust Bearing Inactive Temperature 1",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 149,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Thrust Bearing Inactive Temperature 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Gearbox\\Gearbox Wheel Thrust Bearing Inactive Temperature 2",
+        "subsystem": "Gearbox",
+        "tag_name": "Gearbox Wheel Thrust Bearing Inactive Temperature 2",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 150,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Control Oil Header Pressure 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Control Oil Header Pressure 1",
+        "subsystem": "Hydraulic System",
+        "tag_name": "Control Oil Header Pressure 1",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 151,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Control Oil Header Pressure 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Control Oil Header Pressure 2",
+        "subsystem": "Hydraulic System",
+        "tag_name": "Control Oil Header Pressure 2",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 152,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Control Oil Header Pressure 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Control Oil Header Pressure 3",
+        "subsystem": "Hydraulic System",
+        "tag_name": "Control Oil Header Pressure 3",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 153,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Differential Pressure Hydraulic Filter",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Differential Pressure Hydraulic Filter",
+        "subsystem": "Hydraulic System",
+        "tag_name": "Differential Pressure Hydraulic Filter",
+        "category": "Differential Pressure",
+        "unit": "mbar",
+        "sim_range": [
+            10.0,
+            150.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 154,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Hydraulic Header Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Hydraulic System\\Hydraulic Header Pressure",
+        "subsystem": "Hydraulic System",
+        "tag_name": "Hydraulic Header Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 155,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Average Header Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Average Header Pressure",
+        "subsystem": "Lube Oil System",
+        "tag_name": "Lube Oil Average Header Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 156,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Differential Pressure Filter",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Differential Pressure Filter",
+        "subsystem": "Lube Oil System",
+        "tag_name": "Lube Oil Differential Pressure Filter",
+        "category": "Differential Pressure",
+        "unit": "mbar",
+        "sim_range": [
+            10.0,
+            150.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 157,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Pressure 1",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Pressure 1",
+        "subsystem": "Lube Oil System",
+        "tag_name": "Lube Oil Header Pressure 1",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 158,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Pressure 2",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Pressure 2",
+        "subsystem": "Lube Oil System",
+        "tag_name": "Lube Oil Header Pressure 2",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 159,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Pressure 3",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Pressure 3",
+        "subsystem": "Lube Oil System",
+        "tag_name": "Lube Oil Header Pressure 3",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 160,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Temperature",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Header Temperature",
+        "subsystem": "Lube Oil System",
+        "tag_name": "Lube Oil Header Temperature",
+        "category": "Temperature",
+        "unit": "degC",
+        "sim_range": [
+            40.0,
+            110.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 161,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Pump Delivery Pressure",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Pump Delivery Pressure",
+        "subsystem": "Lube Oil System",
+        "tag_name": "Lube Oil Pump Delivery Pressure",
+        "category": "Pressure",
+        "unit": "barg",
+        "sim_range": [
+            1.0,
+            35.0
+        ],
+        "web_id": null
+    },
+    {
+        "id": 162,
+        "selected": true,
+        "parent": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Tank Level",
+        "attribute_name": "Parameter",
+        "object_type": "Attribute",
+        "full_af_path": "MALAYSIA\\BORF\\GTG\\GT-2420A\\Lube Oil System\\Lube Oil Tank Level",
+        "subsystem": "Lube Oil System",
+        "tag_name": "Lube Oil Tank Level",
+        "category": "Level",
+        "unit": "%",
+        "sim_range": [
+            40.0,
+            85.0
+        ],
+        "web_id": null
+    }
+]

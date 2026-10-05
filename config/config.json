@@ -1,0 +1,57 @@
+{
+    "app_name": "PTTEP Gas Turbine (GT-2420A) PI Analytics",
+    "version": "1.0.0",
+    "pi_web_api": {
+        "url": "https://kul-pivision.pttep.com/piwebapi/",
+        "af_db": "\\\\KUL-PIAF\\GEG RPM\\\\",
+        "username": "zaqeelahr",
+        "password": "Welcome@1234567",
+        "auth_type": "basic",
+        "verify_ssl": false,
+        "timeout_seconds": 30,
+        "mock_mode": true,
+        "query_mode": "interpolated",
+        "sample_interval": "1h",
+        "batch_size": 25,
+        "test_duration_days": 1,
+        "full_duration_months": 12
+    },
+    "database": {
+        "engine": "mssql",
+        "host": "localhost",
+        "port": 1433,
+        "database": "PTTEP_AI",
+        "user": "pi-ai",
+        "password": "Ptt3p@2026",
+        "driver": "SQL Server",
+        "table_name": "operating_limits",
+        "use_sqlite_fallback": true,
+        "sqlite_path": "data/operating_limits.db"
+    },
+    "operating_limits": {
+        "method": "percentile",
+        "normal_stat": "median",
+        "sigma_multipliers": {
+            "hh": 3.0,
+            "h": 2.0,
+            "l": 2.0,
+            "ll": 3.0
+        },
+        "percentiles": {
+            "ll": 1.0,
+            "l": 5.0,
+            "h": 95.0,
+            "hh": 99.0
+        }
+    },
+    "correlation": {
+        "method": "pearson",
+        "min_periods": 30,
+        "top_n_pairs": 20
+    },
+    "storage": {
+        "pickle_file": "data/historical_data.pkl",
+        "correlation_file": "data/correlation_matrix.csv",
+        "limits_csv_file": "data/operating_limits.csv"
+    }
+}
