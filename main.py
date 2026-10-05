@@ -37,6 +37,7 @@ def cmd_status(args: argparse.Namespace) -> None:
     table.add_row("PI Web API User", cfg.get("pi_web_api", {}).get("username", "N/A"))
     table.add_row("PI Web API Mode", "MOCK (Safe Development Mode)" if cfg.get("pi_web_api", {}).get("mock_mode") else "LIVE PI SERVER")
     table.add_row("Database Engine", cfg.get("database", {}).get("engine", "N/A"))
+    table.add_row("Database Name", cfg.get("database", {}).get("database", "N/A"))
     table.add_row("Database User", cfg.get("database", {}).get("user", "N/A"))
     table.add_row("Database Table", cfg.get("database", {}).get("table_name", "N/A"))
     table.add_row("Active DB Backend", meta.get("backend_db", "N/A"))

@@ -340,7 +340,7 @@ All runtime settings are managed via `config/config.json`:
         "engine": "mssql",
         "host": "localhost",
         "port": 1433,
-        "database": "PTTEP_AI",
+        "database": "OperationLimits",
         "user": "pi-ai",
         "password": "Ptt3p@2026",
         "driver": "SQL Server",

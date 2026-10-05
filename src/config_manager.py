@@ -43,7 +43,7 @@ DEFAULT_CONFIG: Dict[str, Any] = {
         "engine": "mssql",  # 'mssql' or 'sqlite'
         "host": "localhost",
         "port": 1433,
-        "database": "PTTEP_AI",
+        "database": "OperationLimits",
         "user": "pi-ai",
         "password": "Ptt3p@2026",
         "driver": "SQL Server",

@@ -457,7 +457,7 @@ elif page == "⚙️ Settings":
             db_engine = st.selectbox("Database Engine", ["mssql", "sqlite"], index=0 if config.get("database", {}).get("engine") == "mssql" else 1)
             db_host = st.text_input("Host Server", value=config.get("database", {}).get("host", "localhost"))
             db_port = st.number_input("Port", value=config.get("database", {}).get("port", 1433))
-            db_name = st.text_input("Database Name", value=config.get("database", {}).get("database", "PTTEP_AI"))
+            db_name = st.text_input("Database Name", value=config.get("database", {}).get("database", "OperationLimits"))
         with d_col2:
             db_user = st.text_input("SQL User", value=config.get("database", {}).get("user", "pi-ai"))
             db_pass = st.text_input("SQL Password", value=config.get("database", {}).get("password", "Ptt3p@2026"), type="password")
