@@ -53,6 +53,7 @@ class PIWebApiClient:
 
         self.session = self._create_session()
         self._webid_cache: Dict[str, str] = {}
+        self.last_batch_network_error: bool = False
 
     def _create_session(self) -> requests.Session:
         """Create and configure requests Session with authentication."""
@@ -147,6 +148,7 @@ class PIWebApiClient:
         """Fetch data using PI Web API Batch request for multiple WebIDs with progress feedback."""
         batch_url = f"{self.base_url}/batch"
         results: Dict[str, pd.Series] = {}
+        self.last_batch_network_error = False
 
         tag_items = list(tag_webid_map.items())
         total_tags = len(tag_items)
@@ -209,8 +211,10 @@ class PIWebApiClient:
                         else:
                             logger.warning(f"Batch item failed for {tag_path}: Status {status}")
                 else:
+                    self.last_batch_network_error = True
                     logger.error(f"Batch request failed: HTTP {resp.status_code}")
             except Exception as e:
+                self.last_batch_network_error = True
                 logger.error(f"Batch request exception: {e}")
 
             # Compute progress and ETA
@@ -389,27 +393,35 @@ class PIWebApiClient:
                 logger.error("No WebIDs could be resolved from PI AF. Aborting live pull.")
                 return pd.DataFrame()
 
-            # Inspect checkpoint to determine which slices to skip
+            # Inspect checkpoint to determine which slices to skip vs backfill
             skipped_slices = []
             remaining_slices = []
-            latest_ts_cmp = None
 
             if resume and existing_df is not None and not existing_df.empty:
-                latest_ts = existing_df.index.max()
-                if hasattr(latest_ts, "tzinfo") and latest_ts.tzinfo is not None:
-                    latest_ts_cmp = latest_ts.tz_convert("UTC").tz_localize(None)
-                else:
-                    latest_ts_cmp = latest_ts
+                try:
+                    # Pre-compute hourly point counts across existing dataset for fast O(1) lookup
+                    hourly_counts = existing_df.iloc[:, 0].resample("1h").count()
+                    for s_start, s_end in slices:
+                        s_ts = pd.Timestamp(s_start)
+                        if s_ts.tz is None:
+                            s_ts = s_ts.tz_localize("UTC")
+                        else:
+                            s_ts = s_ts.tz_convert("UTC")
 
-            if latest_ts_cmp is not None:
-                for s_start, s_end in slices:
-                    s_end_cmp = s_end.tz_convert("UTC").tz_localize(None) if (hasattr(s_end, "tzinfo") and s_end.tzinfo) else s_end
-                    if s_end_cmp <= latest_ts_cmp:
-                        skipped_slices.append((s_start, s_end))
-                    else:
-                        remaining_slices.append((s_start, s_end))
-                if skipped_slices:
-                    logger.info(f"Checkpoint resume: Skipping {len(skipped_slices)} previously completed slices up to {latest_ts_cmp}.")
+                        pts = hourly_counts.get(s_ts, 0)
+                        if pts >= 30:  # Slice is already present with valid data (at least 30 minutes)
+                            skipped_slices.append((s_start, s_end))
+                        else:
+                            remaining_slices.append((s_start, s_end))
+
+                    if skipped_slices:
+                        logger.info(
+                            f"Checkpoint resume: Skipping {len(skipped_slices)} previously completed slices. "
+                            f"{len(remaining_slices)} slices will be downloaded / backfilled."
+                        )
+                except Exception as e:
+                    logger.warning(f"Error during gap-aware slice check: {e}. Falling back to default slicing.")
+                    remaining_slices = list(slices)
             else:
                 remaining_slices = list(slices)
 
@@ -469,12 +481,13 @@ class PIWebApiClient:
                 return chk_df
 
             df = pd.DataFrame()
+            consecutive_network_failures = 0
             try:
                 for s_idx, (s_start, s_end) in enumerate(remaining_slices):
                     current_slice_num = completed_slices + s_idx + 1
                     s_start_str = s_start.strftime("%Y-%m-%dT%H:%M:%SZ")
                     s_end_str = s_end.strftime("%Y-%m-%dT%H:%M:%SZ")
-                    slice_label = f"{s_start.strftime('%H:%M')}-{s_end.strftime('%H:%M')}"
+                    slice_label = f"{s_start.strftime('%Y-%m-%d %H:%M')}-{s_end.strftime('%H:%M')}"
 
                     def slice_cb(fraction: float, message: str, details: Optional[Dict[str, Any]] = None):
                         if progress_callback:
@@ -513,6 +526,23 @@ class PIWebApiClient:
 
                     slice_pts = sum(len(ser) for ser in slice_batch.values())
                     total_points_accum += slice_pts
+
+                    # VPN / Network Disconnect Guard
+                    if slice_pts == 0 and getattr(self, "last_batch_network_error", False):
+                        consecutive_network_failures += 1
+                        if consecutive_network_failures >= 3:
+                            msg = "VPN / Network connection lost (3 consecutive batch failures). Ingestion paused and checkpoint saved."
+                            logger.error(msg)
+                            if progress_callback:
+                                overall_frac = (completed_slices + s_idx + 1.0) / total_slices
+                                progress_callback(
+                                    overall_frac,
+                                    f"⚠️ {msg} Reconnect VPN and click Trigger Ingestion to resume.",
+                                    {"vpn_error": True, "slice": current_slice_num, "total_slices": total_slices},
+                                )
+                            break
+                    else:
+                        consecutive_network_failures = 0
 
                     for tag_path, ser in slice_batch.items():
                         if tag_path in all_series and not ser.empty:
