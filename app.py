@@ -342,6 +342,24 @@ elif page == "⚡ Module 1: Ingestion & Limits":
         st.markdown("---")
         st.subheader("⚡ Compute Limits on Current Cache")
         st.caption("Calculate operating limits immediately on whatever telemetry has been downloaded so far, without waiting for the full ingestion to complete.")
+
+        limit_time_scope = st.radio(
+            "Select Baseline Time Frame:",
+            ["All Available Telemetry (Full Cache)", "Last 30 Days", "Last 90 Days", "Custom Date Range"],
+            horizontal=False,
+            key="limit_scope_radio",
+        )
+
+        filter_start, filter_end = None, None
+        if limit_time_scope == "Custom Date Range":
+            l_c1, l_c2 = st.columns(2)
+            with l_c1:
+                filter_start_date = st.date_input("Baseline Start Date:", value=dt.date(2025, 10, 5), key="lim_start_d")
+                filter_start = dt.datetime.combine(filter_start_date, dt.time.min).replace(tzinfo=dt.timezone.utc)
+            with l_c2:
+                filter_end_date = st.date_input("Baseline End Date:", value=dt.date.today(), key="lim_end_d")
+                filter_end = dt.datetime.combine(filter_end_date, dt.time.max).replace(tzinfo=dt.timezone.utc)
+
         if st.button("📊 Calculate Operating Limits Now", use_container_width=True):
             with st.spinner("Computing statistical operating limits from cached telemetry..."):
                 d_path = cm.get_telemetry_path()
@@ -364,19 +382,32 @@ elif page == "⚡ Module 1: Ingestion & Limits":
                     if df_cur is None or df_cur.empty:
                         st.error("Could not read telemetry dataset.")
                     else:
-                        calc = LimitsCalculator(config=config)
-                        recs, sum_df = calc.compute_all_limits(df_cur)
+                        # Apply timeframe filter if selected
+                        if limit_time_scope == "Last 30 Days":
+                            cutoff = df_cur.index.max() - dt.timedelta(days=30)
+                            df_cur = df_cur[df_cur.index >= cutoff]
+                        elif limit_time_scope == "Last 90 Days":
+                            cutoff = df_cur.index.max() - dt.timedelta(days=90)
+                            df_cur = df_cur[df_cur.index >= cutoff]
+                        elif limit_time_scope == "Custom Date Range" and filter_start and filter_end:
+                            df_cur = df_cur[(df_cur.index >= filter_start) & (df_cur.index <= filter_end)]
 
-                        # Save CSV
-                        limits_csv_rel = config.get("storage", {}).get("limits_csv_file", "data/operating_limits.csv")
-                        limits_csv_path = cm.resolve_path(limits_csv_rel)
-                        limits_csv_path.parent.mkdir(parents=True, exist_ok=True)
-                        sum_df.to_csv(limits_csv_path, index=False)
+                        if df_cur.empty:
+                            st.error("No telemetry points found within the selected timeframe.")
+                        else:
+                            calc = LimitsCalculator(config=config)
+                            recs, sum_df = calc.compute_all_limits(df_cur)
 
-                        # Sync SQL
-                        ins, skp = sql_storage.save_limits(recs)
-                        st.success(f"🎉 Operating limits successfully updated for {len(sum_df)} sensors ({len(recs)} thresholds) based on {len(df_cur):,} timestamps! (Inserted: {ins}, Skipped: {skp})")
-                        st.rerun()
+                            # Save CSV
+                            limits_csv_rel = config.get("storage", {}).get("limits_csv_file", "data/operating_limits.csv")
+                            limits_csv_path = cm.resolve_path(limits_csv_rel)
+                            limits_csv_path.parent.mkdir(parents=True, exist_ok=True)
+                            sum_df.to_csv(limits_csv_path, index=False)
+
+                            # Sync SQL
+                            ins, skp = sql_storage.save_limits(recs)
+                            st.success(f"🎉 Operating limits successfully updated for {len(sum_df)} sensors ({len(recs)} thresholds) based on {len(df_cur):,} timestamps ({df_cur.index.min().strftime('%Y-%m-%d')} to {df_cur.index.max().strftime('%Y-%m-%d')})! (Inserted: {ins}, Skipped: {skp})")
+                            st.rerun()
 
     st.markdown("---")
     st.subheader("Database Audit Log (`operating_limits`)")

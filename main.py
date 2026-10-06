@@ -152,7 +152,46 @@ def cmd_calc_limits(args: argparse.Namespace) -> None:
         return
 
     console.print(f"Loaded [bold cyan]{len(df):,} timestamps[/bold cyan] across [bold cyan]{len(df.columns)} sensors[/bold cyan] ({time.time() - t0:.2f}s).")
-    console.print(f"Time range: [bold yellow]{df.index.min()} to {df.index.max()}[/bold yellow]")
+    console.print(f"Available range in cache: [bold yellow]{df.index.min()} to {df.index.max()}[/bold yellow]")
+
+    # Filter by timeframe if specified
+    if getattr(args, "days", None):
+        max_ts = df.index.max()
+        cutoff_ts = max_ts - dt.timedelta(days=args.days)
+        df = df[df.index >= cutoff_ts]
+        console.print(f"Filtered to last [bold cyan]{args.days} days[/bold cyan]: {cutoff_ts} to {max_ts} ({len(df):,} rows)")
+
+    if getattr(args, "start", None):
+        try:
+            start_ts = dt.datetime.fromisoformat(args.start)
+            if df.index.tz is not None and start_ts.tzinfo is None:
+                start_ts = start_ts.replace(tzinfo=dt.timezone.utc)
+            df = df[df.index >= start_ts]
+            console.print(f"Applied start filter >= [bold cyan]{start_ts}[/bold cyan]")
+        except ValueError:
+            console.print(f"[bold red]Invalid start timestamp format: {args.start}. Use 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM'.[/bold red]")
+            return
+
+    if getattr(args, "end", None):
+        try:
+            end_ts = dt.datetime.fromisoformat(args.end)
+            if df.index.tz is not None and end_ts.tzinfo is None:
+                end_ts = end_ts.replace(tzinfo=dt.timezone.utc)
+            df = df[df.index <= end_ts]
+            console.print(f"Applied end filter <= [bold cyan]{end_ts}[/bold cyan]")
+        except ValueError:
+            console.print(f"[bold red]Invalid end timestamp format: {args.end}. Use 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM'.[/bold red]")
+            return
+
+    if df.empty:
+        console.print("[bold red]No telemetry points found within the specified time frame filter.[/bold red]")
+        return
+
+    console.print(f"Computing limits on active window: [bold green]{df.index.min()} to {df.index.max()}[/bold green] ({len(df):,} rows)")
+
+    if getattr(args, "method", None):
+        cfg["operating_limits"] = cfg.get("operating_limits", {})
+        cfg["operating_limits"]["method"] = args.method
 
     calc = LimitsCalculator(config=cfg)
     console.print(f"[bold green]Calculating Operating Limits using method='{calc.method}'...[/bold green]")
@@ -277,7 +316,11 @@ def main() -> None:
     p_m2.add_argument("--filter", choices=["all", "positive", "negative", "cross_subsystem"], default="all")
 
     # calc-limits
-    subparsers.add_parser("calc-limits", help="Compute Operating Limits directly from cached telemetry Parquet and sync to SQL")
+    p_cl = subparsers.add_parser("calc-limits", help="Compute Operating Limits directly from cached telemetry Parquet and sync to SQL")
+    p_cl.add_argument("--start", type=str, default=None, help="Custom start timestamp (YYYY-MM-DD or YYYY-MM-DD HH:MM)")
+    p_cl.add_argument("--end", type=str, default=None, help="Custom end timestamp (YYYY-MM-DD or YYYY-MM-DD HH:MM)")
+    p_cl.add_argument("--days", type=int, default=None, help="Compute limits using only the last N days of telemetry")
+    p_cl.add_argument("--method", choices=["percentile", "sigma"], default=None, help="Statistical method (percentile or sigma)")
 
     # show-limits
     p_lim = subparsers.add_parser("show-limits", help="Query operating limits from SQL")
