@@ -15,6 +15,7 @@ from rich.table import Table
 
 from src.config_manager import ConfigManager
 from src.module1_pi_ingestion.pipeline import Module1Pipeline
+from src.module1_pi_ingestion.limits_calculator import LimitsCalculator
 from src.module1_pi_ingestion.sql_storage import SQLStorageManager
 from src.module2_correlation.correlation_engine import CorrelationEngine
 from src.module2_correlation.clustering import SensorClusterer
@@ -121,6 +122,58 @@ def cmd_run_module1(args: argparse.Namespace) -> None:
     console.print(f"SQL Inserted: {res['sql_inserted']} | SQL Skipped (Unchanged): {res['sql_skipped']}")
 
 
+def cmd_calc_limits(args: argparse.Namespace) -> None:
+    """Compute Operating Limits directly from cached telemetry Parquet and sync to SQL."""
+    import time
+    cm = ConfigManager()
+    cfg = cm.load_config()
+    data_path = cm.get_telemetry_path()
+    if not data_path.exists():
+        console.print(f"[bold red]Error:[/bold red] Telemetry data not found at {data_path}. Please run ingestion first.")
+        return
+
+    console.print(f"[bold green]Reading cached telemetry from {data_path}...[/bold green]")
+    t0 = time.time()
+    df = None
+    for attempt in range(3):
+        try:
+            if str(data_path).lower().endswith(".parquet"):
+                df = pd.read_parquet(data_path, engine="pyarrow")
+            else:
+                import pickle
+                with open(data_path, "rb") as f:
+                    df = pickle.load(f)
+            break
+        except (PermissionError, IOError):
+            time.sleep(0.5)
+
+    if df is None or df.empty:
+        console.print("[bold red]Failed to read telemetry or dataset is empty.[/bold red]")
+        return
+
+    console.print(f"Loaded [bold cyan]{len(df):,} timestamps[/bold cyan] across [bold cyan]{len(df.columns)} sensors[/bold cyan] ({time.time() - t0:.2f}s).")
+    console.print(f"Time range: [bold yellow]{df.index.min()} to {df.index.max()}[/bold yellow]")
+
+    calc = LimitsCalculator(config=cfg)
+    console.print(f"[bold green]Calculating Operating Limits using method='{calc.method}'...[/bold green]")
+    t1 = time.time()
+    records, summary_df = calc.compute_all_limits(df)
+    console.print(f"Computed [bold cyan]{len(records)} limits[/bold cyan] across {len(summary_df)} sensors ({time.time() - t1:.2f}s).")
+
+    # Save summary CSV
+    limits_csv_rel = cfg.get("storage", {}).get("limits_csv_file", "data/operating_limits.csv")
+    limits_csv_path = cm.resolve_path(limits_csv_rel)
+    limits_csv_path.parent.mkdir(parents=True, exist_ok=True)
+    summary_df.to_csv(limits_csv_path, index=False)
+
+    # Sync to SQL
+    sql_storage = SQLStorageManager(config=cfg)
+    console.print(f"[bold green]Synchronizing into {sql_storage.active_backend} database (`{sql_storage.table_name}`)...[/bold green]")
+    inserted, skipped = sql_storage.save_limits(records)
+
+    console.print(f"[bold green][OK] Limits Synchronization Complete![/bold green] Inserted: [bold cyan]{inserted}[/bold cyan] | Skipped (Unchanged): [bold yellow]{skipped}[/bold yellow]")
+
+
 def cmd_run_module2(args: argparse.Namespace) -> None:
     """Run Module 2 correlation engine."""
     cm = ConfigManager()
@@ -223,6 +276,9 @@ def main() -> None:
     p_m2.add_argument("--top-n", type=int, default=20, help="Number of top correlated pairs to display")
     p_m2.add_argument("--filter", choices=["all", "positive", "negative", "cross_subsystem"], default="all")
 
+    # calc-limits
+    subparsers.add_parser("calc-limits", help="Compute Operating Limits directly from cached telemetry Parquet and sync to SQL")
+
     # show-limits
     p_lim = subparsers.add_parser("show-limits", help="Query operating limits from SQL")
     p_lim.add_argument("--filter", type=str, default="", help="Filter sensors by substring")
@@ -234,6 +290,8 @@ def main() -> None:
         cmd_status(args)
     elif args.command == "run-module1":
         cmd_run_module1(args)
+    elif args.command == "calc-limits":
+        cmd_calc_limits(args)
     elif args.command == "run-module2":
         cmd_run_module2(args)
     elif args.command == "show-limits":

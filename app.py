@@ -17,6 +17,7 @@ import streamlit as st
 
 from src.config_manager import ConfigManager
 from src.module1_pi_ingestion.pipeline import Module1Pipeline
+from src.module1_pi_ingestion.limits_calculator import LimitsCalculator
 from src.module1_pi_ingestion.sql_storage import SQLStorageManager
 from src.module2_correlation.correlation_engine import CorrelationEngine
 from src.module2_correlation.clustering import SensorClusterer
@@ -337,6 +338,45 @@ elif page == "⚡ Module 1: Ingestion & Limits":
         st.subheader("Last Pipeline Execution Telemetry")
         latest_meta = cm.load_last_run_meta()
         st.json(latest_meta)
+
+        st.markdown("---")
+        st.subheader("⚡ Compute Limits on Current Cache")
+        st.caption("Calculate operating limits immediately on whatever telemetry has been downloaded so far, without waiting for the full ingestion to complete.")
+        if st.button("📊 Calculate Operating Limits Now", use_container_width=True):
+            with st.spinner("Computing statistical operating limits from cached telemetry..."):
+                d_path = cm.get_telemetry_path()
+                if not d_path.exists():
+                    st.error("No telemetry data found in storage yet. Run ingestion first.")
+                else:
+                    df_cur = None
+                    for attempt in range(3):
+                        try:
+                            if str(d_path).lower().endswith(".parquet"):
+                                df_cur = pd.read_parquet(d_path, engine="pyarrow")
+                            else:
+                                import pickle
+                                with open(d_path, "rb") as f:
+                                    df_cur = pickle.load(f)
+                            break
+                        except (PermissionError, IOError):
+                            time.sleep(0.5)
+
+                    if df_cur is None or df_cur.empty:
+                        st.error("Could not read telemetry dataset.")
+                    else:
+                        calc = LimitsCalculator(config=config)
+                        recs, sum_df = calc.compute_all_limits(df_cur)
+
+                        # Save CSV
+                        limits_csv_rel = config.get("storage", {}).get("limits_csv_file", "data/operating_limits.csv")
+                        limits_csv_path = cm.resolve_path(limits_csv_rel)
+                        limits_csv_path.parent.mkdir(parents=True, exist_ok=True)
+                        sum_df.to_csv(limits_csv_path, index=False)
+
+                        # Sync SQL
+                        ins, skp = sql_storage.save_limits(recs)
+                        st.success(f"🎉 Operating limits successfully updated for {len(sum_df)} sensors ({len(recs)} thresholds) based on {len(df_cur):,} timestamps! (Inserted: {ins}, Skipped: {skp})")
+                        st.rerun()
 
     st.markdown("---")
     st.subheader("Database Audit Log (`operating_limits`)")
