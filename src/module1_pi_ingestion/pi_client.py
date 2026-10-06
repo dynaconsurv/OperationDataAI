@@ -47,6 +47,9 @@ class PIWebApiClient:
         self.query_mode = pi_cfg.get("query_mode", "interpolated")
         self.sample_interval = pi_cfg.get("sample_interval", "1h")
         self.batch_size = pi_cfg.get("batch_size", 25)
+        self.batch_throttle_calls = int(pi_cfg.get("batch_throttle_calls", 5))
+        self.batch_throttle_delay = float(pi_cfg.get("batch_throttle_delay_seconds", 5.0))
+        self.batch_call_count = 0
 
         if not self.verify_ssl:
             urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -217,6 +220,8 @@ class PIWebApiClient:
                 self.last_batch_network_error = True
                 logger.error(f"Batch request exception: {e}")
 
+            self.batch_call_count += 1
+
             # Compute progress and ETA
             tags_done = min(total_tags, i + len(chunk))
             fraction = tags_done / total_tags if total_tags > 0 else 1.0
@@ -228,19 +233,34 @@ class PIWebApiClient:
             msg = f"Batch {batch_idx}/{total_batches} ({tags_done}/{total_tags} tags) - {subsystem}"
             total_points = sum(len(s) for s in results.values())
 
-            if progress_callback:
+            details_info = {
+                "batch": batch_idx,
+                "total_batches": total_batches,
+                "tags_completed": tags_done,
+                "total_tags": total_tags,
+                "elapsed": round(elapsed, 1),
+                "eta": round(eta, 1),
+                "points_collected": total_points,
+            }
+
+            # Throttling delay every N batch calls to accommodate concurrent PI Web API & PI Vision users
+            if self.batch_throttle_calls > 0 and self.batch_throttle_delay > 0 and (self.batch_call_count % self.batch_throttle_calls == 0):
+                logger.info(
+                    f"Throttling PI Web API: Pausing {self.batch_throttle_delay}s after batch call #{self.batch_call_count} "
+                    "to accommodate concurrent PI Vision users."
+                )
+                if progress_callback:
+                    progress_callback(
+                        fraction,
+                        f"{msg} | ⏸️ Pausing {self.batch_throttle_delay}s for PI Vision...",
+                        details_info,
+                    )
+                time.sleep(self.batch_throttle_delay)
+            elif progress_callback:
                 progress_callback(
                     fraction,
                     msg,
-                    {
-                        "batch": batch_idx,
-                        "total_batches": total_batches,
-                        "tags_completed": tags_done,
-                        "total_tags": total_tags,
-                        "elapsed": round(elapsed, 1),
-                        "eta": round(eta, 1),
-                        "points_collected": total_points,
-                    },
+                    details_info,
                 )
 
         return results

@@ -13,6 +13,8 @@
         "query_mode": "interpolated",
         "sample_interval": "1m",
         "batch_size": 25,
+        "batch_throttle_calls": 5,
+        "batch_throttle_delay_seconds": 5.0,
         "test_duration_days": 1,
         "full_duration_months": 12
     },
