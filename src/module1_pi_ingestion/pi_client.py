@@ -6,11 +6,12 @@ Interpolated and Recorded data extraction, WebID resolution, and Mock fallback.
 from __future__ import annotations
 
 import datetime as dt
+import json
 import pickle
 import time
 import urllib.parse
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 import urllib3
 import pandas as pd
 import requests
@@ -325,6 +326,49 @@ class PIWebApiClient:
             target_path = Path(pq_file)
             if not target_path.is_absolute():
                 target_path = Path(__file__).resolve().parent.parent.parent / target_path
+        elif not isinstance(target_path, Path):
+            target_path = Path(target_path)
+
+        should_save = save_storage if save_pickle is None else (save_storage or save_pickle)
+
+        ledger_path = target_path.parent / "completed_slices.json" if target_path else None
+        completed_slice_keys: Set[str] = set()
+
+        if resume and ledger_path and ledger_path.exists():
+            try:
+                with open(ledger_path, "r", encoding="utf-8") as f:
+                    ledger_data = json.load(f)
+                    if isinstance(ledger_data, list):
+                        completed_slice_keys = set(ledger_data)
+                    elif isinstance(ledger_data, dict):
+                        completed_slice_keys = set(ledger_data.get("completed_slices", []))
+                logger.info(f"Loaded {len(completed_slice_keys)} completed slices from ledger {ledger_path}")
+            except Exception as e:
+                logger.warning(f"Could not read completed slices ledger from {ledger_path}: {e}")
+        elif not resume:
+            completed_slice_keys = set()
+            if ledger_path and ledger_path.exists() and should_save:
+                try:
+                    ledger_path.unlink()
+                except Exception as e:
+                    logger.warning(f"Could not remove old ledger {ledger_path}: {e}")
+
+        def to_slice_key(dt_val) -> str:
+            ts = pd.Timestamp(dt_val)
+            if ts.tz is None:
+                ts = ts.tz_localize("UTC")
+            else:
+                ts = ts.tz_convert("UTC")
+            return ts.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+        def save_ledger():
+            if should_save and ledger_path and completed_slice_keys:
+                try:
+                    ledger_path.parent.mkdir(parents=True, exist_ok=True)
+                    with open(ledger_path, "w", encoding="utf-8") as f:
+                        json.dump({"completed_slices": sorted(list(completed_slice_keys))}, f, indent=2)
+                except Exception as e:
+                    logger.warning(f"Could not save completed slices ledger to {ledger_path}: {e}")
 
         # Check for existing checkpoint to resume
         existing_df: Optional[pd.DataFrame] = None
@@ -352,8 +396,6 @@ class PIWebApiClient:
             f"Pulling data (mode={mode}, interval={effective_interval}, mock={self.mock_mode}, "
             f"slices={len(slices)}, resume={resume}) from {start_time} to {end_time}..."
         )
-
-        should_save = save_storage if save_pickle is None else (save_storage or save_pickle)
 
         if self.mock_mode:
             logger.info("MOCK MODE ACTIVE: Generating simulated GT-2420A telemetry (no external network call).")
@@ -413,24 +455,23 @@ class PIWebApiClient:
                 logger.error("No WebIDs could be resolved from PI AF. Aborting live pull.")
                 return pd.DataFrame()
 
-            # Inspect checkpoint to determine which slices to skip vs backfill
+            # Inspect checkpoint and ledger to determine which slices to skip vs backfill
             skipped_slices = []
             remaining_slices = []
 
-            if resume and existing_df is not None and not existing_df.empty:
+            if resume and ((existing_df is not None and not existing_df.empty) or completed_slice_keys):
                 try:
                     # Pre-compute hourly point counts across existing dataset for fast O(1) lookup
-                    hourly_counts = existing_df.iloc[:, 0].resample("1h").count()
+                    hourly_counts = existing_df.iloc[:, 0].resample("1h").count() if (existing_df is not None and not existing_df.empty) else pd.Series(dtype=int)
                     for s_start, s_end in slices:
-                        s_ts = pd.Timestamp(s_start)
-                        if s_ts.tz is None:
-                            s_ts = s_ts.tz_localize("UTC")
-                        else:
-                            s_ts = s_ts.tz_convert("UTC")
+                        s_key = to_slice_key(s_start)
+                        s_ts = pd.Timestamp(s_key)
 
                         pts = hourly_counts.get(s_ts, 0)
-                        if pts >= 30:  # Slice is already present with valid data (at least 30 minutes)
+                        # Slice is skipped if already in parquet with data OR confirmed completed in ledger (e.g. plant outage)
+                        if pts >= 30 or s_key in completed_slice_keys:
                             skipped_slices.append((s_start, s_end))
+                            completed_slice_keys.add(s_key)
                         else:
                             remaining_slices.append((s_start, s_end))
 
@@ -446,11 +487,11 @@ class PIWebApiClient:
                 remaining_slices = list(slices)
 
             if not remaining_slices and existing_df is not None and not existing_df.empty:
-                logger.info("All requested time slices are already present in existing parquet file. No network calls needed.")
+                logger.info("All requested time slices are already present in existing parquet file / ledger. No network calls needed.")
                 if progress_callback:
                     progress_callback(
                         1.0,
-                        f"All {len(slices)} slices already present in checkpoint. Loaded {len(existing_df)} rows.",
+                        f"All {len(slices)} slices already completed. Loaded {len(existing_df)} rows.",
                         {"points_collected": int(existing_df.size), "total_slices": len(slices), "slice": len(slices)},
                     )
                 return existing_df
@@ -475,6 +516,7 @@ class PIWebApiClient:
             t_pull_start = time.time()
 
             def save_checkpoint(is_final: bool = False) -> pd.DataFrame:
+                save_ledger()
                 combined_dict: Dict[str, pd.Series] = {}
                 for tag_path, ser_list in all_series.items():
                     if ser_list:
@@ -483,7 +525,7 @@ class PIWebApiClient:
                         combined_dict[tag_path] = cat_s
 
                 if not combined_dict:
-                    return pd.DataFrame()
+                    return existing_df if existing_df is not None else pd.DataFrame()
 
                 chk_df = pd.DataFrame(combined_dict)
                 chk_df.index.name = "timestamp"
@@ -553,6 +595,7 @@ class PIWebApiClient:
                         if consecutive_network_failures >= 3:
                             msg = "VPN / Network connection lost (3 consecutive batch failures). Ingestion paused and checkpoint saved."
                             logger.error(msg)
+                            save_ledger()
                             if progress_callback:
                                 overall_frac = (completed_slices + s_idx + 1.0) / total_slices
                                 progress_callback(
@@ -563,6 +606,8 @@ class PIWebApiClient:
                             break
                     else:
                         consecutive_network_failures = 0
+                        # Successful query (even if 0 points due to unit shutdown) -> mark slice as completed
+                        completed_slice_keys.add(to_slice_key(s_start))
 
                     for tag_path, ser in slice_batch.items():
                         if tag_path in all_series and not ser.empty:
@@ -574,6 +619,7 @@ class PIWebApiClient:
 
             finally:
                 df = save_checkpoint(is_final=True)
+                save_ledger()
 
             return df
 

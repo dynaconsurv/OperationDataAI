@@ -9,14 +9,14 @@
         "auth_type": "basic",
         "verify_ssl": false,
         "timeout_seconds": 30,
-        "mock_mode": true,
+        "mock_mode": false,
         "query_mode": "interpolated",
         "sample_interval": "1m",
         "batch_size": 25,
-        "batch_throttle_calls": 5,
-        "batch_throttle_delay_seconds": 5.0,
         "test_duration_days": 1,
-        "full_duration_months": 12
+        "full_duration_months": 12,
+        "batch_throttle_calls": 5,
+        "batch_throttle_delay_seconds": 5.0
     },
     "database": {
         "engine": "mssql",
@@ -52,9 +52,9 @@
         "top_n_pairs": 20
     },
     "storage": {
-        "parquet_file": "data/historical_data.parquet",
         "pickle_file": "data/historical_data.pkl",
         "correlation_file": "data/correlation_matrix.csv",
-        "limits_csv_file": "data/operating_limits.csv"
+        "limits_csv_file": "data/operating_limits.csv",
+        "parquet_file": "data/historical_data.parquet"
     }
 }

@@ -114,3 +114,72 @@ def test_no_resume_overwrites_existing(tmp_path: Path):
     # Verify the old 2026-10-01 rows are completely gone because resume was False
     assert (df_fresh.index.year == 2026).all()
     assert (df_fresh.index.day == 5).all()
+
+
+def test_completed_slices_ledger_skips_outage_hours(tmp_path: Path):
+    """Verify that slices returning 0 points (plant outages) are tracked in ledger and not re-queried on resume."""
+    import json
+    from unittest.mock import MagicMock
+
+    parquet_file = tmp_path / "ledger_test.parquet"
+    ledger_file = tmp_path / "completed_slices.json"
+
+    cfg = {
+        "pi_web_api": {"mock_mode": False, "sample_interval": "1m"},
+        "storage": {"parquet_file": str(parquet_file)},
+    }
+    client = PIWebApiClient(
+        config=cfg,
+        sensors=[{"parent": "TestElem", "attribute_name": "TestAttr", "full_af_path": "Path/TestAttr", "web_id": "W123"}],
+    )
+
+    # Mock fetch_batch_data_live: Hour 1 has data, Hour 2 is outage (0 pts), Hour 3 has data
+    calls = []
+
+    def mock_fetch(tag_webid_map, start_time_str, end_time_str, interval, progress_callback=None):
+        calls.append((start_time_str, end_time_str))
+        if "09:00:00" in start_time_str:
+            # Outage hour - returns 0 points
+            return {"Path/TestAttr": pd.Series(dtype=float)}
+        else:
+            # Operating hour - returns data
+            ts = pd.date_range(start_time_str, end_time_str, freq="1min")
+            return {"Path/TestAttr": pd.Series(np.ones(len(ts)), index=ts)}
+
+    client.fetch_batch_data_live = MagicMock(side_effect=mock_fetch)
+
+    t_start = dt.datetime(2026, 10, 5, 8, 0, 0)
+    t_end = dt.datetime(2026, 10, 5, 11, 0, 0)
+
+    # 1. First run: processes hours 8-9, 9-10 (outage), 10-11
+    df1 = client.pull_data(
+        custom_start=t_start,
+        custom_end=t_end,
+        custom_interval="1m",
+        storage_path=parquet_file,
+        resume=True,
+    )
+
+    assert len(calls) == 3
+    assert ledger_file.exists()
+
+    with open(ledger_file, "r") as f:
+        ledger = json.load(f)
+    # All 3 hours must be marked complete in the ledger, including the 0-point outage hour
+    assert len(ledger["completed_slices"]) == 3
+    assert "2026-10-05T09:00:00Z" in ledger["completed_slices"]
+
+    # 2. Second run with resume=True: all 3 slices should be skipped!
+    calls.clear()
+    df2 = client.pull_data(
+        custom_start=t_start,
+        custom_end=t_end,
+        custom_interval="1m",
+        storage_path=parquet_file,
+        resume=True,
+    )
+
+    # No network calls made because all 3 slices (including outage) are acknowledged in ledger
+    assert len(calls) == 0
+    assert len(df2) == len(df1)
+
