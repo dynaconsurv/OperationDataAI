@@ -1,0 +1,18 @@
+{
+    "last_pull_timestamp": "2026-10-09 11:42:02",
+    "duration_seconds": 2.18,
+    "target_equipment": "GT-2420A",
+    "pull_mode": "6-Month Hourly",
+    "sample_interval": "1h",
+    "is_mock": true,
+    "backend_db": "sqlite",
+    "time_range": "2026-04-09 11:00 to 2026-10-09 11:00",
+    "tags_requested": 162,
+    "tags_successful": 162,
+    "data_points_collected": 711666,
+    "limits_calculated": 810,
+    "sql_inserted": 698,
+    "sql_skipped": 112,
+    "status": "Success",
+    "last_error": null
+}
