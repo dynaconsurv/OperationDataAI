@@ -44,3 +44,10 @@ logs/*.log
 data/*.parquet
 *.pkl
 data/*.pkl
+
+# Portable Python extracted directory (tracked via python_runtime.zip)
+release/python_runtime/
+release/data/*.parquet
+release/data/*.pkl
+release/data/*.db
+

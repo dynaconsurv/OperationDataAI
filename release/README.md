@@ -135,39 +135,32 @@ Sensors are grouped under equipment keys (`GT-2420A`). Additional equipment can 
 
 ## 🏃 How to Run
 
-### Installation
-Ensure Python 3.10+ is available, then install dependencies:
-```bash
-pip install -r requirements.txt
+### Zero Installation Required (Bundled Embedded Python)
+The release folder includes an embedded **Python 3.11 runtime (`python_runtime/`)** with all required packages pre-installed (`pandas`, `numpy`, `pyarrow`, `SQLAlchemy`, `pyodbc`, `requests`, `requests-ntlm`, etc.). **You do not need to install Python on the destination host.**
+
+#### Option A: One-Click Windows Batch Launcher (Recommended)
+Simply double-click or execute `run.bat`:
+```cmd
+run.bat
+```
+Pass arguments directly to `run.bat`:
+```cmd
+run.bat --mock
+run.bat --equipment GT-2420A --months 6 --interval 1h
 ```
 
-### Standalone CLI Execution
+#### Option B: Direct Embedded Python Execution
+```cmd
+python_runtime\python.exe run_module1.py
+python_runtime\python.exe run_module1.py --mock
+```
 
-1. **Default Production Execution (Past 6 Months Hourly, Live PI Web API):**
-   ```bash
-   python run_module1.py
-   ```
-
-2. **Offline Simulation Mode (Mock Telemetry):**
-   ```bash
-   python run_module1.py --mock
-   ```
-
-3. **Custom Duration or Time Range:**
-   ```bash
-   python run_module1.py --months 3 --interval 1h
-   python run_module1.py --start "2026-01-01 00:00" --end "2026-06-01 00:00"
-   ```
-
-4. **Target Different Equipment:**
-   ```bash
-   python run_module1.py --equipment GT-2420A
-   ```
-
-5. **Fresh Run (Ignore Checkpoints):**
-   ```bash
-   python run_module1.py --no-resume
-   ```
+#### Option C: Using System Python (Fallback)
+If deploying without `python_runtime/`:
+```bash
+pip install -r requirements.txt
+python run_module1.py
+```
 
 ---
 

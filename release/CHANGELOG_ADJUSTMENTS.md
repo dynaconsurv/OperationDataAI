@@ -90,15 +90,26 @@ In accordance with the instruction to *prioritize reusing whatever features/func
 
 ---
 
+### Adjustment 6: Bundled Embedded Python 3.11 Runtime & One-Click Launcher (`run.bat`)
+- **Original:** Required a pre-installed system Python 3.10+ environment with manual `pip install -r requirements.txt`.
+- **Portable Adjustment:**
+  - Bundled a standalone, self-contained **Python 3.11.9 embeddable runtime (`release/python_runtime/`)** with all required packages pre-installed into `Lib/site-packages`.
+  - Configured `python311._pth` with `import site` and `..` to allow importing root release modules without setting `PYTHONPATH`.
+  - Created `run.bat` and `run_module1.bat` one-click Windows launchers that detect and execute the embedded Python runtime automatically, with fallback to system Python if the runtime folder is absent.
+
+---
+
 ## 3. Comparison Matrix
 
 | Aspect | Main Repository (Module 1) | Portable Release (`release/`) |
 | :--- | :--- | :--- |
+| **Python Requirement** | Must be pre-installed on host machine | **Embedded runtime included (`python_runtime/`) — Zero installation required** |
+| **Windows Execution** | Command line `python ...` | **One-click batch launcher (`run.bat`)** |
 | **Taglist Structure** | Flat array (`sensors.json`) | **Grouped by equipment number** (`{"GT-2420A": [...]}`) |
 | **Target Equipment** | Implicit | **Configurable via JSON (`target_equipment`) and CLI (`--equipment`)** |
 | **Default Time Window** | 12 months (or 1 day test) | **Past 6 months** (`duration_months: 6`) |
 | **Default Frequency** | 1 minute (`1m`) | **Hourly (`1h`)** |
-| **Execution Entry Point** | Streamlit UI (`app.py`) / `main.py` | **Dedicated Standalone CLI (`run_module1.py`)** |
+| **Execution Entry Point** | Streamlit UI (`app.py`) / `main.py` | **Dedicated Standalone CLI (`run_module1.py` & `run.bat`)** |
 | **Module Scope** | Modules 1, 2, and 3 | **Module 1 only (Ingestion, Limits, SQL)** |
 | **Portability** | Requires entire repository | **Fully standalone (can be copied to any directory/server)** |
 | **Deduplication Method** | Matching `(af_path, type)` | **Identical: Matching `(af_path, type)` + Current execution timestamp** |
