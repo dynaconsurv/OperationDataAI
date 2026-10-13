@@ -449,13 +449,25 @@ def cmd_run_module3(args: argparse.Namespace) -> None:
     if corr_csv_path.exists():
         corr_df = pd.read_csv(corr_csv_path, index_col=0)
 
-    console.print(f"[bold green]Calibrating CorrelationDigitalTwin across {df.shape[1]} sensors ({len(df):,} samples)...[/bold green]")
-    twin = CorrelationDigitalTwin(
-        top_n_peers=args.top_peers,
-        min_correlation=args.min_corr,
-        sensor_catalog=sensors,
-    )
-    twin.fit(df, correlation_matrix=corr_df)
+    load_model_path = getattr(args, "load_model", None)
+    save_model_path = getattr(args, "save_model", None)
+
+    if load_model_path and Path(load_model_path).exists():
+        console.print(f"[bold green]Loading pre-calibrated CorrelationDigitalTwin from {load_model_path}...[/bold green]")
+        twin = CorrelationDigitalTwin.load_model(load_model_path)
+        if sensors and not twin.tag_name_map:
+            twin._build_sensor_lookup_maps(sensors)
+    else:
+        console.print(f"[bold green]Calibrating CorrelationDigitalTwin across {df.shape[1]} sensors ({len(df):,} samples)...[/bold green]")
+        twin = CorrelationDigitalTwin(
+            top_n_peers=args.top_peers,
+            min_correlation=args.min_corr,
+            sensor_catalog=sensors,
+        )
+        twin.fit(df, correlation_matrix=corr_df)
+        if save_model_path:
+            twin.save_model(save_model_path)
+            console.print(f"[bold cyan]Calibrated model successfully saved to {save_model_path}[/bold cyan]")
 
     # Identify active operational window if tail is in outage/shutdown
     numeric_df = df.select_dtypes(include=[np.number])
@@ -547,6 +559,8 @@ def main() -> None:
     p_m3.add_argument("--min-corr", type=float, default=0.65, help="Minimum absolute correlation to accept a peer")
     p_m3.add_argument("--inject-fault", choices=["none", "combustion", "bearing"], default="none", help="Inject synthetic fault to test early warning detection")
     p_m3.add_argument("--timestamp", type=str, default=None, help="Specific timestamp to diagnose (default: latest timestamp)")
+    p_m3.add_argument("--save-model", type=str, default=None, help="Save calibrated digital twin model pickle to path")
+    p_m3.add_argument("--load-model", type=str, default=None, help="Load pre-calibrated digital twin model pickle from path")
     p_m3.add_argument("--json", action="store_true", help="Print raw alert JSON object")
 
     # show-limits
