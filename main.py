@@ -9,6 +9,7 @@ import argparse
 import datetime as dt
 import sys
 from pathlib import Path
+import numpy as np
 import pandas as pd
 from rich.console import Console
 from rich.table import Table
@@ -20,6 +21,7 @@ from src.module1_pi_ingestion.limits_calculator import LimitsCalculator
 from src.module1_pi_ingestion.sql_storage import SQLStorageManager
 from src.module2_correlation.correlation_engine import CorrelationEngine
 from src.module2_correlation.clustering import SensorClusterer
+from src.module3_prediction.correlation_digital_twin import CorrelationDigitalTwin
 
 console = Console()
 
@@ -372,9 +374,139 @@ def cmd_show_limits(args: argparse.Namespace) -> None:
         vals = [f"{row[c]:.4f}" if pd.notna(row.get(c)) else "N/A" for c in ["LL", "L", "Normal", "H", "HH"] if c in pivot_df.columns]
         table.add_row(af_short, *vals)
 
-    console.print(table)
     if len(pivot_df) > args.limit:
         console.print(f"[dim]Showing first {args.limit} of {len(pivot_df)} sensors. Use --limit to show more.[/dim]")
+
+
+def render_early_warning_card(alert: Dict[str, Any]) -> None:
+    """Render a structured Early Warning Advisory card with rich styling."""
+    culprit = alert["culprit_sensor"]
+    witnesses = alert.get("supporting_witness_sensors", [])
+
+    is_anom = alert.get("is_anomaly", False)
+    border_color = "red" if is_anom else "green"
+    status_label = f"[bold red]{alert['severity']} (ANOMALY DETECTED)[/bold red]" if is_anom else f"[bold green]{alert['severity']} (NORMAL PROFILE)[/bold green]"
+
+    lines = [
+        f"[bold white]ASSET ID:[/bold white] {alert['asset_id']}  |  [bold white]TIMESTAMP:[/bold white] {alert['timestamp']}  |  [bold white]STATUS:[/bold white] {status_label}",
+        f"[bold white]TURBINE HEALTH SCORE:[/bold white] {alert['health_score']}/100  |  [bold white]ANOMALY SCORE (SPE):[/bold white] {alert['composite_anomaly_score']} (Threshold: {alert['system_threshold']})",
+        "",
+        "[bold cyan]1. WHAT IS ABOUT TO HAPPEN (PREDICTED INCIDENT):[/bold cyan]",
+        f"   * Predicted Incident:   [bold yellow]{alert['predicted_incident']}[/bold yellow]",
+        f"   * Estimated Lead Time:  [bold cyan]~{alert['estimated_lead_time_hours']} Hours advance notice[/bold cyan]",
+        f"   * Root Cause Verdict:   {alert['root_cause_diagnosis']}",
+        "",
+        "[bold cyan]2. WHICH SENSORS PROVE THE DATA (THE FAILURE SIGNAL & EVIDENCE):[/bold cyan]",
+        f"   [bold yellow]PRIMARY CULPRIT SENSOR:[/bold yellow] [bold white]{culprit['tag_name']}[/bold white] (Subsystem: {culprit['subsystem']})",
+        f"     - Actual Live Telemetry:       [bold yellow]{culprit['actual_value']}[/bold yellow]",
+        f"     - Expected Digital Twin Value: [cyan]{culprit['expected_digital_twin_value']}[/cyan]",
+        f"     - Residual Error Deviation:    [bold red]{culprit['residual_deviation']:+.2f}[/bold red] ({culprit['z_score']:+.2f} sigma deviation)",
+        f"     - Contribution Index (SCI):    [bold magenta]{culprit['contribution_index_pct']:.1f}%[/bold magenta] of total turbine anomaly error",
+        "",
+        "   [bold yellow]SUPPORTING WITNESS SENSORS (PHYSICAL CORRELATION PEERS):[/bold yellow]",
+    ]
+
+    for w in witnesses[:5]:
+        status_col = "green" if w["status"] == "NORMAL" else "red"
+        lines.append(
+            f"     * {w['tag_name'][:28]:<28} Live: {w['actual']:>7.2f} | Expected: {w['expected']:>7.2f} | Residual: {w['residual']:>+6.2f} [{status_col}]{w['status']}[/{status_col}]"
+        )
+
+    lines.extend([
+        "",
+        "[bold cyan]3. PRESCRIBED OPERATOR ACTIONS:[/bold cyan]",
+    ])
+    for idx, act in enumerate(alert.get("prescribed_operator_actions", []), 1):
+        lines.append(f"   {idx}. {act}")
+
+    box_text = "\n".join(lines)
+    card_title = f"[bold white]PREDICTIVE EARLY WARNING ADVISORY: {alert['alert_id']}[/bold white]"
+    console.print(Panel(box_text, title=card_title, border_style=border_color, padding=(1, 2)))
+
+
+def cmd_run_module3(args: argparse.Namespace) -> None:
+    """Execute Module 3: CorrelationDigitalTwin predictive anomaly engine and generate Early Warning alerts."""
+    import json
+    cm = ConfigManager()
+    cfg = cm.load_config()
+    sensors = cm.load_sensors()
+
+    data_path = cm.get_telemetry_path()
+    if not data_path.exists():
+        console.print(f"[bold red]Error:[/bold red] Telemetry data not found at {data_path}. Please run Module 1 first.")
+        sys.exit(1)
+
+    if str(data_path).lower().endswith(".parquet"):
+        df = pd.read_parquet(data_path, engine="pyarrow")
+    else:
+        import pickle
+        with open(data_path, "rb") as f:
+            df = pickle.load(f)
+
+    corr_csv_rel = cfg.get("storage", {}).get("correlation_file", "data/correlation_matrix.csv")
+    corr_csv_path = cm.resolve_path(corr_csv_rel)
+    corr_df = None
+    if corr_csv_path.exists():
+        corr_df = pd.read_csv(corr_csv_path, index_col=0)
+
+    console.print(f"[bold green]Calibrating CorrelationDigitalTwin across {df.shape[1]} sensors ({len(df):,} samples)...[/bold green]")
+    twin = CorrelationDigitalTwin(
+        top_n_peers=args.top_peers,
+        min_correlation=args.min_corr,
+        sensor_catalog=sensors,
+    )
+    twin.fit(df, correlation_matrix=corr_df)
+
+    # Identify active operational window if tail is in outage/shutdown
+    numeric_df = df.select_dtypes(include=[np.number])
+    running_mask = (numeric_df > 10.0).sum(axis=1) > (len(numeric_df.columns) * 0.3)
+    if running_mask.any():
+        last_running_ts = df[running_mask].index[-1]
+        if (df.index[-1] - last_running_ts).total_seconds() > 3600 * 12:
+            console.print(f"[dim]Latest timestamps are in unit outage/standby. Evaluating active operational window up to {last_running_ts}...[/dim]")
+            eval_window = df.loc[:last_running_ts].tail(args.lookback).copy()
+        else:
+            eval_window = df.tail(args.lookback).copy()
+    else:
+        eval_window = df.tail(args.lookback).copy()
+
+    # Optional synthetic fault injection for demonstration
+    if args.inject_fault == "combustion":
+        tc_cols = [c for c in eval_window.columns if "exhaust temperature 8" in c.lower()]
+        if tc_cols:
+            target_col = tc_cols[0]
+            console.print(f"[bold yellow][TEST INJECTION] Simulating burner nozzle coking fault on '{target_col.split(chr(92))[-1]}'...[/bold yellow]")
+            vals = eval_window[target_col].to_numpy().copy()
+            vals[-10:] -= np.linspace(15, 65, 10)
+            eval_window[target_col] = vals
+    elif args.inject_fault == "bearing":
+        b_cols = [c for c in eval_window.columns if "journal bearing" in c.lower() and "temperature" in c.lower()]
+        if b_cols:
+            target_col = b_cols[0]
+            console.print(f"[bold yellow][TEST INJECTION] Simulating bearing babbitt heating fault on '{target_col.split(chr(92))[-1]}'...[/bold yellow]")
+            vals = eval_window[target_col].to_numpy().copy()
+            vals[-10:] += np.linspace(8, 25, 10)
+            eval_window[target_col] = vals
+
+    console.print(f"[bold green]Evaluating telemetry window ({len(eval_window)} timestamps: {eval_window.index.min()} to {eval_window.index.max()})...[/bold green]")
+    scored = twin.score_telemetry(eval_window)
+
+    anomaly_count = int(scored["is_anomaly"].sum())
+    console.print(f"Scored {len(scored)} timestamps | [bold cyan]Anomalies Flagged: {anomaly_count}[/bold cyan] (System Threshold: {twin.system_anomaly_threshold:.2f})")
+
+    target_ts = getattr(args, "timestamp", None)
+    if target_ts is None:
+        if anomaly_count > 0:
+            target_ts = scored[scored["is_anomaly"]].index[-1]
+        else:
+            target_ts = eval_window.index[-1]
+
+    alert = twin.diagnose_anomaly(eval_window, timestamp=target_ts)
+
+    if args.json:
+        console.print_json(data=alert)
+    else:
+        render_early_warning_card(alert)
 
 
 def main() -> None:
@@ -408,6 +540,15 @@ def main() -> None:
     p_cl.add_argument("--days", type=int, default=None, help="Compute limits using only the last N days of telemetry")
     p_cl.add_argument("--method", choices=["percentile", "sigma"], default=None, help="Statistical method (percentile or sigma)")
 
+    # run-module3
+    p_m3 = subparsers.add_parser("run-module3", help="Execute Module 3 (CorrelationDigitalTwin Predictive Anomaly Engine)")
+    p_m3.add_argument("--lookback", type=int, default=48, help="Number of recent telemetry timestamps to score")
+    p_m3.add_argument("--top-peers", type=int, default=5, help="Number of correlated peers per digital twin")
+    p_m3.add_argument("--min-corr", type=float, default=0.65, help="Minimum absolute correlation to accept a peer")
+    p_m3.add_argument("--inject-fault", choices=["none", "combustion", "bearing"], default="none", help="Inject synthetic fault to test early warning detection")
+    p_m3.add_argument("--timestamp", type=str, default=None, help="Specific timestamp to diagnose (default: latest timestamp)")
+    p_m3.add_argument("--json", action="store_true", help="Print raw alert JSON object")
+
     # show-limits
     p_lim = subparsers.add_parser("show-limits", help="Query operating limits from SQL")
     p_lim.add_argument("--filter", type=str, default="", help="Filter sensors by substring")
@@ -423,6 +564,8 @@ def main() -> None:
         cmd_calc_limits(args)
     elif args.command == "run-module2":
         cmd_run_module2(args)
+    elif args.command == "run-module3":
+        cmd_run_module3(args)
     elif args.command == "show-limits":
         cmd_show_limits(args)
     else:
