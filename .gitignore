@@ -50,4 +50,7 @@ release/python_runtime/
 release/data/*.parquet
 release/data/*.pkl
 release/data/*.db
+release/data/*.csv
+release/data/*.json
+release/logs/*.log
 

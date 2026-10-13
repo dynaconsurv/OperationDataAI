@@ -20,30 +20,37 @@ A self-contained, portable edition of **Module 1 (PI Telemetry Ingestion & Opera
 ```
 release/
 ├── config/
-│   ├── config.json          # Main configuration (PI Web API, Database, Limits, Time Range)
-│   ├── sensors.json         # Taglist grouped by equipment number (GT-2420A)
-│   └── last_run_meta.json   # Pipeline execution metadata & statistics
-├── data/                    # Generated Parquet caches, CSV limits, and SQLite databases
-├── logs/                    # Execution logs (module1.log)
+│   ├── config.json              # Main configuration (PI Web API, Database, Limits, Time Range)
+│   ├── sensors.json             # Taglist grouped by equipment number (GT-2420A)
+│   └── last_run_meta.json       # Pipeline execution metadata & statistics
+├── data/                        # Generated Parquet caches, CSV limits, and SQLite databases
+├── logs/                        # Execution logs (module1.log)
+├── python_runtime/              # Bundled embedded Python 3.11 environment
+├── python_runtime.zip           # Compressed portable Python archive
 ├── src/
 │   ├── __init__.py
-│   ├── config_manager.py     # Portable configuration & sensor catalog manager
+│   ├── config_manager.py        # Portable configuration & sensor catalog manager
 │   ├── module1_pi_ingestion/
 │   │   ├── __init__.py
-│   │   ├── pi_client.py      # PI Web API client with batching & ledger
+│   │   ├── pi_client.py         # PI Web API client with batching & ledger
 │   │   ├── limits_calculator.py # Operating Limits statistical calculator
-│   │   ├── sql_storage.py    # SQL storage engine with deduplication
-│   │   └── pipeline.py       # Orchestration pipeline
+│   │   ├── sql_storage.py       # SQL storage engine with deduplication
+│   │   └── pipeline.py          # Orchestration pipeline
 │   └── utils/
 │       ├── __init__.py
-│       ├── logger.py         # Formatted console & file logger
-│       └── mock_generator.py # Synthetic telemetry generator for offline testing
+│       ├── logger.py            # Formatted console & file logger
+│       └── mock_generator.py    # Synthetic telemetry generator for offline testing
 ├── tests/
 │   └── test_portable_module1.py # Portable verification test suite
-├── run_module1.py            # Standalone CLI entry point
-├── requirements.txt          # Python dependencies
-├── CHANGELOG_ADJUSTMENTS.md  # Detailed summary of adjustments from main repository
-└── README.md                 # This documentation
+├── create_scheduled_task.bat    # Automated Windows Task Scheduler installer
+├── remove_scheduled_task.bat    # Automated Windows Task Scheduler uninstaller
+├── run.bat                      # One-click portable launcher (supports --unattended)
+├── run_module1.bat              # Batch launcher alias
+├── run_module1.py               # Standalone CLI entry point
+├── setup_runtime.bat            # Runtime extraction & verification script
+├── requirements.txt             # Python dependencies
+├── CHANGELOG_ADJUSTMENTS.md      # Detailed summary of adjustments from main repository
+└── README.md                    # This documentation
 ```
 
 ---
@@ -156,11 +163,168 @@ python_runtime\python.exe run_module1.py --mock
 ```
 
 #### Option C: Using System Python (Fallback)
-If deploying without `python_runtime/`:
+If deploying without bundled `python_runtime/`:
 ```bash
 pip install -r requirements.txt
 python run_module1.py
 ```
+
+---
+
+## 📅 Windows Task Scheduler Deployment
+
+Deploying Module 1 via **Windows Task Scheduler** enables automated, unattended execution (e.g., daily recalculation of 6-month statistical operating limits and telemetry sync).
+
+### Operational Architecture & Safety
+
+- **Headless Execution**: The launcher supports `--unattended` (or environment variable `UNATTENDED=1`), which disables interactive `pause` prompts so automated runs never hang on errors.
+- **PI System Protection**: The built-in batch throttling (5-second sleep after every 5 batch requests) remains active, protecting PI Web API and other active PI Vision users.
+- **Outage-Aware Checkpointing**: If a network disconnect or scheduled reboot occurs mid-run, the pipeline records completed slices in `data/completed_slices.json`. The next scheduled task run will automatically resume from the last completed slice.
+- **Database Deduplication**: Matching `(af_path, type)` ensures unchanged threshold values are not duplicated in the SQL database.
+
+---
+
+### Option 1: Turnkey Automated Setup via Script (Recommended)
+
+The portable release includes an automated configuration script:
+
+1. Right-click **[`create_scheduled_task.bat`](create_scheduled_task.bat)** and select **Run as Administrator**.
+2. Follow the interactive prompts:
+   - **Frequency**:
+     - `[1]` Daily at 01:00 AM (Recommended for standard daily limits)
+     - `[2]` Hourly (Every 1 hour)
+     - `[3]` Every 4 Hours
+     - `[4]` Custom Time (Daily at `HH:MM`)
+   - **Security Account**:
+     - `[1]` Local `SYSTEM` (`NT AUTHORITY\SYSTEM`) — Runs 24/7 in background without user logon, no password required.
+     - `[2]` Current User Account (`%USERNAME%`).
+3. The script automatically generates an XML task definition with the correct working directory, 4-hour execution timeout, and `IgnoreNew` concurrency policy, then registers it in Windows Task Scheduler.
+
+To remove the scheduled task at any time, run **[`remove_scheduled_task.bat`](remove_scheduled_task.bat)**.
+
+---
+
+### Option 2: Step-by-Step GUI Setup (`taskschd.msc`)
+
+To manually configure the task through the Windows Task Scheduler GUI:
+
+#### Step 1: Open Task Scheduler
+Press `Win + R`, type `taskschd.msc`, and press **Enter**.
+
+#### Step 2: Create Task
+In the right-hand **Actions** panel, click **Create Task...** *(Do NOT use "Create Basic Task", as it lacks critical working directory and concurrency settings)*.
+
+#### Step 3: General Tab
+- **Name**: `PTTEP_Module1_Ingestion`
+- **Description**: `PTTEP Module 1 - Telemetry Ingestion and Operating Limits Calculation`
+- **Security options**:
+  - Select **Run whether user is logged on or not**
+  - Check **Run with highest privileges**
+- **Configure for**: Select `Windows 10` or `Windows Server 2016 / 2019 / 2022`
+
+#### Step 4: Triggers Tab
+1. Click **New...**
+2. **Begin the task**: `On a schedule`
+3. **Settings**:
+   - For Daily: Select **Daily**, recur every `1` days, Start: `01:00:00`
+   - For Hourly: Select **Daily**, check **Repeat task every**: `1 hour` for a duration of `1 day`
+4. Ensure **Enabled** is checked.
+5. Click **OK**.
+
+#### Step 5: Actions Tab (Critical Configuration)
+1. Click **New...**
+2. **Action**: `Start a program`
+3. **Program/script**:
+   ```
+   cmd.exe
+   ```
+4. **Add arguments**:
+   ```
+   /c ""C:\path\to\release\run.bat" --unattended"
+   ```
+   *(Replace `C:\path\to\release\` with your actual absolute deployment folder path)*
+5. **Start in (crucial)**:
+   ```
+   C:\path\to\release
+   ```
+
+> [!IMPORTANT]
+> **Always set the "Start in" directory** to the absolute path of the `release` folder (e.g. `C:\PTTEP_AI\release`). If left blank, Windows defaults the working directory to `C:\Windows\System32`, causing relative paths to `config/`, `data/`, and `python_runtime/` to fail.
+
+#### Step 6: Conditions Tab
+- **Power**: **Uncheck** *"Start the task only if the computer is on AC power"* (ensures execution on VMs or laptops).
+- **Power**: **Uncheck** *"Stop if the computer switches to battery power"*.
+- **Network**: Check *"Start only if the following network connection is available"* and select `Any connection`.
+
+#### Step 7: Settings Tab
+- Check **Allow task to be run on demand**.
+- Check **Run task as soon as possible after a scheduled start is missed**.
+- Check **If the task fails, restart every**: `10 minutes` (Attempt to restart up to: `3` times).
+- Check **Stop the task if it runs longer than**: `4 hours`.
+- If the running task does not end when requested: check **Force the task to stop**.
+- **If the task is already running, then the following rule applies**: Select **Do not start a new instance** *(avoids duplicate overlapping queries to PI Web API)*.
+
+Click **OK** to save the task. If prompted, enter the account credentials.
+
+---
+
+### Option 3: Command-Line Setup via `schtasks`
+
+You can also create and manage the task directly from an elevated Command Prompt or PowerShell terminal.
+
+#### 1. Register Daily Task (at 01:00 AM as SYSTEM):
+```cmd
+schtasks /Create /TN "PTTEP_Module1_Ingestion" /TR "\"C:\path\to\release\run.bat\" --unattended" /SC DAILY /ST 01:00 /RU "NT AUTHORITY\SYSTEM" /RL HIGHEST /F
+```
+
+#### 2. Register Hourly Task (Every 1 hour as SYSTEM):
+```cmd
+schtasks /Create /TN "PTTEP_Module1_Ingestion" /TR "\"C:\path\to\release\run.bat\" --unattended" /SC HOURLY /MO 1 /RU "NT AUTHORITY\SYSTEM" /RL HIGHEST /F
+```
+
+#### 3. Register with a Dedicated Service Account:
+```cmd
+schtasks /Create /TN "PTTEP_Module1_Ingestion" /TR "\"C:\path\to\release\run.bat\" --unattended" /SC DAILY /ST 01:00 /RU "DOMAIN\service_account" /RP "AccountPassword" /RL HIGHEST /F
+```
+
+#### 4. Trigger an Immediate Test Run:
+```cmd
+schtasks /Run /TN "PTTEP_Module1_Ingestion"
+```
+
+#### 5. Check Task Status & Last Run Result:
+```cmd
+schtasks /Query /TN "PTTEP_Module1_Ingestion" /FO LIST /V
+```
+
+#### 6. Delete / Uninstall the Task:
+```cmd
+schtasks /Delete /TN "PTTEP_Module1_Ingestion" /F
+```
+
+---
+
+### 🔍 Verification & Monitoring
+
+After the scheduled task executes, verify health and telemetry outputs using the following checkpoints:
+
+1. **Execution Logs**: Inspect **[`logs/module1.log`](logs/module1.log)** for timestamps, PI batch requests, limits calculated, and SQL insertion statistics.
+2. **Metadata Snapshot**: Check **[`config/last_run_meta.json`](config/last_run_meta.json)** for execution status, data points collected, and time range.
+3. **Task Scheduler Return Codes**:
+   - `0x0` (`0`): **Success** — Pipeline executed and exited cleanly.
+   - `0x1` (`1`): **Application Error** — Check `logs/module1.log` for PI Web API connectivity or SQL authentication issues.
+   - `0x41301`: **Task is Currently Running** — Pipeline is actively ingesting slices.
+   - `0x80070005`: **Access Denied** — Ensure the task runs with elevated privileges or valid service account credentials.
+   - `0xC000013A`: **Terminated** — Task was interrupted or cancelled.
+4. **SQL Database Verification**:
+   Query the target SQL table to confirm updated records:
+   ```sql
+   SELECT TOP 20 af_path, type, value, updated_at
+   FROM operating_limits
+   ORDER BY updated_at DESC;
+   ```
+5. **Windows Event Log**: Detailed task lifecycle events are available in:
+   `Event Viewer -> Applications and Services Logs -> Microsoft -> Windows -> TaskScheduler -> Operational`
 
 ---
 

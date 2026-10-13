@@ -82,6 +82,11 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Custom end datetime in ISO or 'YYYY-MM-DD HH:MM' format.",
     )
+    parser.add_argument(
+        "--unattended",
+        action="store_true",
+        help="Run in unattended/headless mode (suitable for Windows Task Scheduler).",
+    )
     return parser.parse_args()
 
 
