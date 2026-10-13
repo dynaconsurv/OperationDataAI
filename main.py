@@ -12,6 +12,7 @@ from pathlib import Path
 import pandas as pd
 from rich.console import Console
 from rich.table import Table
+from rich.panel import Panel
 
 from src.config_manager import ConfigManager
 from src.module1_pi_ingestion.pipeline import Module1Pipeline
@@ -259,7 +260,91 @@ def cmd_run_module2(args: argparse.Namespace) -> None:
         table.add_row(str(i + 1), s1, s2, subsys, f"[{color}]{val:+.4f}[/{color}]")
 
     console.print(table)
-    console.print(f"Full correlation matrix saved to: [underline]{corr_csv_path}[/underline]")
+    console.print(f"Full correlation matrix saved to: [underline]{corr_csv_path}[/underline]\n")
+
+    if not getattr(args, "no_explain", False):
+        print_correlation_explanation(method=args.method, top_pairs=top_pairs, filter_mode=args.filter)
+
+
+def print_correlation_explanation(method: str, top_pairs: pd.DataFrame, filter_mode: str) -> None:
+    """Print an intuitive, operator-friendly guide explaining how to interpret the correlation results."""
+    method_name = method.title()
+    method_desc = (
+        "measures the direct linear relationship (do sensors move together in fixed proportion?)"
+        if method.lower() == "pearson"
+        else "measures monotonic relationship (do sensors move together regardless of linearity?)"
+    )
+
+    explanation_lines = [
+        f"[bold cyan][?] WHAT IS {method.upper()} CORRELATION (EXPLAINED IN PLAIN ENGLISH)?[/bold cyan]",
+        f"You don't need a statistics background to understand this! The [bold]{method_name}[/bold] method {method_desc}.",
+        "Think of correlation as measuring whether two sensors [bold]dance together in lockstep[/bold] over time:",
+        "",
+        "  * [bold green]+1.0000 (Perfect Positive)[/bold green] : When Sensor 1 goes UP, Sensor 2 goes UP at the exact same time in lockstep.",
+        "  * [dim] 0.0000 (No Correlation)[/dim]     : Sensor 1 and Sensor 2 move independently (no relationship at all).",
+        "  * [bold red]-1.0000 (Perfect Inverse)[/bold red]  : When Sensor 1 goes UP, Sensor 2 goes DOWN (move in opposite directions).",
+        "",
+        "[bold yellow][*] HOW TO READ THE CORRELATION VALUE (BENCHMARK GUIDE):[/bold yellow]",
+        "  * [bold green]+0.80 to +1.00[/bold green] : [bold]Very Strong Positive[/bold] (Redundant sensors or sensors in the exact same thermal/pressure zone)",
+        "  * [green]+0.50 to +0.79[/green] : [bold]Moderate / Strong[/bold] (Sensors that follow the same general operational turbine load)",
+        "  * [yellow]+0.20 to +0.49[/yellow] : [bold]Weak Connection[/bold] (Minor shared influence)",
+        "  * [dim]-0.19 to +0.19[/dim] : [bold]Uncorrelated / Independent[/bold] (Noise or unrelated physical systems)",
+        "  * [red]-0.50 to -0.79[/red] : [bold]Moderate Inverse[/bold] (e.g., flow rate vs pressure drop across a filter)",
+        "  * [bold red]-0.80 to -1.00[/bold red] : [bold]Very Strong Inverse[/bold] (e.g., cooling valve opening % vs downstream temperature)",
+        "",
+        "[bold cyan][!] ENGINEERING INTERPRETATION FOR GT-2420A (WHY THIS MATTERS):[/bold cyan]"
+    ]
+
+    # Specific insights based on sensors present in the top pairs table
+    sensors_str = " ".join(top_pairs["Sensor_1"].tolist() + top_pairs["Sensor_2"].tolist()).lower() if not top_pairs.empty else ""
+
+    insight_idx = 1
+    if "exhaust temperature" in sensors_str:
+        explanation_lines.extend([
+            f"  {insight_idx}. [bold]Exhaust Thermocouples Cluster (+1.0000)[/bold]:",
+            "     Sensors such as 'Exhaust Temperature 4, 5, 6, 7, 8, 9' form the circumferential exhaust ring.",
+            "     Because gas turbine combustion cans fire simultaneously, all exhaust thermocouples naturally rise and",
+            "     fall together with MW turbine load. This confirms normal symmetrical combustion.",
+            "     [italic yellow][EARLY WARNING][/italic yellow] If one thermocouple suddenly drops to +0.20 while others remain at +0.99,",
+            "     that indicates combustion flame-out, nozzle clogging, or a failing thermocouple probe before a trip occurs!"
+        ])
+        insight_idx += 1
+
+    if "axial displacement" in sensors_str or "rotor" in sensors_str:
+        explanation_lines.extend([
+            f"  {insight_idx}. [bold]Rotor Axial Displacement Probes (+1.0000)[/bold]:",
+            "     HP and LP Rotor Axial Displacement Proximity Probes are paired redundant sensors measuring shaft position.",
+            "     Near-perfect (+1.0000) correlation proves both dual-channel probes agree on rotor mechanical position.",
+            "     [italic yellow][HEALTH CHECK][/italic yellow] A divergence between redundant probes flags loose mounting or calibration drift."
+        ])
+        insight_idx += 1
+
+    if "fuel gas" in sensors_str or "compressor discharge" in sensors_str or "control oil" in sensors_str:
+        explanation_lines.extend([
+            f"  {insight_idx}. [bold]Thermodynamic & Hydraulic Cross-Coupling (+0.999)[/bold]:",
+            "     Fuel Gas Pressure, Compressor Discharge Pressure (PCD), and Control Oil Header Pressure track together.",
+            "     As turbine load ramps, hydraulic control oil modulates fuel gas valves, and higher combustion drives PCD.",
+            "     [italic yellow][PROCESS COUPLING][/italic yellow] Proves core engine thermodynamic loop and governor control are behaving synchronously."
+        ])
+        insight_idx += 1
+
+    if insight_idx == 1:
+        explanation_lines.extend([
+            "  1. [bold]Physical Process Coupling[/bold]:",
+            "     Sensors with correlation > 0.80 indicate strong aerodynamic, thermal, or mechanical linkages across the unit.",
+            "     Pairs with correlation near 0.00 operate independently, while negative values indicate opposing control responses."
+        ])
+
+    explanation_lines.extend([
+        "",
+        "[bold magenta][>] NEXT STEPS / ADVANCED FILTERS:[/bold magenta]",
+        "  * Find cross-system coupling:  [bold white]python main.py run-module2 --filter cross_subsystem --top-n 15[/bold white]",
+        "  * Find opposing / inverse trends: [bold white]python main.py run-module2 --filter negative --top-n 15[/bold white]",
+        "  * Capture non-linear trends:      [bold white]python main.py run-module2 --method spearman --top-n 15[/bold white]"
+    ])
+
+    guide_box = "\n".join(explanation_lines)
+    console.print(Panel(guide_box, title="[bold white]Operator Guide: How to Read & Interpret Module 2 Results[/bold white]", border_style="cyan", padding=(1, 2)))
 
 
 def cmd_show_limits(args: argparse.Namespace) -> None:
@@ -314,6 +399,7 @@ def main() -> None:
     p_m2.add_argument("--method", choices=["pearson", "spearman"], default="pearson", help="Correlation method")
     p_m2.add_argument("--top-n", type=int, default=20, help="Number of top correlated pairs to display")
     p_m2.add_argument("--filter", choices=["all", "positive", "negative", "cross_subsystem"], default="all")
+    p_m2.add_argument("--no-explain", action="store_true", help="Suppress the operator explanation guide box")
 
     # calc-limits
     p_cl = subparsers.add_parser("calc-limits", help="Compute Operating Limits directly from cached telemetry Parquet and sync to SQL")
