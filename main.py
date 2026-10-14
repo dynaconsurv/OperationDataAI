@@ -515,6 +515,14 @@ def cmd_run_module3(args: argparse.Namespace) -> None:
 
     alert = twin.diagnose_anomaly(eval_window, timestamp=target_ts)
 
+    save_alert_path = getattr(args, "save_alert", None)
+    if save_alert_path:
+        out_p = Path(save_alert_path)
+        out_p.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_p, "w", encoding="utf-8") as f:
+            json.dump(alert, f, indent=2)
+        console.print(f"[bold cyan]Advisory alert saved to {save_alert_path}[/bold cyan]")
+
     if args.json:
         console.print_json(data=alert)
     else:
@@ -570,6 +578,7 @@ def main() -> None:
     p_m3.add_argument("--timestamp", type=str, default=None, help="Specific timestamp to diagnose (default: latest timestamp)")
     p_m3.add_argument("--save-model", type=str, default=None, help="Save calibrated digital twin model pickle to path")
     p_m3.add_argument("--load-model", type=str, default=None, help="Load pre-calibrated digital twin model pickle from path")
+    p_m3.add_argument("--save-alert", type=str, default=None, help="Save generated advisory alert JSON to path")
     p_m3.add_argument("--json", action="store_true", help="Print raw alert JSON object")
 
     # show-limits

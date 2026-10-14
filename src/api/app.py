@@ -242,6 +242,18 @@ def get_latest_advisory(
     if twin_model is None or not twin_model.is_trained:
         raise HTTPException(status_code=503, detail="Digital twin model is not loaded.")
     
+    # Fast path: If pre-computed advisory exists from 5-min scheduled runner and no simulation requested
+    advisory_file = Path("data/latest_advisory.json")
+    if simulate_fault is None and advisory_file.exists():
+        try:
+            import json
+            with open(advisory_file, "r", encoding="utf-8") as f:
+                saved_alert = json.load(f)
+            if "alert_id" in saved_alert:
+                return saved_alert
+        except Exception as e:
+            logger.warning(f"Failed to read pre-computed advisory: {e}")
+
     df_cache = _get_latest_telemetry()
     if df_cache is None or df_cache.empty:
         raise HTTPException(status_code=503, detail="Telemetry cache is empty.")
