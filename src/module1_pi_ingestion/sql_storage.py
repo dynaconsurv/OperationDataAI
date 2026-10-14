@@ -363,3 +363,57 @@ class SQLStorageManager:
             return None
         finally:
             session.close()
+
+    def bulk_save_predictive_advisories(self, advisories: List[Dict[str, Any]], batch_size: int = 1000) -> int:
+        """Bulk insert a large historical list of predictive advisories into database."""
+        if self.engine is None or not advisories:
+            return 0
+
+        import json
+        session = self.get_session()
+        inserted_total = 0
+        try:
+            for i in range(0, len(advisories), batch_size):
+                chunk = advisories[i:i + batch_size]
+                records = []
+                for alert in chunk:
+                    ts_str = alert.get("timestamp")
+                    ts = pd.to_datetime(ts_str) if ts_str else dt.datetime.now(dt.timezone.utc)
+                    if hasattr(ts, "to_pydatetime"):
+                        ts = ts.to_pydatetime()
+                    if ts.tzinfo is not None:
+                        ts = ts.replace(tzinfo=None)
+
+                    asset_id = alert.get("asset_id", "GT-2420A")
+                    culprit = alert.get("culprit_sensor", {})
+
+                    rec = PredictiveAdvisoryRecord(
+                        timestamp=ts,
+                        asset_id=asset_id,
+                        health_score=float(alert.get("health_score", 100.0)),
+                        anomaly_score=float(alert.get("composite_anomaly_score", 0.0)),
+                        threshold=float(alert.get("system_threshold", 732.01)),
+                        is_anomaly=bool(alert.get("is_anomaly", False)),
+                        severity=str(alert.get("severity", "NORMAL")),
+                        predicted_incident=str(alert.get("predicted_incident", "")),
+                        lead_time_hours=float(alert.get("estimated_lead_time_hours", 0.0)),
+                        culprit_sensor=str(culprit.get("sensor_path", "")),
+                        culprit_tag=str(culprit.get("tag_name", "")),
+                        culprit_subsystem=str(culprit.get("subsystem", "")),
+                        culprit_sci_pct=float(culprit.get("contribution_index_pct", 0.0)),
+                        culprit_residual=float(culprit.get("residual_deviation", 0.0)),
+                        culprit_z_score=float(culprit.get("z_score", 0.0)),
+                        root_cause_diagnosis=str(alert.get("root_cause_diagnosis", "")),
+                        payload_json=json.dumps(alert),
+                    )
+                    records.append(rec)
+                session.add_all(records)
+                session.commit()
+                inserted_total += len(records)
+            return inserted_total
+        except Exception as e:
+            session.rollback()
+            logger.error(f"Error bulk persisting predictive advisories to SQL: {e}")
+            return inserted_total
+        finally:
+            session.close()

@@ -546,6 +546,80 @@ def cmd_serve_api(args: argparse.Namespace) -> None:
     uvicorn.run("src.api.app:app", host=args.host, port=args.port, reload=args.reload)
 
 
+def cmd_backfill_module3(args: argparse.Namespace) -> None:
+    """Backfill past historical predictions across 1 year into SQL database."""
+    import time
+    cm = ConfigManager()
+    cfg = cm.load_config()
+    sensors = cm.load_sensors()
+
+    data_path = cm.get_telemetry_path()
+    if not data_path.exists():
+        console.print(f"[bold red]Error:[/bold red] Telemetry data not found at {data_path}. Please run Module 1 first.")
+        sys.exit(1)
+
+    console.print(f"[bold green]Loading historical telemetry from {data_path}...[/bold green]")
+    if str(data_path).lower().endswith(".parquet"):
+        df = pd.read_parquet(data_path)
+    else:
+        import pickle
+        with open(data_path, "rb") as f:
+            df = pickle.load(f)
+
+    # Filter to requested historical window
+    if args.days:
+        cutoff = df.index.max() - pd.Timedelta(days=args.days)
+        df = df[df.index >= cutoff]
+
+    console.print(f"Loaded {len(df):,} raw timestamps spanning {df.index.min()} to {df.index.max()}.")
+
+    # Resample to evaluation interval (e.g. '1h' or '30m')
+    numeric_df = df.select_dtypes(include=[np.number])
+    console.print(f"[bold green]Resampling telemetry to interval '{args.interval}' for historical evaluation...[/bold green]")
+    resampled_df = numeric_df.resample(args.interval).mean().dropna(how="all")
+    console.print(f"Generated {len(resampled_df):,} discrete historical timestamps to score.")
+
+    # Load pre-calibrated CorrelationDigitalTwin
+    model_path = args.load_model or "models/gt2420a_digital_twin.pkl"
+    if Path(model_path).exists():
+        console.print(f"[bold green]Loading pre-calibrated CorrelationDigitalTwin from {model_path}...[/bold green]")
+        twin = CorrelationDigitalTwin.load_model(model_path)
+        if sensors and not twin.tag_name_map:
+            twin._build_sensor_lookup_maps(sensors)
+    else:
+        console.print("[bold yellow]Calibrating digital twin from baseline telemetry...[/bold yellow]")
+        corr_csv = cm.resolve_path("data/correlation_matrix.csv")
+        corr_df = pd.read_csv(corr_csv, index_col=0) if corr_csv.exists() else None
+        twin = CorrelationDigitalTwin(top_n_peers=5, min_correlation=0.65, sensor_catalog=sensors)
+        twin.fit(df, correlation_matrix=corr_df)
+        twin.save_model("models/gt2420a_digital_twin.pkl")
+
+    # Vectorized scoring across the entire historical window
+    t0 = time.time()
+    console.print(f"[bold green]Scoring {len(resampled_df):,} timestamps through 158 sensor digital twins...[/bold green]")
+    scored = twin.score_telemetry(resampled_df)
+    score_elapsed = time.time() - t0
+    console.print(f"[bold cyan]Scoring completed in {score_elapsed:.2f}s![/bold cyan]")
+
+    anomalies_count = int(scored["is_anomaly"].sum())
+    console.print(f"Total timestamps: {len(scored):,} | Anomalies detected: [bold red]{anomalies_count}[/bold red] (Threshold: {twin.system_anomaly_threshold:.2f})")
+
+    # Generate structured advisories
+    console.print("[bold green]Generating structured advisories for database archiving...[/bold green]")
+    advisories = []
+    for ts in resampled_df.index:
+        alert = twin.diagnose_anomaly(resampled_df, timestamp=ts)
+        advisories.append(alert)
+
+    # Bulk insert into SQL database
+    from src.module1_pi_ingestion.sql_storage import SQLStorageManager
+    sql_mgr = SQLStorageManager(cfg)
+    console.print(f"[bold green]Bulk inserting {len(advisories):,} historical advisories into SQL ({sql_mgr.active_backend})...[/bold green]")
+    inserted = sql_mgr.bulk_save_predictive_advisories(advisories, batch_size=args.batch_size)
+    console.print(f"[bold green]SUCCESS: Successfully archived {inserted:,} historical advisories into SQL table 'predictive_advisories'![/bold green]")
+
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="PTTEP GT-2420A PI Analytics Application")
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
@@ -600,6 +674,13 @@ def main() -> None:
     p_api.add_argument("--port", type=int, default=8000, help="Bind port (default: 8000)")
     p_api.add_argument("--reload", action="store_true", help="Enable auto-reload for development")
 
+    # backfill-module3
+    p_bf = subparsers.add_parser("backfill-module3", help="Backfill historical predictive advisories into SQL across past telemetry")
+    p_bf.add_argument("--days", type=int, default=365, help="Number of historical days to backfill (default: 365 for 1 full year)")
+    p_bf.add_argument("--interval", type=str, default="1h", help="Historical evaluation sampling interval (e.g. 1h, 30m, 15m; default: 1h)")
+    p_bf.add_argument("--load-model", type=str, default=None, help="Path to pre-calibrated digital twin model (default: models/gt2420a_digital_twin.pkl)")
+    p_bf.add_argument("--batch-size", type=int, default=1000, help="SQL bulk insertion batch size (default: 1000)")
+
     args = parser.parse_args()
 
     if args.command == "status":
@@ -612,6 +693,8 @@ def main() -> None:
         cmd_run_module2(args)
     elif args.command == "run-module3":
         cmd_run_module3(args)
+    elif args.command == "backfill-module3":
+        cmd_backfill_module3(args)
     elif args.command == "serve-api":
         cmd_serve_api(args)
     elif args.command == "show-limits":
