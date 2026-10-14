@@ -523,6 +523,14 @@ def cmd_run_module3(args: argparse.Namespace) -> None:
             json.dump(alert, f, indent=2)
         console.print(f"[bold cyan]Advisory alert saved to {save_alert_path}[/bold cyan]")
 
+    # Persist advisory historically into SQL database
+    try:
+        from src.module1_pi_ingestion.sql_storage import SQLStorageManager
+        sql_mgr = SQLStorageManager(cfg)
+        sql_mgr.save_predictive_advisory(alert)
+    except Exception as e:
+        pass
+
     if args.json:
         console.print_json(data=alert)
     else:

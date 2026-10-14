@@ -76,3 +76,13 @@ def test_sync_telemetry_endpoint():
     assert "advisory" in data
     assert "health_score" in data["advisory"]
 
+
+def test_historical_advisory_query():
+    # Query a specific historical time in September 2026
+    data = get_latest_advisory(timestamp="2026-09-18 06:24:00", lookback=24)
+    assert "alert_id" in data
+    assert "20260918" in data["alert_id"]
+    assert "health_score" in data
+    assert "culprit_sensor" in data
+
+

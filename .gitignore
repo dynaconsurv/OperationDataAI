@@ -44,6 +44,8 @@ logs/*.log
 data/*.parquet
 *.pkl
 data/*.pkl
+*.db
+data/*.db
 
 # Portable Python extracted directory (tracked via python_runtime.zip)
 release/python_runtime/

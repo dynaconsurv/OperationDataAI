@@ -56,6 +56,15 @@
                 lookback: scope.config.LookbackPoints || 24
             };
 
+            // Detect PI Vision Time Bar adjustment (Historical Playback)
+            if (scope.timeProvider && scope.timeProvider.displayTime) {
+                var endTime = scope.timeProvider.displayTime.end;
+                // If not current live snapshot ("*" or "now"), query historical timestamp
+                if (endTime && endTime !== "*" && endTime !== "now") {
+                    params.timestamp = endTime;
+                }
+            }
+
             if (scope.config.SimulateFault && scope.config.SimulateFault !== "none") {
                 params.simulate_fault = scope.config.SimulateFault;
             }
@@ -115,6 +124,17 @@
                 newConfig.SimulateFault !== oldConfig.SimulateFault) {
                 startPolling();
             }
+        }
+
+        // Watch for PI Vision Time Bar adjustments by the operator
+        if (scope.timeProvider) {
+            scope.$watch(function () {
+                return scope.timeProvider.displayTime ? scope.timeProvider.displayTime.end : null;
+            }, function (newVal, oldVal) {
+                if (newVal && newVal !== oldVal) {
+                    fetchAdvisory();
+                }
+            });
         }
 
         scope.$on("$destroy", function () {

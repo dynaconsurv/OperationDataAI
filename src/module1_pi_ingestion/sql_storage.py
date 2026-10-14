@@ -36,6 +36,36 @@ class OperatingLimitRecord(Base):
     )
 
 
+class PredictiveAdvisoryRecord(Base):
+    """SQLAlchemy model for historical predictive digital twin advisories."""
+
+    __tablename__ = "predictive_advisories"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    timestamp = Column(DateTime, nullable=False, index=True)
+    asset_id = Column(String(50), nullable=False, default="GT-2420A", index=True)
+    health_score = Column(Float, nullable=False)
+    anomaly_score = Column(Float, nullable=False)
+    threshold = Column(Float, nullable=False)
+    is_anomaly = Column(sa.Boolean, nullable=False)
+    severity = Column(String(20), nullable=False)
+    predicted_incident = Column(String(255), nullable=True)
+    lead_time_hours = Column(Float, nullable=True)
+    culprit_sensor = Column(String(500), nullable=True)
+    culprit_tag = Column(String(100), nullable=True)
+    culprit_subsystem = Column(String(100), nullable=True)
+    culprit_sci_pct = Column(Float, nullable=True)
+    culprit_residual = Column(Float, nullable=True)
+    culprit_z_score = Column(Float, nullable=True)
+    root_cause_diagnosis = Column(sa.Text, nullable=True)
+    payload_json = Column(sa.Text, nullable=True)
+    created_at = Column(DateTime, default=lambda: dt.datetime.now(dt.timezone.utc))
+
+    __table_args__ = (
+        Index("idx_asset_ts", "asset_id", "timestamp"),
+    )
+
+
 class SQLStorageManager:
     """Manages database connection and persistence of operating limits."""
 
@@ -101,9 +131,15 @@ class SQLStorageManager:
         self.create_tables_if_not_exist()
 
     def create_tables_if_not_exist(self) -> None:
-        """Create the operating_limits table if missing."""
+        """Create the operating_limits and predictive_advisories tables if missing."""
         if self.engine is not None:
             Base.metadata.create_all(self.engine)
+
+    def get_session(self):
+        """Create a new SQLAlchemy session."""
+        if self.engine is None:
+            raise RuntimeError("Database engine is not initialized.")
+        return sessionmaker(bind=self.engine)()
 
     def get_latest_limits_map(self) -> Dict[Tuple[str, str], float]:
         """Fetch the most recent value for each (af_path, type) from the database."""
@@ -227,3 +263,103 @@ class SQLStorageManager:
 
         cols = [c for c in ["af_path", "LL", "L", "Normal", "H", "HH"] if c in pivot_df.columns]
         return pivot_df[cols]
+
+    def save_predictive_advisory(self, alert: Dict[str, Any]) -> bool:
+        """Store predictive digital twin advisory historically in database."""
+        if self.engine is None or not alert or "alert_id" not in alert:
+            return False
+
+        import json
+        session = self.get_session()
+        try:
+            ts_str = alert.get("timestamp")
+            ts = pd.to_datetime(ts_str) if ts_str else dt.datetime.now(dt.timezone.utc)
+            if hasattr(ts, "to_pydatetime"):
+                ts = ts.to_pydatetime()
+            if ts.tzinfo is not None:
+                ts = ts.replace(tzinfo=None)
+
+            asset_id = alert.get("asset_id", "GT-2420A")
+            culprit = alert.get("culprit_sensor", {})
+
+            existing = session.query(PredictiveAdvisoryRecord).filter(
+                PredictiveAdvisoryRecord.asset_id == asset_id,
+                PredictiveAdvisoryRecord.timestamp == ts,
+            ).first()
+
+            if existing:
+                existing.health_score = float(alert.get("health_score", 100.0))
+                existing.anomaly_score = float(alert.get("composite_anomaly_score", 0.0))
+                existing.threshold = float(alert.get("system_threshold", 732.01))
+                existing.is_anomaly = bool(alert.get("is_anomaly", False))
+                existing.severity = str(alert.get("severity", "NORMAL"))
+                existing.predicted_incident = str(alert.get("predicted_incident", ""))
+                existing.lead_time_hours = float(alert.get("estimated_lead_time_hours", 0.0))
+                existing.culprit_sensor = str(culprit.get("sensor_path", ""))
+                existing.culprit_tag = str(culprit.get("tag_name", ""))
+                existing.culprit_subsystem = str(culprit.get("subsystem", ""))
+                existing.culprit_sci_pct = float(culprit.get("contribution_index_pct", 0.0))
+                existing.culprit_residual = float(culprit.get("residual_deviation", 0.0))
+                existing.culprit_z_score = float(culprit.get("z_score", 0.0))
+                existing.root_cause_diagnosis = str(alert.get("root_cause_diagnosis", ""))
+                existing.payload_json = json.dumps(alert)
+            else:
+                record = PredictiveAdvisoryRecord(
+                    timestamp=ts,
+                    asset_id=asset_id,
+                    health_score=float(alert.get("health_score", 100.0)),
+                    anomaly_score=float(alert.get("composite_anomaly_score", 0.0)),
+                    threshold=float(alert.get("system_threshold", 732.01)),
+                    is_anomaly=bool(alert.get("is_anomaly", False)),
+                    severity=str(alert.get("severity", "NORMAL")),
+                    predicted_incident=str(alert.get("predicted_incident", "")),
+                    lead_time_hours=float(alert.get("estimated_lead_time_hours", 0.0)),
+                    culprit_sensor=str(culprit.get("sensor_path", "")),
+                    culprit_tag=str(culprit.get("tag_name", "")),
+                    culprit_subsystem=str(culprit.get("subsystem", "")),
+                    culprit_sci_pct=float(culprit.get("contribution_index_pct", 0.0)),
+                    culprit_residual=float(culprit.get("residual_deviation", 0.0)),
+                    culprit_z_score=float(culprit.get("z_score", 0.0)),
+                    root_cause_diagnosis=str(alert.get("root_cause_diagnosis", "")),
+                    payload_json=json.dumps(alert),
+                )
+                session.add(record)
+            session.commit()
+            return True
+        except Exception as e:
+            session.rollback()
+            logger.error(f"Error persisting predictive advisory to SQL: {e}")
+            return False
+        finally:
+            session.close()
+
+    def get_advisory_by_timestamp(self, asset_id: str, target_timestamp: dt.datetime) -> Optional[Dict[str, Any]]:
+        """Retrieve closest historical advisory from database matching target timestamp."""
+        if self.engine is None:
+            return None
+
+        import json
+        session = self.get_session()
+        try:
+            target_naive = target_timestamp.replace(tzinfo=None) if target_timestamp.tzinfo else target_timestamp
+            window_start = target_naive - dt.timedelta(hours=2)
+            window_end = target_naive + dt.timedelta(hours=2)
+
+            records = session.query(PredictiveAdvisoryRecord).filter(
+                PredictiveAdvisoryRecord.asset_id == asset_id,
+                PredictiveAdvisoryRecord.timestamp >= window_start,
+                PredictiveAdvisoryRecord.timestamp <= window_end,
+            ).all()
+
+            if not records:
+                return None
+
+            closest = min(records, key=lambda r: abs((r.timestamp - target_naive).total_seconds()))
+            if closest and closest.payload_json:
+                return json.loads(closest.payload_json)
+            return None
+        except Exception as e:
+            logger.error(f"Error querying advisory by timestamp: {e}")
+            return None
+        finally:
+            session.close()

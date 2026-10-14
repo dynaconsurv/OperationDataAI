@@ -226,23 +226,55 @@ def get_sensor_catalog() -> Dict[str, Any]:
 
 
 @app.get("/api/v1/advisory/latest", tags=["Early Warning"])
+@app.get("/api/v1/advisory", tags=["Early Warning"])
 def get_latest_advisory(
-    lookback: int = Query(24, ge=1, le=120, description="Telemetry points in evaluation window"),
-    simulate_fault: Optional[str] = Query(
-        None,
-        pattern="^(none|combustion|bearing)$",
-        description="Inject synthetic fault to preview PI Vision advisory alert card",
-    ),
+    timestamp: Optional[str] = None,
+    lookback: int = 24,
+    simulate_fault: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Provide the latest Early Warning Advisory card payload for PI Vision custom symbols.
+    """Provide Early Warning Advisory card payload for PI Vision custom symbols.
     
-    Reads the latest active operational telemetry from the server cache, evaluates
-    multivariate correlation integrity, and formats the response for PI Vision.
+    Supports both LIVE monitoring (latest state) and HISTORICAL playback when
+    an operator adjusts the PI Vision time bar.
     """
     if twin_model is None or not twin_model.is_trained:
         raise HTTPException(status_code=503, detail="Digital twin model is not loaded.")
-    
-    # Fast path: If pre-computed advisory exists from 5-min scheduled runner and no simulation requested
+
+    # 1. Historical Lookup: If operator adjusted the PI Vision Time Bar
+    if timestamp:
+        try:
+            target_ts = pd.to_datetime(timestamp)
+            if target_ts.tzinfo is not None:
+                target_ts = target_ts.tz_convert(None)
+        except Exception:
+            raise HTTPException(status_code=400, detail=f"Invalid timestamp format: '{timestamp}'")
+
+        # Check if already archived in SQL database
+        from src.module1_pi_ingestion.sql_storage import SQLStorageManager
+        sql_mgr = SQLStorageManager(config_manager.load_config())
+        archived = sql_mgr.get_advisory_by_timestamp("GT-2420A", target_ts.to_pydatetime() if hasattr(target_ts, "to_pydatetime") else target_ts)
+        if archived:
+            return archived
+
+        # Dynamic On-Demand Reconstruction from Parquet for requested historical time
+        df_cache = _get_latest_telemetry()
+        if df_cache is not None and not df_cache.empty:
+            idx_tz = getattr(df_cache.index, "tz", None)
+            if idx_tz is not None and target_ts.tzinfo is None:
+                target_ts = target_ts.tz_localize(idx_tz)
+            elif idx_tz is None and target_ts.tzinfo is not None:
+                target_ts = target_ts.tz_localize(None)
+
+            if target_ts in df_cache.index:
+                target_idx = df_cache.index.get_loc(target_ts)
+            else:
+                target_idx = int(np.argmin(np.abs(df_cache.index - target_ts)))
+            
+            slice_end = df_cache.index[target_idx]
+            eval_window = df_cache.loc[:slice_end].tail(lookback).copy()
+            return twin_model.diagnose_anomaly(eval_window, timestamp=slice_end)
+
+    # 2. Live Monitoring: Fast path from 5-min scheduled runner if no simulation requested
     advisory_file = Path("data/latest_advisory.json")
     if simulate_fault is None and advisory_file.exists():
         try:
