@@ -521,6 +521,15 @@ def cmd_run_module3(args: argparse.Namespace) -> None:
         render_early_warning_card(alert)
 
 
+def cmd_serve_api(args: argparse.Namespace) -> None:
+    """Launch the FastAPI REST service for PI Vision integration using Uvicorn."""
+    import uvicorn
+    console.print(f"[bold green]Starting PTTEP GT-2420A Predictive Anomaly API on {args.host}:{args.port}...[/bold green]")
+    console.print(f"[dim]PI Vision endpoint: http://{args.host}:{args.port}/api/v1/advisory/latest[/dim]")
+    console.print(f"[dim]Swagger Docs:       http://{args.host}:{args.port}/docs[/dim]")
+    uvicorn.run("src.api.app:app", host=args.host, port=args.port, reload=args.reload)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="PTTEP GT-2420A PI Analytics Application")
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
@@ -568,6 +577,12 @@ def main() -> None:
     p_lim.add_argument("--filter", type=str, default="", help="Filter sensors by substring")
     p_lim.add_argument("--limit", type=int, default=30, help="Max rows to display")
 
+    # serve-api
+    p_api = subparsers.add_parser("serve-api", help="Launch FastAPI REST service for PI Vision integration")
+    p_api.add_argument("--host", type=str, default="0.0.0.0", help="Bind host (default: 0.0.0.0)")
+    p_api.add_argument("--port", type=int, default=8000, help="Bind port (default: 8000)")
+    p_api.add_argument("--reload", action="store_true", help="Enable auto-reload for development")
+
     args = parser.parse_args()
 
     if args.command == "status":
@@ -580,6 +595,8 @@ def main() -> None:
         cmd_run_module2(args)
     elif args.command == "run-module3":
         cmd_run_module3(args)
+    elif args.command == "serve-api":
+        cmd_serve_api(args)
     elif args.command == "show-limits":
         cmd_show_limits(args)
     else:

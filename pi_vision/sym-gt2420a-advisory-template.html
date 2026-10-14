@@ -1,0 +1,142 @@
+<!-- PI Vision Custom Symbol HTML Template: GT-2420A Predictive Advisory Card -->
+<div class="pv-gt2420a-advisory" style="width: 100%; height: 100%; box-sizing: border-box; overflow-y: auto; font-family: 'Segoe UI', Arial, sans-serif; background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #334155;">
+
+    <!-- Loading State -->
+    <div ng-if="loading" style="display: flex; justify-content: center; align-items: center; height: 100%; color: #94a3b8; font-size: 14px;">
+        <span>Connecting to Predictive Engine API...</span>
+    </div>
+
+    <!-- Error State -->
+    <div ng-if="error && !loading" style="padding: 16px; background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; border-radius: 6px; color: #fca5a5; font-size: 13px;">
+        <b style="color: #ef4444;">API Connection Notice:</b>
+        <div style="margin-top: 4px;">{{error}}</div>
+        <div style="margin-top: 8px; font-size: 11px; color: #cbd5e1;">Target Endpoint: {{config.ApiUrl}}</div>
+    </div>
+
+    <!-- Main Advisory Content -->
+    <div ng-if="advisory && !loading">
+
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 10px; margin-bottom: 12px;">
+            <div>
+                <div style="font-size: 16px; font-weight: bold; color: #38bdf8; letter-spacing: 0.5px;">
+                    PTTEP GT-2420A DIGITAL TWIN ADVISORY
+                </div>
+                <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">
+                    Alert ID: {{advisory.alert_id}} | Telemetry Timestamp: {{advisory.timestamp}}
+                </div>
+            </div>
+            <div style="background: {{badgeColor}}; color: #ffffff; padding: 4px 12px; border-radius: 9999px; font-size: 11px; font-weight: bold; letter-spacing: 0.5px;">
+                {{badgeText}}
+            </div>
+        </div>
+
+        <!-- 3 KPI Metric Tiles -->
+        <div style="display: flex; gap: 10px; margin-bottom: 14px;">
+            <div style="flex: 1; background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; text-align: center;">
+                <div style="font-size: 10px; text-transform: uppercase; color: #94a3b8; font-weight: 600;">Turbine Health</div>
+                <div style="font-size: 22px; font-weight: bold; color: {{badgeColor}}; margin-top: 2px;">
+                    {{advisory.health_score}} <span style="font-size: 12px; color: #64748b;">/ 100</span>
+                </div>
+            </div>
+
+            <div style="flex: 1; background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; text-align: center;">
+                <div style="font-size: 10px; text-transform: uppercase; color: #94a3b8; font-weight: 600;">Anomaly Score (SPE)</div>
+                <div style="font-size: 22px; font-weight: bold; color: {{advisory.is_anomaly ? '#ef4444' : '#10b981'}}; margin-top: 2px;">
+                    {{advisory.composite_anomaly_score}}
+                </div>
+                <div style="font-size: 9px; color: #64748b;">Threshold: {{advisory.system_threshold}}</div>
+            </div>
+
+            <div style="flex: 1; background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; text-align: center;">
+                <div style="font-size: 10px; text-transform: uppercase; color: #94a3b8; font-weight: 600;">Predicted Lead Time</div>
+                <div style="font-size: 22px; font-weight: bold; color: #38bdf8; margin-top: 2px;">
+                    ~{{advisory.estimated_lead_time_hours}}h
+                </div>
+                <div style="font-size: 9px; color: #64748b;">Advance Notice</div>
+            </div>
+        </div>
+
+        <!-- Section 1: What is about to happen -->
+        <div style="font-size: 12px; text-transform: uppercase; color: #94a3b8; font-weight: 700; margin-bottom: 6px; letter-spacing: 0.5px;">
+            1. What Is About to Happen (Predicted Incident)
+        </div>
+        <div style="background: #1e293b; border-left: 3px solid #38bdf8; padding: 10px; border-radius: 4px; margin-bottom: 14px;">
+            <div style="font-size: 13px; font-weight: bold; color: #f1f5f9;">
+                {{advisory.predicted_incident}}
+            </div>
+            <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px; line-height: 1.4;">
+                {{advisory.root_cause_diagnosis}}
+            </div>
+        </div>
+
+        <!-- Section 2: Sensor Evidence & SCI Attribution -->
+        <div style="font-size: 12px; text-transform: uppercase; color: #94a3b8; font-weight: 700; margin-bottom: 6px; letter-spacing: 0.5px;">
+            2. Sensor Evidence & Fault Contribution
+        </div>
+        <div style="background: #1e293b; border-left: 3px solid {{badgeColor}}; padding: 10px; border-radius: 4px; margin-bottom: 10px; font-size: 12px;">
+            <div>
+                <b style="color: #f1f5f9;">Primary Culprit Sensor:</b>
+                <span style="color: #38bdf8; font-weight: bold;">{{advisory.culprit_sensor.tag_name}}</span>
+                <span style="color: #94a3b8;">({{advisory.culprit_sensor.subsystem}})</span>
+            </div>
+            <div style="margin-top: 4px; color: #cbd5e1;">
+                Live: <b>{{advisory.culprit_sensor.actual_value}}</b> |
+                Expected: <b>{{advisory.culprit_sensor.expected_digital_twin_value}}</b> |
+                Residual: <b style="color: {{badgeColor}};">{{advisory.culprit_sensor.residual_deviation}}</b>
+                ({{advisory.culprit_sensor.z_score}} &sigma;)
+            </div>
+            <div style="margin-top: 4px; color: #f1f5f9;">
+                Fault Contribution (SCI):
+                <b style="color: {{badgeColor}};">{{advisory.culprit_sensor.contribution_index_pct}}%</b>
+                <span style="color: #94a3b8;">of total turbine anomaly error</span>
+            </div>
+        </div>
+
+        <!-- Supporting Witness Peers Table -->
+        <div ng-if="config.ShowWitnessPeers && advisory.supporting_witness_sensors.length > 0" style="margin-bottom: 14px;">
+            <div style="font-size: 11px; font-weight: 600; color: #94a3b8; margin-bottom: 4px;">Correlating Physical Peer Witnesses:</div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 11px; background: #1e293b; border-radius: 4px; overflow: hidden;">
+                <thead>
+                    <tr style="background: #0f172a; color: #94a3b8; text-align: left;">
+                        <th style="padding: 6px 8px;">Peer Sensor</th>
+                        <th style="padding: 6px 8px; text-align: right;">Live</th>
+                        <th style="padding: 6px 8px; text-align: right;">Expected</th>
+                        <th style="padding: 6px 8px; text-align: right;">Residual</th>
+                        <th style="padding: 6px 8px; text-align: center;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="w in advisory.supporting_witness_sensors | limitTo:4" style="border-top: 1px solid #334155;">
+                        <td style="padding: 5px 8px; color: #cbd5e1;">{{w.tag_name}}</td>
+                        <td style="padding: 5px 8px; text-align: right; color: #f8fafc;">{{w.actual}}</td>
+                        <td style="padding: 5px 8px; text-align: right; color: #94a3b8;">{{w.expected}}</td>
+                        <td style="padding: 5px 8px; text-align: right; font-weight: bold; color: {{w.status === 'DEVIATING' ? '#ef4444' : '#10b981'}};">
+                            {{w.residual}}
+                        </td>
+                        <td style="padding: 5px 8px; text-align: center;">
+                            <span style="font-size: 10px; font-weight: bold; color: {{w.status === 'DEVIATING' ? '#ef4444' : '#10b981'}};">
+                                {{w.status}}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 3: Prescribed Operator Actions -->
+        <div ng-if="config.ShowActions" style="margin-top: 10px;">
+            <div style="font-size: 12px; text-transform: uppercase; color: #94a3b8; font-weight: 700; margin-bottom: 6px; letter-spacing: 0.5px;">
+                3. Prescribed Operator Actions
+            </div>
+            <div style="background: #1e293b; border-radius: 6px; padding: 10px; border: 1px solid #334155;">
+                <ol style="margin: 0; padding-left: 20px; font-size: 12px; color: #e2e8f0; line-height: 1.5;">
+                    <li ng-repeat="act in advisory.prescribed_operator_actions" style="margin-bottom: 4px;">
+                        {{act}}
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+    </div>
+</div>
