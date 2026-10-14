@@ -28,6 +28,30 @@ logger = get_logger("PredictiveAPI")
 twin_model: Optional[CorrelationDigitalTwin] = None
 config_manager: Optional[ConfigManager] = None
 telemetry_cache: Optional[pd.DataFrame] = None
+cache_last_mtime: float = 0.0
+
+
+def _get_latest_telemetry() -> pd.DataFrame:
+    """Retrieve telemetry dataframe, automatically reloading from Parquet if modified on disk."""
+    global telemetry_cache, cache_last_mtime, config_manager
+    if config_manager is None:
+        config_manager = ConfigManager()
+    data_path = config_manager.get_telemetry_path()
+    if data_path.exists():
+        try:
+            current_mtime = data_path.stat().st_mtime
+            if current_mtime > cache_last_mtime or telemetry_cache is None:
+                if str(data_path).lower().endswith(".parquet"):
+                    telemetry_cache = pd.read_parquet(data_path)
+                else:
+                    import pickle
+                    with open(data_path, "rb") as f:
+                        telemetry_cache = pickle.load(f)
+                cache_last_mtime = current_mtime
+                logger.info(f"Refreshed telemetry cache from disk ({telemetry_cache.shape[0]:,} rows).")
+        except Exception as e:
+            logger.warning(f"Failed to check/reload telemetry cache: {e}")
+    return telemetry_cache
 
 
 @asynccontextmanager
@@ -217,18 +241,20 @@ def get_latest_advisory(
     """
     if twin_model is None or not twin_model.is_trained:
         raise HTTPException(status_code=503, detail="Digital twin model is not loaded.")
-    if telemetry_cache is None or telemetry_cache.empty:
+    
+    df_cache = _get_latest_telemetry()
+    if df_cache is None or df_cache.empty:
         raise HTTPException(status_code=503, detail="Telemetry cache is empty.")
 
     # Find the latest active base-load operating window
-    numeric_df = telemetry_cache.select_dtypes(include=[np.number])
+    numeric_df = df_cache.select_dtypes(include=[np.number])
     running_mask = (numeric_df > 10.0).sum(axis=1) > (len(numeric_df.columns) * 0.3)
     
     if running_mask.any():
-        last_running_ts = telemetry_cache[running_mask].index[-1]
-        eval_window = telemetry_cache.loc[:last_running_ts].tail(lookback).copy()
+        last_running_ts = df_cache[running_mask].index[-1]
+        eval_window = df_cache.loc[:last_running_ts].tail(lookback).copy()
     else:
-        eval_window = telemetry_cache.tail(lookback).copy()
+        eval_window = df_cache.tail(lookback).copy()
 
     # Apply synthetic fault if requested
     if simulate_fault == "combustion":
