@@ -95,16 +95,34 @@ python main.py show-limits --filter "TT-08"
 #### When is it executed?
 Executed **immediately after telemetry is ingested (Step 1)**. Module 3 requires this matrix to identify which sensors physically and thermodynamically interact with one another.
 
-#### Execution Command:
+#### Available Correlation Methods & Filters:
+The system supports multiple statistical and machine learning approaches to discover sensor relationships:
+* **Pearson Correlation (`--method pearson`):** Measures direct linear relationships ($r \in [-1, 1]$). Ideal for redundant sensors (e.g. dual thermocouple probes, axial displacement pairs) and direct thermodynamic balances.
+* **Spearman Rank Correlation (`--method spearman`):** Measures monotonic relationships ($\rho \in [-1, 1]$) regardless of linearity. Ideal for non-linear physical processes such as throttle valve opening % vs fuel mass flow, compressor inlet guide vane (IGV) angle vs exhaust temperature, or pressure drop vs flow rate.
+* **Cross-Subsystem Filtering (`--filter cross_subsystem`):** Isolates correlations where Sensor 1 and Sensor 2 belong to different subsystems (e.g., Combustion Chamber $\leftrightarrow$ Exhaust System, Lube Oil $\leftrightarrow$ Journal Bearings).
+* **Hierarchical Agglomerative Clustering:** Uses dissimilarity $d = 1 - |r|$ to group sensors into functional operational clusters.
+* **Timeframe Control:** You can restrict correlation computation to a specific baseline period using `--start`, `--end`, or `--days`.
+
+#### Execution Commands:
 ```powershell
+# Default: Pearson linear correlation across all telemetry
 python main.py run-module2 --method pearson --top-n 30
+
+# Alternative: Spearman rank correlation (captures non-linear physical laws)
+python main.py run-module2 --method spearman --top-n 30
+
+# Discover cross-subsystem physical inter-dependencies:
+python main.py run-module2 --filter cross_subsystem --top-n 20
+
+# Compute correlation strictly on a specific 1-year baseline window:
+python main.py run-module2 --start "2024-10-14 00:00" --end "2025-10-14 00:00" --method spearman
 ```
 
 #### What happens:
-1. Reads [`data/historical_data.parquet`](file:///C:/Users/Fuad/Documents/dev/PTTEP%20AI/data/historical_data.parquet).
-2. Computes the full $158 \times 158$ Pearson correlation matrix.
+1. Reads [`data/historical_data.parquet`](file:///C:/Users/Fuad/Documents/dev/PTTEP%20AI/data/historical_data.parquet) (filtered by timeframe if requested).
+2. Computes the full $158 \times 158$ correlation matrix across all active sensors.
 3. Automatically saves the matrix to [`data/correlation_matrix.csv`](file:///C:/Users/Fuad/Documents/dev/PTTEP%20AI/data/correlation_matrix.csv).
-4. Prints top correlated sensor pairs and cross-subsystem interactions for operator verification.
+4. Prints an intuitive, plain-English operator guide with engineering interpretations for GT-2420A.
 
 ---
 
@@ -113,14 +131,26 @@ python main.py run-module2 --method pearson --top-n 30
 #### When is it executed?
 Executed **after the correlation matrix is generated (Step 3)** and **before running the historical backfill or launching the API**.
 
-#### Execution Command:
+#### Do you need to set Start and End dates for training?
+* **If you have only 1 year in Parquet:** You do **not** need to specify `--start` and `--end`. The engine automatically uses the entire dataset as the baseline calibration set.
+* **If you have multiple years (e.g. `-2y to -1y` baseline + `-1y to Now` operational):** You **can** explicitly specify the exact training window using `--start` and `--end` (or `--days`) so the model only calibrates on known-good healthy operation!
+
+#### Execution Commands:
+
 ```powershell
+# Option A: Train on the entire available telemetry dataset (Default)
 python main.py run-module3 --save-model models/gt2420a_digital_twin.pkl
+
+# Option B: Train specifically on a defined historical baseline period (e.g. pristine Year -2)
+python main.py run-module3 --start "2024-10-14 00:00" --end "2025-10-14 00:00" --save-model models/gt2420a_digital_twin.pkl
+
+# Option C: Train using only the last 180 days of known-good telemetry
+python main.py run-module3 --days 180 --save-model models/gt2420a_digital_twin.pkl
 ```
 
-#### What happens:
+#### What happens during training:
 1. Loads [`data/correlation_matrix.csv`](file:///C:/Users/Fuad/Documents/dev/PTTEP%20AI/data/correlation_matrix.csv) and identifies the **Top 5 peer sensors** ($|r| \ge 0.65$) for each of the 158 sensors.
-2. Fits 158 individual Ridge regression estimators ($y_i = \mathbf{w}_i^T \mathbf{x}_{\text{peers}} + b_i$).
+2. Fits 158 individual Ridge regression estimators ($y_i = \mathbf{w}_i^T \mathbf{x}_{\text{peers}} + b_i$) on the selected training window.
 3. Establishes baseline residual normal distributions ($\mu_i, \sigma_i$) across normal operating telemetry.
 4. Computes the plant-wide composite squared prediction error (SPE) anomaly threshold ($\tau_{\text{system}} = 732.01$).
 5. Serializes the trained digital twin into [`models/gt2420a_digital_twin.pkl`](file:///C:/Users/Fuad/Documents/dev/PTTEP%20AI/models/gt2420a_digital_twin.pkl).

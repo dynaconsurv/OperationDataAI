@@ -125,6 +125,42 @@ def cmd_run_module1(args: argparse.Namespace) -> None:
     console.print(f"SQL Inserted: {res['sql_inserted']} | SQL Skipped (Unchanged): {res['sql_skipped']}")
 
 
+def filter_df_by_timeframe(df: pd.DataFrame, args: argparse.Namespace) -> pd.DataFrame:
+    """Filter DataFrame by --days, --start, and --end arguments if provided."""
+    if df is None or df.empty:
+        return df
+
+    if getattr(args, "days", None):
+        max_ts = df.index.max()
+        cutoff_ts = max_ts - dt.timedelta(days=args.days)
+        df = df[df.index >= cutoff_ts]
+        console.print(f"Filtered to last [bold cyan]{args.days} days[/bold cyan]: {cutoff_ts} to {max_ts} ({len(df):,} rows)")
+
+    if getattr(args, "start", None):
+        try:
+            start_ts = dt.datetime.fromisoformat(args.start)
+            if df.index.tz is not None and start_ts.tzinfo is None:
+                start_ts = start_ts.replace(tzinfo=dt.timezone.utc)
+            df = df[df.index >= start_ts]
+            console.print(f"Applied start filter >= [bold cyan]{start_ts}[/bold cyan]")
+        except ValueError:
+            console.print(f"[bold red]Invalid start timestamp format: {args.start}. Use 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM'.[/bold red]")
+            return pd.DataFrame()
+
+    if getattr(args, "end", None):
+        try:
+            end_ts = dt.datetime.fromisoformat(args.end)
+            if df.index.tz is not None and end_ts.tzinfo is None:
+                end_ts = end_ts.replace(tzinfo=dt.timezone.utc)
+            df = df[df.index <= end_ts]
+            console.print(f"Applied end filter <= [bold cyan]{end_ts}[/bold cyan]")
+        except ValueError:
+            console.print(f"[bold red]Invalid end timestamp format: {args.end}. Use 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM'.[/bold red]")
+            return pd.DataFrame()
+
+    return df
+
+
 def cmd_calc_limits(args: argparse.Namespace) -> None:
     """Compute Operating Limits directly from cached telemetry Parquet and sync to SQL."""
     import time
@@ -158,34 +194,7 @@ def cmd_calc_limits(args: argparse.Namespace) -> None:
     console.print(f"Available range in cache: [bold yellow]{df.index.min()} to {df.index.max()}[/bold yellow]")
 
     # Filter by timeframe if specified
-    if getattr(args, "days", None):
-        max_ts = df.index.max()
-        cutoff_ts = max_ts - dt.timedelta(days=args.days)
-        df = df[df.index >= cutoff_ts]
-        console.print(f"Filtered to last [bold cyan]{args.days} days[/bold cyan]: {cutoff_ts} to {max_ts} ({len(df):,} rows)")
-
-    if getattr(args, "start", None):
-        try:
-            start_ts = dt.datetime.fromisoformat(args.start)
-            if df.index.tz is not None and start_ts.tzinfo is None:
-                start_ts = start_ts.replace(tzinfo=dt.timezone.utc)
-            df = df[df.index >= start_ts]
-            console.print(f"Applied start filter >= [bold cyan]{start_ts}[/bold cyan]")
-        except ValueError:
-            console.print(f"[bold red]Invalid start timestamp format: {args.start}. Use 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM'.[/bold red]")
-            return
-
-    if getattr(args, "end", None):
-        try:
-            end_ts = dt.datetime.fromisoformat(args.end)
-            if df.index.tz is not None and end_ts.tzinfo is None:
-                end_ts = end_ts.replace(tzinfo=dt.timezone.utc)
-            df = df[df.index <= end_ts]
-            console.print(f"Applied end filter <= [bold cyan]{end_ts}[/bold cyan]")
-        except ValueError:
-            console.print(f"[bold red]Invalid end timestamp format: {args.end}. Use 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM'.[/bold red]")
-            return
-
+    df = filter_df_by_timeframe(df, args)
     if df.empty:
         console.print("[bold red]No telemetry points found within the specified time frame filter.[/bold red]")
         return
@@ -233,6 +242,12 @@ def cmd_run_module2(args: argparse.Namespace) -> None:
         import pickle
         with open(data_path, "rb") as f:
             df: pd.DataFrame = pickle.load(f)
+
+    # Filter telemetry if timeframe specified
+    df = filter_df_by_timeframe(df, args)
+    if df.empty:
+        console.print("[bold red]No telemetry points found within the specified time frame filter.[/bold red]")
+        return
 
     console.print(f"[bold green]Computing {args.method.upper()} correlation matrix on {df.shape[1]} sensors ({df.shape[0]} timestamps)...[/bold green]")
     engine = CorrelationEngine(method=args.method)
@@ -443,6 +458,12 @@ def cmd_run_module3(args: argparse.Namespace) -> None:
         with open(data_path, "rb") as f:
             df = pickle.load(f)
 
+    # Filter telemetry window for training/calibration if specified
+    df = filter_df_by_timeframe(df, args)
+    if df.empty:
+        console.print("[bold red]No telemetry points found within the specified time frame filter.[/bold red]")
+        return
+
     corr_csv_rel = cfg.get("storage", {}).get("correlation_file", "data/correlation_matrix.csv")
     corr_csv_path = cm.resolve_path(corr_csv_rel)
     corr_df = None
@@ -646,6 +667,9 @@ def main() -> None:
     p_m2.add_argument("--method", choices=["pearson", "spearman"], default="pearson", help="Correlation method")
     p_m2.add_argument("--top-n", type=int, default=20, help="Number of top correlated pairs to display")
     p_m2.add_argument("--filter", choices=["all", "positive", "negative", "cross_subsystem"], default="all")
+    p_m2.add_argument("--start", type=str, default=None, help="Custom start timestamp for correlation (YYYY-MM-DD or YYYY-MM-DD HH:MM)")
+    p_m2.add_argument("--end", type=str, default=None, help="Custom end timestamp for correlation (YYYY-MM-DD or YYYY-MM-DD HH:MM)")
+    p_m2.add_argument("--days", type=int, default=None, help="Compute correlation using only the last N days of telemetry")
     p_m2.add_argument("--no-explain", action="store_true", help="Suppress the operator explanation guide box")
 
     # calc-limits
@@ -657,6 +681,9 @@ def main() -> None:
 
     # run-module3
     p_m3 = subparsers.add_parser("run-module3", help="Execute Module 3 (CorrelationDigitalTwin Predictive Anomaly Engine)")
+    p_m3.add_argument("--start", type=str, default=None, help="Custom start timestamp for model training (YYYY-MM-DD or YYYY-MM-DD HH:MM)")
+    p_m3.add_argument("--end", type=str, default=None, help="Custom end timestamp for model training (YYYY-MM-DD or YYYY-MM-DD HH:MM)")
+    p_m3.add_argument("--days", type=int, default=None, help="Train model using only the last N days of telemetry")
     p_m3.add_argument("--lookback", type=int, default=48, help="Number of recent telemetry timestamps to score")
     p_m3.add_argument("--top-peers", type=int, default=5, help="Number of correlated peers per digital twin")
     p_m3.add_argument("--min-corr", type=float, default=0.65, help="Minimum absolute correlation to accept a peer")
