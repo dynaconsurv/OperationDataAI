@@ -9,6 +9,7 @@ from src.api.app import (
     get_sensor_catalog,
     lifespan,
     render_advisory_html_card,
+    sync_telemetry_and_predict,
 )
 
 
@@ -66,3 +67,12 @@ def test_card_html_endpoint():
     assert "PTTEP GT-2420A DIGITAL TWIN" in html_text
     assert "TURBINE HEALTH SCORE" in html_text
     assert "CRITICAL" in html_text
+
+
+def test_sync_telemetry_endpoint():
+    data = sync_telemetry_and_predict(save_parquet=False, sync_hours=1)
+    assert data["status"] == "SYNCED_AND_EVALUATED"
+    assert data["ingested_points"] > 0
+    assert "advisory" in data
+    assert "health_score" in data["advisory"]
+

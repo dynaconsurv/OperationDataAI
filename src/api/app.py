@@ -251,6 +251,65 @@ def get_latest_advisory(
     return alert
 
 
+@app.post("/api/v1/sync", tags=["Ingestion & Prediction"])
+def sync_telemetry_and_predict(
+    save_parquet: bool = Query(True, description="Persist incoming points to Apache Parquet"),
+    sync_hours: int = Query(2, ge=1, le=48, description="Time window in hours to pull from PI Web API"),
+) -> Dict[str, Any]:
+    """Ingest latest telemetry from PI Web API, append to Parquet, and perform prediction simultaneously.
+    
+    1. Ingestion: Queries PI Web API for the latest sensor readings across all 158 channels.
+    2. Storage: Appends and deduplicates new records into data/historical_data.parquet.
+    3. Prediction: Evaluates the updated sliding window through CorrelationDigitalTwin and returns the advisory.
+    """
+    global telemetry_cache, twin_model, config_manager
+    if twin_model is None or not twin_model.is_trained:
+        raise HTTPException(status_code=503, detail="Digital twin model is not initialized.")
+
+    from src.module1_pi_ingestion.pi_client import PIWebApiClient
+    cfg = config_manager.load_config()
+    sensors = config_manager.load_sensors()
+    pi_client = PIWebApiClient(cfg, sensors)
+
+    end_time = dt.datetime.now().replace(microsecond=0)
+    start_time = end_time - dt.timedelta(hours=sync_hours)
+    storage_path = config_manager.get_telemetry_path() if save_parquet else None
+
+    logger.info(f"Syncing telemetry from PI Web API ({start_time} to {end_time})...")
+    new_df = pi_client.pull_data(
+        mode="test",
+        custom_start=start_time,
+        custom_end=end_time,
+        custom_interval="5m",
+        save_storage=save_parquet,
+        storage_path=storage_path,
+        resume=True,
+    )
+
+    if new_df.empty:
+        raise HTTPException(status_code=502, detail="No telemetry returned from PI Web API.")
+
+    # Update in-memory cache
+    if telemetry_cache is not None and not telemetry_cache.empty:
+        combined = pd.concat([telemetry_cache, new_df])
+        telemetry_cache = combined[~combined.index.duplicated(keep="last")].sort_index()
+    else:
+        telemetry_cache = new_df
+
+    # Run immediate prediction on latest window
+    eval_window = telemetry_cache.tail(24)
+    alert = twin_model.diagnose_anomaly(eval_window, timestamp=eval_window.index[-1])
+
+    return {
+        "status": "SYNCED_AND_EVALUATED",
+        "ingested_points": len(new_df),
+        "total_records": len(telemetry_cache),
+        "parquet_persisted": save_parquet,
+        "latest_timestamp": str(eval_window.index[-1]),
+        "advisory": alert,
+    }
+
+
 @app.post("/api/v1/diagnose", tags=["Early Warning"])
 def diagnose_telemetry(payload: Union[TelemetrySnapshot, TimeSeriesWindow]) -> Dict[str, Any]:
     """Score incoming live telemetry supplied directly by PI Vision or external callers.
