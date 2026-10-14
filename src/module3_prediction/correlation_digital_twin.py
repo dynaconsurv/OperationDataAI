@@ -292,6 +292,8 @@ class CorrelationDigitalTwin(BasePredictor):
         self,
         data: pd.DataFrame,
         timestamp: Optional[Union[pd.Timestamp, str]] = None,
+        scored_df: Optional[pd.DataFrame] = None,
+        expected_df: Optional[pd.DataFrame] = None,
     ) -> Dict[str, Any]:
         """Generate a complete diagnostic Early Warning alert object for a specific timestamp.
 
@@ -301,6 +303,10 @@ class CorrelationDigitalTwin(BasePredictor):
             Telemetry dataset containing the target timestamp.
         timestamp : Timestamp or str, optional
             Timestamp to diagnose. If None, diagnoses the last row of data.
+        scored_df : pd.DataFrame, optional
+            Precomputed scored telemetry DataFrame from self.score_telemetry().
+        expected_df : pd.DataFrame, optional
+            Precomputed expected values DataFrame from self.predict_expected_values().
 
         Returns
         -------
@@ -310,7 +316,7 @@ class CorrelationDigitalTwin(BasePredictor):
         if not self.is_trained:
             raise RuntimeError("Model must be trained before diagnosing anomalies.")
 
-        scored = self.score_telemetry(data)
+        scored = scored_df if scored_df is not None else self.score_telemetry(data)
         if scored.empty:
             return {"status": "No data scored"}
 
@@ -328,7 +334,8 @@ class CorrelationDigitalTwin(BasePredictor):
         subsystem = self.subsystem_map.get(culprit, "Turbine Package")
 
         actual_val = float(data.loc[target_ts, culprit]) if culprit in data.columns else 0.0
-        expected_df = self.predict_expected_values(data.loc[[target_ts]])
+        if expected_df is None:
+            expected_df = self.predict_expected_values(data.loc[[target_ts]])
         expected_val = float(expected_df.loc[target_ts, culprit]) if culprit in expected_df.columns else actual_val
         residual = actual_val - expected_val
         z_score = float(row_scored["top_culprit_z_score"])

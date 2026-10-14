@@ -573,10 +573,13 @@ def cmd_backfill_module3(args: argparse.Namespace) -> None:
 
     console.print(f"Loaded {len(df):,} raw timestamps spanning {df.index.min()} to {df.index.max()}.")
 
-    # Resample to evaluation interval (e.g. '1h' or '30m')
+    # Resample to evaluation interval (e.g. '1h' or '5m'/'5min')
     numeric_df = df.select_dtypes(include=[np.number])
-    console.print(f"[bold green]Resampling telemetry to interval '{args.interval}' for historical evaluation...[/bold green]")
-    resampled_df = numeric_df.resample(args.interval).mean().dropna(how="all")
+    freq = args.interval.strip()
+    if freq.lower().endswith("m") and not freq.lower().endswith("min") and not freq.lower().endswith("mo"):
+        freq = freq[:-1] + "min"
+    console.print(f"[bold green]Resampling telemetry to interval '{args.interval}' (frequency: {freq}) for historical evaluation...[/bold green]")
+    resampled_df = numeric_df.resample(freq).mean().dropna(how="all")
     console.print(f"Generated {len(resampled_df):,} discrete historical timestamps to score.")
 
     # Load pre-calibrated CorrelationDigitalTwin
@@ -606,9 +609,10 @@ def cmd_backfill_module3(args: argparse.Namespace) -> None:
 
     # Generate structured advisories
     console.print("[bold green]Generating structured advisories for database archiving...[/bold green]")
+    expected_df = twin.predict_expected_values(resampled_df)
     advisories = []
     for ts in resampled_df.index:
-        alert = twin.diagnose_anomaly(resampled_df, timestamp=ts)
+        alert = twin.diagnose_anomaly(resampled_df, timestamp=ts, scored_df=scored, expected_df=expected_df)
         advisories.append(alert)
 
     # Bulk insert into SQL database
