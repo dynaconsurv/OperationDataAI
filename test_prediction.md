@@ -64,43 +64,46 @@ flowchart LR
 
 ## 4. Real Historical Case Studies Detected in GT-2420A Telemetry
 
-### Case 1: Burner Nozzle Coking / Flame Degradation (24 Hours Advance Notice)
-* **Timestamp Flagged:** `2025-12-26 23:10:00 UTC`
+### Case 1: Burner Nozzle Coking / Flame Degradation (Exhaust Temp 7)
+* **Early Advisory Flagged ($T_{\text{alarm}}$):** `2025-12-26 23:10:00 UTC`
 * **Predicted Incident:** `Impending High Exhaust Temperature Spread Trip (TTXS_ALM)`
-* **Estimated Lead Time:** **24.0 Hours advance notice**
+* **DCS Spread Trip Limit Breach ($T_{\text{trip}}$):** `2025-12-26 23:11:00 UTC` ($TTXS = 207.8^\circ\text{C} > 80.0^\circ\text{C}$ trip limit)
+* **Severe Flameout Plunge ($T_{\text{plunge}}$):** `2025-12-26 23:12:00 UTC` (Temp 7 plunges to **$158.5^\circ\text{C}$**, $TTXS = 640.8^\circ\text{C}$)
 * **Primary Culprit Sensor:** `Exhaust Temperature 7` (Subsystem: `Gas Turbine Engine`)
+* **DCS Limit Thresholds:** Spread Alarm $TTXS\_ALM = 55.0^\circ\text{C}$, Spread Trip $TTXS\_TRIP = 80.0^\circ\text{C}$.
 * **Physical Evidence:**
   * Actual Telemetry: Reads **154.7 °C below its peer cluster** ($SCI = 42.8\%$, $Z = -90.10 \sigma$).
-  * Peer Exhaust Sensors: Exhaust Temperatures 1, 2, 3, 4, 5, 6, and 8 were all reading normally at ~510 °C.
+  * Peer Exhaust Sensors: Exhaust Temperatures 1, 6, and 8 surged synchronously to ~600 °C during startup light-off while Temp 7 lagged at 512.6 °C before plunging to 158.5 °C.
 * **Diagnosis Generated:**
   > *"Combustion chamber flame degradation or localized burner nozzle coking detected on 'Exhaust Temperature 7'. Thermocouple reads 154.7 deg C below expected cluster temperature."*
-* **Prescribed Operator Action:**
-  1. Inspect burner nozzle fuel orifice for coking or heavy hydrocarbon deposition.
-  2. Verify dual thermocouple integrity and transmitter loop wiring.
+* **Lead Time Clarification:** The catalog assigns `24.0h` as the typical MTBF horizon for slow progressive burner coking degradation. During this acute light-off event, the physical flameout occurred within 2 minutes of the initial divergence.
 
 ---
 
-### Case 2: Bearing Babbitt Metal Overheating (48 Hours Advance Notice)
-* **Timestamp Flagged:** `2026-10-02 08:00:00 UTC`
+### Case 2: Bearing Babbitt Metal Overheating (Compressor Journal Bearing 4)
+* **Early Advisory Flagged ($T_{\text{alarm}}$):** `2026-10-02 06:00:00 UTC` (Anomaly Score: 42,082 > Threshold 732)
+* **DCS High-High Trip Breach ($T_{\text{trip}}$):** `2026-10-02 07:42:00 UTC` (Surges from 27.5 °C to **$795.58^\circ\text{C}$**)
 * **Predicted Incident:** `Impending Bearing Babbitt Metal High-Temperature Trip (BT_HH)`
-* **Estimated Lead Time:** **48.0 Hours (2 Full Days advance notice)**
+* **Empirical Advance Lead Time:** **1 Hour 42 Minutes (102 minutes)** before the hard DCS trip breach.
+* **Catalog Lead Time Horizon:** **48.0 Hours** (standard MTBF estimate for hydrodynamic babbitt wear).
 * **Primary Culprit Sensor:** `Compressor Journal Bearing Temperature 4` (Subsystem: `Compressor`)
-* **Physical Evidence:**
-  * Bearing Babbitt Temperature: Climbed **+767.3 °C above expected digital twin value** ($Z = +5661.8 \sigma$, $SCI = 44.5\%$).
-  * Witness Peers: Journal Bearing Temperatures 1, 2, and 3 remained within normal thermal baseline.
+* **DCS Limit Thresholds:** $BT\_HH = 140.3^\circ\text{C}$ (from `data/operating_limits.db`), API 670 trip is $115.0^\circ\text{C}$.
+* **Physical Evidence & Babbitt Definition:**
+  * Babbitt metal is a soft tin-antimony alloy lining hydrodynamic sleeve bearings. A "babbitt spike" is an acute temperature surge caused by oil film collapse, oil starvation, metal-to-metal boundary friction, or sensor junction grounding fault.
+  * Bearing 4 spiked from 27.5 °C to 795.58 °C, remaining peaked for 8 minutes before resetting at 07:50 UTC, while peer bearings remained normal at 28.5 °C.
 * **Diagnosis Generated:**
   > *"Localized bearing babbitt metal overheating detected on 'Compressor Journal Bearing Temperature 4'. Potential oil film breakdown or mechanical friction."*
-* **Operational Impact:** Conventional DCS alarms would only fire when babbitt temperature breaches 115 °C (giving seconds before the babbitt wipes and ruins the shaft). The digital twin detected the multi-sensor correlation divergence **2 full days prior**, allowing maintenance to adjust lube oil pressure and inspect filters.
 
 ---
 
-### Case 3: Combustion Hot Streak / Can Over-Firing (24 Hours Advance Notice)
-* **Timestamp Flagged:** `2026-01-03 15:35:00 UTC`
+### Case 3: Combustion Deload Hot Streak & Can Spread Divergence (Exhaust Temp 2)
+* **Early Advisory Flagged ($T_{\text{alarm}}$):** `2026-01-05 01:35:00 UTC` (Anomaly Score: 2,653 > Threshold 732)
 * **Predicted Incident:** `Impending High Exhaust Temperature Spread Trip (TTXS_ALM)`
-* **Estimated Lead Time:** **24.0 Hours advance notice**
+* **Exact Divergence Timestamp:** `2026-01-05 02:30:00 UTC` (Temp 2 hangs at **$370.35^\circ\text{C}$** while peer Exhaust Temp 6 drops to **$346.03^\circ\text{C}$** and drops further to **$319.85^\circ\text{C}$** at 02:39 UTC; Temp 8 drops to **$324.84^\circ\text{C}$** at 02:40 UTC).
+* **DCS Spread Alarm Breach ($T_{\text{alarm\_DCS}}$):** `2026-01-05 02:27:00 UTC` ($TTXS = 60.97^\circ\text{C} > 55.0^\circ\text{C}$) — **52 Minutes Advance Notice**
+* **DCS Spread Trip Breach ($T_{\text{trip\_DCS}}$):** `2026-01-05 02:49:00 UTC` ($TTXS = 80.61^\circ\text{C} > 80.0^\circ\text{C}$) — **1 Hour 14 Minutes (74 min) Advance Notice**
 * **Primary Culprit Sensor:** `Exhaust Temperature 2` (Subsystem: `Gas Turbine Engine`)
-* **Physical Evidence:**
-  * Reads **+6.58 °C above expected cluster baseline** ($Z = +5.82 \sigma$, $SCI = 6.5\%$).
+* **DCS Limit Thresholds:** $TTXS\_ALM = 55.0^\circ\text{C}$, $TTXS\_TRIP = 80.0^\circ\text{C}$.
 * **Diagnosis Generated:**
   > *"Localized hot streak or combustion can over-firing detected on 'Exhaust Temperature 2'. Reads 6.6 deg C above expected cluster baseline."*
 
