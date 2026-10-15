@@ -632,9 +632,12 @@ def cmd_backfill_module3(args: argparse.Namespace) -> None:
     console.print("[bold green]Generating structured advisories for database archiving...[/bold green]")
     expected_df = twin.predict_expected_values(resampled_df)
     advisories = []
-    for ts in resampled_df.index:
+    t_gen = time.time()
+    for idx, ts in enumerate(resampled_df.index):
         alert = twin.diagnose_anomaly(resampled_df, timestamp=ts, scored_df=scored, expected_df=expected_df)
         advisories.append(alert)
+        if (idx + 1) % 20000 == 0:
+            console.print(f"[dim]Generated {idx + 1:,}/{len(resampled_df):,} advisories ({time.time() - t_gen:.1f}s)...[/dim]")
 
     # Bulk insert into SQL database
     from src.module1_pi_ingestion.sql_storage import SQLStorageManager
@@ -642,6 +645,27 @@ def cmd_backfill_module3(args: argparse.Namespace) -> None:
     console.print(f"[bold green]Bulk inserting {len(advisories):,} historical advisories into SQL ({sql_mgr.active_backend})...[/bold green]")
     inserted = sql_mgr.bulk_save_predictive_advisories(advisories, batch_size=args.batch_size)
     console.print(f"[bold green]SUCCESS: Successfully archived {inserted:,} historical advisories into SQL table 'predictive_advisories'![/bold green]")
+
+    # Early Warning Lead Time Summary
+    anomaly_alerts = [a for a in advisories if a.get("is_anomaly")]
+    if anomaly_alerts:
+        lead_times = [a.get("estimated_lead_time_hours", 0.0) for a in anomaly_alerts]
+        avg_lt = sum(lead_times) / len(lead_times)
+        min_lt = min(lead_times)
+        max_lt = max(lead_times)
+        incidents = {}
+        for a in anomaly_alerts:
+            inc = a.get("predicted_incident", "Unknown")
+            incidents[inc] = incidents.get(inc, 0) + 1
+
+        console.print(f"\n[bold white on dark_green] EARLY WARNING LEAD TIME & PREDICTION SUMMARY [/bold white on dark_green]")
+        console.print(f"Total Timestamps Evaluated:   [bold cyan]{len(advisories):,}[/bold cyan]")
+        console.print(f"Total Early Warnings Flagged: [bold red]{len(anomaly_alerts):,}[/bold red] ({len(anomaly_alerts)/len(advisories)*100:.1f}%)")
+        console.print(f"Advance Warning Notice Range: [bold green]{min_lt:.1f} hours[/bold green] to [bold green]{max_lt:.1f} hours[/bold green]")
+        console.print(f"Average Prediction Lead Time: [bold green]{avg_lt:.1f} hours[/bold green] (~{avg_lt/24:.1f} days advance notice before hard trip)")
+        console.print(f"\n[bold cyan]Top Predicted Incident Categories:[/bold cyan]")
+        for inc, count in sorted(incidents.items(), key=lambda x: x[1], reverse=True)[:5]:
+            console.print(f"  * {inc:<45} : [bold yellow]{count:,}[/bold yellow] occurrences")
 
 
 
