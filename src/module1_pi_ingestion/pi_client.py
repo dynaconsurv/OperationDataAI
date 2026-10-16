@@ -523,6 +523,8 @@ class PIWebApiClient:
                         cat_s = pd.concat(ser_list)
                         cat_s = cat_s[~cat_s.index.duplicated(keep="last")].sort_index()
                         combined_dict[tag_path] = cat_s
+                        # Memory Optimization: Consolidate in-place so list never exceeds 10 chunks
+                        all_series[tag_path] = [cat_s]
 
                 if not combined_dict:
                     return existing_df if existing_df is not None else pd.DataFrame()
@@ -539,6 +541,10 @@ class PIWebApiClient:
                             pickle.dump(chk_df, f)
                     action = "Final telemetry saved" if is_final else "Checkpoint saved"
                     logger.info(f"{action} ({chk_df.shape[0]} rows, {chk_df.shape[1]} sensors) to {target_path}")
+
+                del combined_dict
+                import gc
+                gc.collect()
 
                 return chk_df
 
