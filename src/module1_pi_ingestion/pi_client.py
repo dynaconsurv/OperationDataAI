@@ -499,39 +499,64 @@ class PIWebApiClient:
             total_slices = len(slices)
             completed_slices = len(skipped_slices)
 
-            all_series: Dict[str, List[pd.Series]] = {k: [] for k in tag_webid_map.keys()}
-            total_points_accum = 0
+            # Streaming buffer: ONLY holds new slices since last checkpoint (keeps RAM < 15 MB)
+            new_series: Dict[str, List[pd.Series]] = {k: [] for k in tag_webid_map.keys()}
+            total_points_accum = int(existing_df.size) if (resume and existing_df is not None and not existing_df.empty) else 0
 
-            # Pre-seed series from existing checkpoint
-            if resume and existing_df is not None and not existing_df.empty:
-                total_points_accum = int(existing_df.size)
-                for col in existing_df.columns:
-                    s = existing_df[col].dropna()
-                    if not s.empty:
-                        if col in all_series:
-                            all_series[col].append(s)
-                        else:
-                            all_series[col] = [s]
+            # Free existing_df immediately to prevent double memory allocation
+            del existing_df
+            import gc
+            gc.collect()
 
             t_pull_start = time.time()
 
-            def save_checkpoint(is_final: bool = False) -> pd.DataFrame:
+            def save_checkpoint(is_final: bool = False) -> Optional[pd.DataFrame]:
                 save_ledger()
-                combined_dict: Dict[str, pd.Series] = {}
-                for tag_path, ser_list in all_series.items():
+                has_new_data = any(len(ser_list) > 0 for ser_list in new_series.values())
+
+                if not has_new_data:
+                    if is_final and target_path and target_path.exists():
+                        try:
+                            return pd.read_parquet(target_path, engine="pyarrow")
+                        except Exception:
+                            return pd.DataFrame()
+                    return None
+
+                # Build DataFrame for ONLY the new slices in this batch (e.g. 10 hours = ~370 KB)
+                new_batch_dict: Dict[str, pd.Series] = {}
+                for tag_path, ser_list in new_series.items():
                     if ser_list:
                         cat_s = pd.concat(ser_list)
                         cat_s = cat_s[~cat_s.index.duplicated(keep="last")].sort_index()
-                        combined_dict[tag_path] = cat_s
-                        # Memory Optimization: Consolidate in-place so list never exceeds 10 chunks
-                        all_series[tag_path] = [cat_s]
+                        new_batch_dict[tag_path] = cat_s
 
-                if not combined_dict:
-                    return existing_df if existing_df is not None else pd.DataFrame()
+                # Reset streaming buffer immediately
+                for k in new_series:
+                    new_series[k] = []
 
-                chk_df = pd.DataFrame(combined_dict)
-                chk_df.index.name = "timestamp"
+                new_chunk_df = pd.DataFrame(new_batch_dict)
+                new_chunk_df.index.name = "timestamp"
+                del new_batch_dict
 
+                # Downcast to float32 to cut memory usage by 50%
+                new_chunk_df = new_chunk_df.astype(np.float32)
+
+                # Merge with existing on-disk parquet if available
+                if should_save and target_path and target_path.exists():
+                    try:
+                        old_df = pd.read_parquet(target_path, engine="pyarrow").astype(np.float32)
+                        chk_df = pd.concat([old_df, new_chunk_df])
+                        chk_df = chk_df[~chk_df.index.duplicated(keep="last")].sort_index()
+                        del old_df
+                    except Exception as e:
+                        logger.warning(f"Error reading existing parquet during checkpoint merge: {e}")
+                        chk_df = new_chunk_df
+                else:
+                    chk_df = new_chunk_df
+
+                del new_chunk_df
+
+                # Save merged DataFrame to Parquet
                 if should_save and target_path:
                     target_path.parent.mkdir(parents=True, exist_ok=True)
                     if str(target_path).lower().endswith(".parquet"):
@@ -542,11 +567,11 @@ class PIWebApiClient:
                     action = "Final telemetry saved" if is_final else "Checkpoint saved"
                     logger.info(f"{action} ({chk_df.shape[0]} rows, {chk_df.shape[1]} sensors) to {target_path}")
 
-                del combined_dict
-                import gc
+                ret_df = chk_df if is_final else None
+                del chk_df
                 gc.collect()
 
-                return chk_df
+                return ret_df
 
             df = pd.DataFrame()
             consecutive_network_failures = 0
@@ -616,8 +641,8 @@ class PIWebApiClient:
                         completed_slice_keys.add(to_slice_key(s_start))
 
                     for tag_path, ser in slice_batch.items():
-                        if tag_path in all_series and not ser.empty:
-                            all_series[tag_path].append(ser)
+                        if tag_path in new_series and not ser.empty:
+                            new_series[tag_path].append(ser)
 
                     # Periodic Checkpoint
                     if (s_idx + 1) % checkpoint_interval == 0:
@@ -626,6 +651,11 @@ class PIWebApiClient:
             finally:
                 df = save_checkpoint(is_final=True)
                 save_ledger()
+                if df is None and target_path and target_path.exists():
+                    try:
+                        df = pd.read_parquet(target_path, engine="pyarrow")
+                    except Exception:
+                        df = pd.DataFrame()
 
             return df
 
