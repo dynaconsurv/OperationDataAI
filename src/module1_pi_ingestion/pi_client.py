@@ -13,6 +13,7 @@ import urllib.parse
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 import urllib3
+import numpy as np
 import pandas as pd
 import requests
 from requests.auth import HTTPBasicAuth
@@ -462,14 +463,22 @@ class PIWebApiClient:
             if resume and ((existing_df is not None and not existing_df.empty) or completed_slice_keys):
                 try:
                     # Pre-compute hourly point counts across existing dataset for fast O(1) lookup
-                    hourly_counts = existing_df.iloc[:, 0].resample("1h").count() if (existing_df is not None and not existing_df.empty) else pd.Series(dtype=int)
+                    has_existing = existing_df is not None and not existing_df.empty
+                    hourly_counts = existing_df.iloc[:, 0].resample("1h").count() if has_existing else pd.Series(dtype=int)
+                    max_existing_ts = pd.Timestamp(to_slice_key(existing_df.index.max())) if has_existing else None
+
                     for s_start, s_end in slices:
                         s_key = to_slice_key(s_start)
                         s_ts = pd.Timestamp(s_key)
 
                         pts = hourly_counts.get(s_ts, 0)
+                        # If a previous run crashed before writing parquet, do not skip slices newer than parquet max timestamp
+                        in_ledger = (s_key in completed_slice_keys) and (max_existing_ts is None or s_ts <= max_existing_ts)
+                        if not in_ledger and s_key in completed_slice_keys:
+                            completed_slice_keys.discard(s_key)
+
                         # Slice is skipped if already in parquet with data OR confirmed completed in ledger (e.g. plant outage)
-                        if pts >= 30 or s_key in completed_slice_keys:
+                        if pts >= 30 or in_ledger:
                             skipped_slices.append((s_start, s_end))
                             completed_slice_keys.add(s_key)
                         else:
@@ -511,10 +520,10 @@ class PIWebApiClient:
             t_pull_start = time.time()
 
             def save_checkpoint(is_final: bool = False) -> Optional[pd.DataFrame]:
-                save_ledger()
                 has_new_data = any(len(ser_list) > 0 for ser_list in new_series.values())
 
                 if not has_new_data:
+                    save_ledger()
                     if is_final and target_path and target_path.exists():
                         try:
                             return pd.read_parquet(target_path, engine="pyarrow")
@@ -539,12 +548,12 @@ class PIWebApiClient:
                 del new_batch_dict
 
                 # Downcast to float32 to cut memory usage by 50%
-                new_chunk_df = new_chunk_df.astype(np.float32)
+                new_chunk_df = new_chunk_df.astype("float32")
 
                 # Merge with existing on-disk parquet if available
                 if should_save and target_path and target_path.exists():
                     try:
-                        old_df = pd.read_parquet(target_path, engine="pyarrow").astype(np.float32)
+                        old_df = pd.read_parquet(target_path, engine="pyarrow").astype("float32")
                         chk_df = pd.concat([old_df, new_chunk_df])
                         chk_df = chk_df[~chk_df.index.duplicated(keep="last")].sort_index()
                         del old_df
@@ -566,6 +575,9 @@ class PIWebApiClient:
                             pickle.dump(chk_df, f)
                     action = "Final telemetry saved" if is_final else "Checkpoint saved"
                     logger.info(f"{action} ({chk_df.shape[0]} rows, {chk_df.shape[1]} sensors) to {target_path}")
+
+                # Only persist ledger AFTER parquet write succeeds
+                save_ledger()
 
                 ret_df = chk_df if is_final else None
                 del chk_df
